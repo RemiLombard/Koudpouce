@@ -98,9 +98,18 @@ export function useAuth() {
       user.value = {
         id: serverUser.id as string,
         email: serverUser.email as string,
-        displayName: (serverUser.displayName as string) || (serverUser as any).display_name || "Utilisateur",
-        createdAt: (serverUser.createdAt as string) || (serverUser as any).created_at || new Date().toISOString(),
-        role: (serverUser.role as UserRole) || ((serverUser as any).role as UserRole) || "user",
+        displayName:
+          (serverUser.displayName as string) ||
+          (serverUser as any).display_name ||
+          "Utilisateur",
+        createdAt:
+          (serverUser.createdAt as string) ||
+          (serverUser as any).created_at ||
+          new Date().toISOString(),
+        role:
+          (serverUser.role as UserRole) ||
+          ((serverUser as any).role as UserRole) ||
+          "user",
       };
     } else {
       user.value = null;

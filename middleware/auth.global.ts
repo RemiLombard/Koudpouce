@@ -28,7 +28,8 @@ export default defineNuxtRouteMiddleware(async (to) => {
       const cookieHeader = event.node.req.headers.cookie || "";
       try {
         // Vérifier rapidement le token côté serveur pour éviter les appels réseau internes
-        const { getTokenFromEvent, getUserFromToken } = await import("~/server/utils/supabase");
+        const { getTokenFromEvent, getUserFromToken } =
+          await import("~/server/utils/supabase");
         const token = getTokenFromEvent(event);
         if (token) {
           const serverUser = await getUserFromToken(token);
