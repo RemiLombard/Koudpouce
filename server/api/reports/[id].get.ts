@@ -32,10 +32,12 @@ export default defineEventHandler(async (event) => {
   if (report.listing_id) {
     const { data: listingData } = await supabase
       .from("listings")
-      .select("id, title, type, description, city_name, department_code, status, author_id")
+      .select(
+        "id, title, type, description, city_name, department_code, status, author_id",
+      )
       .eq("id", report.listing_id)
       .single();
-    
+
     if (listingData) {
       listing = {
         id: listingData.id,
