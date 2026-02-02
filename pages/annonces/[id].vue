@@ -183,7 +183,7 @@ async function handleReport() {
 
     <main class="max-w-3xl mx-auto px-4 py-8">
       <!-- Bouton retour -->
-      <BackLink label="Retour aux annonces" />
+      <BackLink to="/cherche" label="Retour aux annonces" />
 
       <!-- Chargement -->
       <LoadingSpinner v-if="loading" text="Chargement..." />
