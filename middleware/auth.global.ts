@@ -23,7 +23,12 @@ export default defineNuxtRouteMiddleware(async (to) => {
 
   // S'assurer que l'état d'authentification est initialisé
   if (!initialized.value) {
-    await fetchUser();
+    if (process.server) {
+      const event = useRequestEvent();
+      await fetchUser(event.node.req.headers.cookie || "");
+    } else {
+      await fetchUser();
+    }
   }
 
   // Rediriger les admins vers /admin (ils ne peuvent pas utiliser l'app normale)

@@ -13,7 +13,12 @@ export default defineNuxtRouteMiddleware(async (to) => {
 
   // S'assurer que l'état d'authentification est initialisé
   if (!initialized.value) {
-    await checkAuth();
+    if (process.server) {
+      const event = useRequestEvent();
+      await fetchUser(event.node.req.headers.cookie || "");
+    } else {
+      await fetchUser();
+    }
   }
 
   if (!isAuthenticated.value) {

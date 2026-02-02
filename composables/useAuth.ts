@@ -78,9 +78,12 @@ export function useAuth() {
     }
   }
 
-  async function fetchUser(): Promise<void> {
+  // Forward optional server cookie header when running on server-side
+  async function fetchUser(cookieHeader?: string): Promise<void> {
     try {
-      const response = await $fetch<{ user: User }>("/api/auth/me");
+      const opts: any = {};
+      if (cookieHeader) opts.headers = { cookie: cookieHeader };
+      const response = await $fetch<{ user: User }>("/api/auth/me", opts);
       user.value = response.user;
     } catch {
       user.value = null;
