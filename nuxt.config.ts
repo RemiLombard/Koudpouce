@@ -5,6 +5,11 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
 
+  // Preset Netlify pour le déploiement
+  nitro: {
+    preset: "netlify",
+  },
+
   // Fichier CSS global avec nos variables et classes custom
   css: ["~/assets/css/main.css"],
 
