@@ -25,7 +25,26 @@ export default defineNuxtRouteMiddleware(async (to) => {
   if (!initialized.value) {
     if (process.server) {
       const event = useRequestEvent();
-      await fetchUser(event.node.req.headers.cookie || "");
+      const cookieHeader = event.node.req.headers.cookie || "";
+      try {
+        // Vérifier rapidement le token côté serveur pour éviter les appels réseau internes
+        const { getTokenFromEvent, getUserFromToken } = await import("~/server/utils/supabase");
+        const token = getTokenFromEvent(event);
+        if (token) {
+          const serverUser = await getUserFromToken(token);
+          if (serverUser) {
+            const { setServerUser } = useAuth();
+            setServerUser(serverUser as any);
+          } else {
+            await fetchUser(cookieHeader);
+          }
+        } else {
+          await fetchUser(cookieHeader);
+        }
+      } catch (e) {
+        // Fallback: essayer d'appeler l'API normalement
+        await fetchUser(cookieHeader);
+      }
     } else {
       await fetchUser();
     }
