@@ -3,20 +3,12 @@
 [build]
   # Commande de build
   command = "npm run build"
-  # Dossier de sortie généré par Nuxt
-  publish = ".output/public"
-  # Fonctions serverless générées par Nuxt
-  functions = ".output/server"
+  # Dossier de sortie - Nuxt Netlify preset gère automatiquement
+  publish = "dist"
 
-# Preset Nuxt pour Netlify (automatique avec nuxt build)
+# Version Node.js
 [build.environment]
   NODE_VERSION = "20"
-
-# Redirections pour le mode SSR/hybrid
-[[redirects]]
-  from = "/*"
-  to = "/.netlify/functions/server"
-  status = 200
 
 # Headers de sécurité
 [[headers]]
