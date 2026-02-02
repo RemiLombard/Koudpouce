@@ -1,0 +1,24 @@
+{
+  "name": "koudpouce",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Monorepo Koudpouce (frontend Nuxt 3 + backend Express)",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "engines": {
+    "node": "20.x"
+  },
+  "scripts": {
+    "dev:frontend": "npm run dev -w frontend",
+    "dev:backend": "npm run dev -w backend",
+    "build:frontend": "npm run build -w frontend",
+    "build:backend": "npm run build -w backend",
+    "lint:frontend": "npm run lint -w frontend --if-present",
+    "lint:backend": "npm run lint -w backend --if-present"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
