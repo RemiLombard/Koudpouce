@@ -161,7 +161,7 @@ async function loadMyListings() {
     myListings.value = response.listings;
   } catch (err: any) {
     error.value =
-      err?.data?.error ?? "Erreur lors du chargement de vos annonces.";
+      err?.data?.message ?? "Erreur lors du chargement de vos annonces.";
   } finally {
     loading.value = false;
   }
@@ -177,7 +177,7 @@ async function closeListing(id: string) {
 
     await loadMyListings();
   } catch (err: any) {
-    alert(err?.data?.error ?? "Erreur lors de la clôture de l'annonce.");
+    alert(err?.data?.message ?? "Erreur lors de la clôture de l'annonce.");
   }
 }
 

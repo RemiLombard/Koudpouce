@@ -29,9 +29,10 @@
 <script setup lang="ts">
 // Google OAuth via Supabase - redirige vers l'URL d'authentification Supabase
 const supabaseUrl = useRuntimeConfig().public.supabaseUrl as string;
-const redirectUrl =
-  typeof window !== "undefined"
-    ? `${window.location.origin}/auth/callback`
-    : "";
-const googleAuthUrl = `${supabaseUrl}/auth/v1/authorize?provider=google&redirect_to=${encodeURIComponent(redirectUrl)}`;
+const requestUrl = useRequestURL();
+const redirectUrl = `${requestUrl.origin}/auth/callback`;
+const googleAuthUrl = computed(
+  () =>
+    `${supabaseUrl}/auth/v1/authorize?provider=google&redirect_to=${encodeURIComponent(redirectUrl)}`,
+);
 </script>

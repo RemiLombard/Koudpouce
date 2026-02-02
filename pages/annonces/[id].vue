@@ -108,7 +108,8 @@ async function handleClose() {
     );
     listing.value = response.listing;
   } catch (err: any) {
-    closeError.value = err?.data?.error ?? "Impossible de clôturer l'annonce.";
+    closeError.value =
+      err?.data?.message ?? "Impossible de clôturer l'annonce.";
   } finally {
     closing.value = false;
   }
@@ -169,7 +170,7 @@ async function handleReport() {
     reportSuccess.value = true;
   } catch (err: any) {
     reportError.value =
-      err?.data?.error ?? "Impossible d'envoyer le signalement.";
+      err?.data?.message ?? "Impossible d'envoyer le signalement.";
   } finally {
     reporting.value = false;
   }

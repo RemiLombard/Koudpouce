@@ -71,7 +71,7 @@ export function useMessaging() {
       conversations.value = response.conversations;
     } catch (err: any) {
       error.value =
-        err?.data?.error ?? "Impossible de charger les conversations.";
+        err?.data?.message ?? "Impossible de charger les conversations.";
       conversations.value = [];
     } finally {
       loading.value = false;
@@ -93,7 +93,7 @@ export function useMessaging() {
       return response.conversation.id;
     } catch (err: any) {
       error.value =
-        err?.data?.error ?? "Impossible de démarrer la conversation.";
+        err?.data?.message ?? "Impossible de démarrer la conversation.";
       return null;
     }
   }
@@ -110,7 +110,7 @@ export function useMessaging() {
       return response;
     } catch (err: any) {
       error.value =
-        err?.data?.error ?? "Impossible de charger la conversation.";
+        err?.data?.message ?? "Impossible de charger la conversation.";
       return null;
     }
   }
@@ -129,7 +129,7 @@ export function useMessaging() {
       );
       return response.message;
     } catch (err: any) {
-      error.value = err?.data?.error ?? "Impossible d'envoyer le message.";
+      error.value = err?.data?.message ?? "Impossible d'envoyer le message.";
       return null;
     }
   }

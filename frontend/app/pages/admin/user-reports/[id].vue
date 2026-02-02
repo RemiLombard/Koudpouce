@@ -319,7 +319,6 @@ interface UserReportDetail {
 
 const route = useRoute();
 const router = useRouter();
-const apiBase = useRuntimeConfig().public.apiBase as string;
 const { logout } = useAuth();
 
 const report = ref<UserReportDetail | null>(null);
@@ -339,10 +338,6 @@ async function loadReport() {
   try {
     const response = await $fetch<{ report: UserReportDetail }>(
       `/api/user-reports/${route.params.id}`,
-      {
-        credentials: "include",
-        baseURL: apiBase,
-      },
     );
     report.value = response.report;
   } catch (err: any) {
@@ -359,8 +354,6 @@ async function dismissReport() {
   try {
     await $fetch(`/api/user-reports/${route.params.id}/dismiss`, {
       method: "POST",
-      credentials: "include",
-      baseURL: apiBase,
     });
     router.push("/admin");
   } catch (err) {
@@ -383,11 +376,7 @@ async function actionReport() {
   try {
     const response = await $fetch<{ message: string; banned?: boolean }>(
       `/api/user-reports/${route.params.id}/action`,
-      {
-        method: "POST",
-        credentials: "include",
-        baseURL: apiBase,
-      },
+      { method: "POST" },
     );
 
     // Afficher le message de résultat

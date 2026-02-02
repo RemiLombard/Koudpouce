@@ -399,7 +399,7 @@ async function submitUserReport() {
     reportSuccess.value = true;
   } catch (err: any) {
     reportError.value =
-      err?.data?.error || "Une erreur est survenue lors du signalement.";
+      err?.data?.message || "Une erreur est survenue lors du signalement.";
   } finally {
     reportLoading.value = false;
   }

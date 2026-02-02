@@ -1,24 +1,27 @@
 {
   "name": "koudpouce",
   "version": "1.0.0",
+  "type": "module",
   "private": true,
-  "description": "Monorepo Koudpouce (frontend Nuxt 3 + backend Express)",
-  "workspaces": [
-    "frontend",
-    "backend"
-  ],
+  "description": "Koudpouce - Entraide entre voisins",
   "engines": {
     "node": "20.x"
   },
   "scripts": {
-    "dev:frontend": "npm run dev -w frontend",
-    "dev:backend": "npm run dev -w backend",
-    "build:frontend": "npm run build -w frontend",
-    "build:backend": "npm run build -w backend",
-    "lint:frontend": "npm run lint -w frontend --if-present",
-    "lint:backend": "npm run lint -w backend --if-present"
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "dependencies": {
+    "@nuxtjs/google-fonts": "^3.2.0",
+    "@supabase/supabase-js": "^2.93.3",
+    "nuxt": "^3.0.0",
+    "vue": "^3.5.27",
+    "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "^6.14.0"
+  }
 }

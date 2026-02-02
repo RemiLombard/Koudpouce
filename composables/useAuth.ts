@@ -36,7 +36,7 @@ export function useAuth() {
       return true;
     } catch (err: any) {
       error.value =
-        err?.data?.error ?? "Une erreur est survenue lors de l'inscription.";
+        err?.data?.message ?? "Une erreur est survenue lors de l'inscription.";
       return false;
     } finally {
       loading.value = false;
@@ -55,7 +55,7 @@ export function useAuth() {
       user.value = response.user;
       return true;
     } catch (err: any) {
-      error.value = err?.data?.error ?? "Email ou mot de passe invalide.";
+      error.value = err?.data?.message ?? "Email ou mot de passe invalide.";
       return false;
     } finally {
       loading.value = false;
@@ -72,7 +72,7 @@ export function useAuth() {
       });
       user.value = null;
     } catch (err: any) {
-      error.value = err?.data?.error ?? "Erreur lors de la déconnexion.";
+      error.value = err?.data?.message ?? "Erreur lors de la déconnexion.";
     } finally {
       loading.value = false;
     }
@@ -106,7 +106,7 @@ export function useAuth() {
       return true;
     } catch (err: any) {
       error.value =
-        err?.data?.error ?? "Erreur lors de la mise à jour du profil.";
+        err?.data?.message ?? "Erreur lors de la mise à jour du profil.";
       return false;
     } finally {
       loading.value = false;
@@ -125,7 +125,7 @@ export function useAuth() {
       return true;
     } catch (err: any) {
       error.value =
-        err?.data?.error ?? "Erreur lors de la suppression du compte.";
+        err?.data?.message ?? "Erreur lors de la suppression du compte.";
       return false;
     } finally {
       loading.value = false;

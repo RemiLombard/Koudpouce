@@ -1,18 +1,19 @@
 // Point d'entrée du serveur backend Express
-// Gère l'authentification par cookie HttpOnly pour la sécurité
+// Utilise Supabase pour la base de données et l'authentification
 
 import "dotenv/config";
 import express from "express";
 import cookieParser from "cookie-parser";
-import session from "express-session";
 import cors from "cors";
 import { config } from "./config";
-import authRoutes from "./routes/auth";
+
+// Routes Supabase
+import authRoutes from "./routes/authSupabase";
 import serviceTypesRoutes from "./routes/serviceTypes";
-import listingsRoutes from "./routes/listings";
-import conversationsRoutes from "./routes/conversations";
-import reportsRoutes from "./routes/reports";
-import userReportsRoutes from "./routes/userReports";
+import listingsRoutes from "./routes/listingsSupabase";
+import conversationsRoutes from "./routes/conversationsSupabase";
+import reportsRoutes from "./routes/reportsSupabase";
+import userReportsRoutes from "./routes/userReportsSupabase";
 
 const app = express();
 
@@ -33,22 +34,6 @@ app.use(
   }),
 );
 
-// Configuration de la session (cookie HttpOnly)
-app.use(
-  session({
-    name: config.sessionCookieName,
-    secret: config.sessionSecret,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      maxAge: config.sessionMaxAge,
-      sameSite: "lax",
-    },
-  }),
-);
-
 // Routes API
 app.use("/api/auth", authRoutes);
 app.use("/api/service-types", serviceTypesRoutes);
@@ -57,7 +42,22 @@ app.use("/api/conversations", conversationsRoutes);
 app.use("/api/reports", reportsRoutes);
 app.use("/api/user-reports", userReportsRoutes);
 
+// Gestion des erreurs globales
+app.use((err: any, _req: any, res: any, _next: any) => {
+  console.error("Erreur serveur:", err);
+  res.status(500).json({ error: "Erreur interne du serveur" });
+});
+
+process.on("uncaughtException", (err) => {
+  console.error("Uncaught Exception:", err);
+});
+
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("Unhandled Rejection at:", promise, "reason:", reason);
+});
+
 // Démarrage du serveur
 app.listen(config.port, () => {
   console.log(`[backend] listening on http://localhost:${config.port}`);
+  console.log(`[backend] using Supabase for database`);
 });

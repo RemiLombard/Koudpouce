@@ -96,7 +96,7 @@ export function useListings() {
       hasMore.value = false;
       currentOffset.value = response.listings.length;
     } catch (err: any) {
-      error.value = err?.data?.error ?? "Impossible de charger les annonces.";
+      error.value = err?.data?.message ?? "Impossible de charger les annonces.";
       listings.value = [];
       total.value = 0;
       hasMore.value = false;

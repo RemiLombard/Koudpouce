@@ -1,4 +1,4 @@
-// Configuration principale de Nuxt 3
+// Configuration principale de Nuxt 3 - Koudpouce
 export default defineNuxtConfig({
   // Modules utilisés : Tailwind pour le CSS et Google Fonts pour les polices
   modules: ["@nuxtjs/tailwindcss", "@nuxtjs/google-fonts"],
@@ -19,7 +19,7 @@ export default defineNuxtConfig({
     preconnect: true,
   },
 
-  // Configuration runtime - Supabase et autres
+  // Configuration runtime - Supabase
   runtimeConfig: {
     // Variables privées (côté serveur uniquement)
     supabaseUrl: process.env.SUPABASE_URL ?? "",
@@ -27,16 +27,7 @@ export default defineNuxtConfig({
 
     // Variables publiques (côté client aussi)
     public: {
-      supabaseUrl: process.env.SUPABASE_URL ?? "", // Pour OAuth Google côté client
+      supabaseUrl: process.env.SUPABASE_URL ?? "",
     },
   },
-
-  // On met le code source dans app/ pour mieux organiser
-  srcDir: "app/",
-
-  dir: {
-    public: "../public",
-  },
-
-  // Plus besoin de proxy, les routes API sont dans server/api/
 });

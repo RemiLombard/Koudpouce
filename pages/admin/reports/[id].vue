@@ -318,7 +318,7 @@ async function loadReport() {
     );
     report.value = response.report;
   } catch (err: any) {
-    error.value = err?.data?.error || "Signalement non trouvé.";
+    error.value = err?.data?.message || "Signalement non trouvé.";
   } finally {
     loading.value = false;
   }
@@ -351,9 +351,9 @@ async function actionReport() {
   try {
     await $fetch(`/api/reports/${route.params.id}/action`, { method: "POST" });
     router.push("/admin");
-  } catch (err) {
+  } catch (err: any) {
     console.error("Erreur lors du traitement du signalement:", err);
-    alert("Erreur lors du traitement du signalement.");
+    alert(err?.data?.message || "Erreur lors du traitement du signalement.");
   } finally {
     actionLoading.value = false;
   }

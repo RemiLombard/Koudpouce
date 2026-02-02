@@ -32,6 +32,7 @@
     <main class="flex-1 max-w-3xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
       <!-- Bouton retour -->
       <BackLink to="/admin" label="Retour aux signalements" />
+
       <!-- État de chargement -->
       <LoadingSpinner v-if="loading" text="Chargement du signalement..." />
 
@@ -77,7 +78,7 @@
           </div>
 
           <h1 class="text-2xl font-bold text-stone-800 mb-2">
-            Signalement #{{ report.id.slice(0, 8) }}
+            Signalement d'utilisateur #{{ report.id.slice(0, 8) }}
           </h1>
           <p class="text-stone-500 flex items-center gap-2">
             <Icon name="calendar" class="w-4 h-4" />
@@ -133,93 +134,80 @@
           <p v-else class="text-stone-400 italic">Utilisateur inconnu</p>
         </BaseCard>
 
-        <!-- Annonce signalée -->
+        <!-- Utilisateur signalé -->
         <BaseCard variant="highlighted" color="primary" padding="lg">
           <h2
             class="text-lg font-bold text-stone-800 mb-4 flex items-center gap-2"
           >
             <div
-              class="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center"
+              class="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center"
             >
-              <Icon name="file-text" class="w-4 h-4 text-orange-600" />
+              <Icon name="alert-triangle" class="w-4 h-4 text-red-600" />
             </div>
-            Annonce signalée
+            Utilisateur signalé
           </h2>
 
-          <div v-if="report.listing" class="space-y-4">
-            <div>
-              <h3 class="text-xl font-bold text-stone-800 mb-1">
-                {{ report.listing.title }}
-              </h3>
-              <p class="text-stone-500 flex items-center gap-1">
-                <Icon name="location" class="w-4 h-4" />
-                {{ report.listing.cityName }} ({{
-                  report.listing.departmentCode
-                }})
-              </p>
-            </div>
-
-            <div class="flex flex-wrap items-center gap-2">
-              <span
-                :class="[
-                  'inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border',
-                  report.listing.type === 'proposition'
-                    ? 'bg-amber-100 text-amber-700 border-amber-200'
-                    : 'bg-orange-100 text-orange-700 border-orange-200',
-                ]"
-              >
-                {{
-                  report.listing.type === "proposition"
-                    ? "Proposition"
-                    : "Demande"
-                }}
-              </span>
-              <span
-                :class="[
-                  'inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border',
-                  report.listing.status === 'active'
-                    ? 'bg-green-100 text-green-700 border-green-200'
-                    : 'bg-stone-100 text-stone-600 border-stone-200',
-                ]"
-              >
-                {{ report.listing.status === "active" ? "Active" : "Clôturée" }}
-              </span>
-            </div>
-
-            <div class="bg-white rounded-xl p-5 border border-stone-100">
-              <p class="text-stone-700 whitespace-pre-wrap leading-relaxed">
-                {{ report.listing.description }}
-              </p>
-            </div>
-
-            <!-- Propriétaire de l'annonce -->
-            <div
-              v-if="report.listingOwner"
-              class="border-t border-stone-200 pt-4"
-            >
-              <h4 class="font-semibold text-stone-700 mb-3">
-                Auteur de l'annonce
-              </h4>
-              <div class="grid gap-2">
-                <div class="flex items-center gap-3">
-                  <span class="text-stone-500 text-sm w-20">Nom</span>
-                  <span class="font-medium text-stone-800">{{
-                    report.listingOwner.firstName
-                  }}</span>
-                </div>
-                <div class="flex items-center gap-3">
-                  <span class="text-stone-500 text-sm w-20">Email</span>
-                  <span class="font-medium text-stone-800">{{
-                    report.listingOwner.email
-                  }}</span>
-                </div>
+          <div v-if="report.reportedUser" class="space-y-4">
+            <div class="grid gap-2">
+              <div class="flex items-center gap-3">
+                <span class="text-stone-500 text-sm w-20">Nom</span>
+                <span class="font-medium text-stone-800"
+                  >{{ report.reportedUser.firstName }}
+                  {{ report.reportedUser.lastName }}</span
+                >
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="text-stone-500 text-sm w-20">Email</span>
+                <span class="font-medium text-stone-800">{{
+                  report.reportedUser.email
+                }}</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="text-stone-500 text-sm w-20">Sanctions</span>
+                <span
+                  :class="[
+                    'inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold',
+                    (report.reportedUser.sanctionCount ?? 0) > 0
+                      ? 'bg-red-100 text-red-700'
+                      : 'bg-green-100 text-green-700',
+                  ]"
+                >
+                  {{
+                    (report.reportedUser.sanctionCount ?? 0) > 0
+                      ? `${report.reportedUser.sanctionCount} sanction(s)`
+                      : "Aucune sanction"
+                  }}
+                </span>
               </div>
             </div>
           </div>
 
           <div v-else class="flex items-center gap-3 text-stone-400">
             <Icon name="alert-triangle" class="w-5 h-5" />
-            <span class="italic">Cette annonce a été supprimée.</span>
+            <span class="italic">Cet utilisateur a été supprimé.</span>
+          </div>
+        </BaseCard>
+
+        <!-- Contexte de la conversation -->
+        <BaseCard v-if="report.conversation" variant="default" padding="lg">
+          <h2
+            class="text-lg font-bold text-stone-800 mb-4 flex items-center gap-2"
+          >
+            <div
+              class="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center"
+            >
+              <Icon name="envelope" class="w-4 h-4 text-orange-600" />
+            </div>
+            Conversation liée
+          </h2>
+          <div class="bg-white rounded-xl p-5 border border-stone-100">
+            <p class="font-medium text-stone-800 mb-2">
+              {{ report.conversation.listingTitle }}
+            </p>
+            <p class="text-sm text-stone-500">
+              Conversation entre {{ report.conversation.contacterName }} et
+              {{ report.conversation.listingAuthorName }}
+            </p>
           </div>
         </BaseCard>
 
@@ -230,6 +218,34 @@
           padding="lg"
         >
           <h2 class="text-lg font-bold text-stone-800 mb-4">Actions</h2>
+
+          <!-- Avertissement si l'utilisateur va être banni -->
+          <div
+            v-if="
+              report.reportedUser &&
+              (report.reportedUser.sanctionCount ?? 0) >= 1
+            "
+            class="bg-red-50 border border-red-200 rounded-xl p-4 mb-4"
+          >
+            <div class="flex items-start gap-3">
+              <Icon
+                name="alert-triangle"
+                class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5"
+              />
+              <div>
+                <p class="font-semibold text-red-700">
+                  Attention : Bannissement imminent
+                </p>
+                <p class="text-sm text-red-600 mt-1">
+                  Cet utilisateur a déjà
+                  {{ report.reportedUser.sanctionCount }} sanction(s).
+                  Sanctionner entraînera la
+                  <strong>suppression définitive</strong> de son compte.
+                </p>
+              </div>
+            </div>
+          </div>
+
           <div class="flex flex-col sm:flex-row gap-3">
             <BaseButton
               variant="outline"
@@ -246,13 +262,20 @@
               :loading="actionLoading"
               @click="actionReport"
             >
-              <Icon name="trash" class="w-5 h-5" />
-              Supprimer l'annonce
+              <Icon name="ban" class="w-5 h-5" />
+              {{
+                (report.reportedUser?.sanctionCount ?? 0) >= 1
+                  ? "Bannir l'utilisateur"
+                  : "Sanctionner l'utilisateur"
+              }}
             </BaseButton>
           </div>
           <p class="text-xs text-stone-500 mt-4 text-center">
-            La suppression d'une annonce supprime également toutes les
-            conversations associées.
+            {{
+              (report.reportedUser?.sanctionCount ?? 0) >= 1
+                ? "L'utilisateur sera définitivement banni et son compte supprimé."
+                : "L'utilisateur recevra un avertissement. Un prochain signalement entraînera son bannissement."
+            }}
           </p>
         </BaseCard>
       </div>
@@ -266,39 +289,39 @@ definePageMeta({
   layout: false,
 });
 
-interface ReportListing {
-  id: string;
-  title: string;
-  description: string;
-  type: string;
-  status: string;
-  cityName: string;
-  departmentCode: string;
-}
-
 interface ReportUser {
   id: string;
   firstName: string;
+  lastName?: string;
   email: string;
+  sanctionCount?: number;
 }
 
-interface ReportDetail {
+interface ReportConversation {
   id: string;
-  listingId: string;
+  listingTitle: string;
+  contacterName: string;
+  listingAuthorName: string;
+}
+
+interface UserReportDetail {
+  id: string;
+  reportedUserId: string;
+  conversationId: string;
   reason: string;
   message: string | null;
   status: "pending" | "dismissed" | "actioned";
   createdAt: string;
-  listing: ReportListing | null;
+  reportedUser: ReportUser | null;
   reporter: ReportUser | null;
-  listingOwner: ReportUser | null;
+  conversation: ReportConversation | null;
 }
 
 const route = useRoute();
 const router = useRouter();
 const { logout } = useAuth();
 
-const report = ref<ReportDetail | null>(null);
+const report = ref<UserReportDetail | null>(null);
 const loading = ref(true);
 const error = ref<string | null>(null);
 const actionLoading = ref(false);
@@ -313,12 +336,12 @@ async function loadReport() {
   error.value = null;
 
   try {
-    const response = await $fetch<{ report: ReportDetail }>(
-      `/api/reports/${route.params.id}`,
+    const response = await $fetch<{ report: UserReportDetail }>(
+      `/api/user-reports/${route.params.id}`,
     );
     report.value = response.report;
   } catch (err: any) {
-    error.value = err?.data?.error || "Signalement non trouvé.";
+    error.value = err?.data?.message || "Signalement non trouvé.";
   } finally {
     loading.value = false;
   }
@@ -329,7 +352,9 @@ async function dismissReport() {
 
   actionLoading.value = true;
   try {
-    await $fetch(`/api/reports/${route.params.id}/dismiss`, { method: "POST" });
+    await $fetch(`/api/user-reports/${route.params.id}/dismiss`, {
+      method: "POST",
+    });
     router.push("/admin");
   } catch (err) {
     console.error("Erreur lors du rejet du signalement:", err);
@@ -340,20 +365,26 @@ async function dismissReport() {
 }
 
 async function actionReport() {
-  if (
-    !confirm(
-      "Êtes-vous sûr de vouloir supprimer cette annonce ? Cette action est irréversible.",
-    )
-  )
-    return;
+  const hasSanction = (report.value?.reportedUser?.sanctionCount ?? 0) >= 1;
+  const confirmMessage = hasSanction
+    ? "⚠️ ATTENTION : Cet utilisateur a déjà été sanctionné. Cette action entraînera la suppression définitive de son compte. Continuer ?"
+    : "Êtes-vous sûr de vouloir sanctionner cet utilisateur ? Un prochain signalement entraînera son bannissement.";
+
+  if (!confirm(confirmMessage)) return;
 
   actionLoading.value = true;
   try {
-    await $fetch(`/api/reports/${route.params.id}/action`, { method: "POST" });
+    const response = await $fetch<{ message: string; banned?: boolean }>(
+      `/api/user-reports/${route.params.id}/action`,
+      { method: "POST" },
+    );
+
+    // Afficher le message de résultat
+    alert(response.message);
     router.push("/admin");
-  } catch (err) {
+  } catch (err: any) {
     console.error("Erreur lors du traitement du signalement:", err);
-    alert("Erreur lors du traitement du signalement.");
+    alert(err?.data?.message || "Erreur lors du traitement du signalement.");
   } finally {
     actionLoading.value = false;
   }
@@ -361,10 +392,10 @@ async function actionReport() {
 
 function reasonLabel(reason: string): string {
   const labels: Record<string, string> = {
+    harassment: "Harcèlement",
     spam: "Spam",
-    professional: "Professionnel",
-    inappropriate: "Inapproprié",
     scam: "Arnaque",
+    inappropriate: "Comportement inapproprié",
     other: "Autre",
   };
   return labels[reason] || reason;
@@ -372,10 +403,10 @@ function reasonLabel(reason: string): string {
 
 function reasonBadgeClass(reason: string): string {
   const classes: Record<string, string> = {
+    harassment: "bg-red-100 text-red-700 border border-red-200",
     spam: "bg-amber-100 text-amber-700 border border-amber-200",
-    professional: "bg-stone-100 text-stone-700 border border-stone-200",
-    inappropriate: "bg-red-100 text-red-700 border border-red-200",
     scam: "bg-red-100 text-red-700 border border-red-200",
+    inappropriate: "bg-orange-100 text-orange-700 border border-orange-200",
     other: "bg-stone-100 text-stone-600 border border-stone-200",
   };
   return (
@@ -387,7 +418,7 @@ function statusLabel(status: string): string {
   const labels: Record<string, string> = {
     pending: "En attente",
     dismissed: "Rejeté",
-    actioned: "Traité",
+    actioned: "Sanctionné",
   };
   return labels[status] || status;
 }
