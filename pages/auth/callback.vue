@@ -2,12 +2,13 @@
 <script setup lang="ts">
 const route = useRoute();
 const router = useRouter();
+const { fetchUser } = useAuth();
 
 onMounted(async () => {
   // Récupérer les paramètres de l'URL (access_token dans le hash fragment)
   const hash = window.location.hash.substring(1);
   const params = new URLSearchParams(hash);
-  
+
   const accessToken = params.get("access_token");
   const refreshToken = params.get("refresh_token");
   const error = params.get("error");
@@ -29,6 +30,9 @@ onMounted(async () => {
           refreshToken,
         },
       });
+
+      // Mettre à jour l'état client sans recharger la page
+      await fetchUser();
 
       // Rediriger vers la page d'accueil
       router.push("/");

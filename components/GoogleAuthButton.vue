@@ -33,6 +33,9 @@ const requestUrl = useRequestURL();
 const redirectUrl = `${requestUrl.origin}/auth/callback`;
 const googleAuthUrl = computed(
   () =>
-    `${supabaseUrl}/auth/v1/authorize?provider=google&redirect_to=${encodeURIComponent(redirectUrl)}`,
+    // Ajouter `prompt=select_account` pour forcer le choix du compte Google
+    `${supabaseUrl}/auth/v1/authorize?provider=google&redirect_to=${encodeURIComponent(
+      redirectUrl,
+    )}&prompt=select_account`,
 );
 </script>
