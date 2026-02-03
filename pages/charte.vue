@@ -24,7 +24,7 @@ useSeoMeta({
     <AppHeader />
 
     <main class="max-w-4xl mx-auto px-4 py-12">
-      <!-- Hero -->
+      <!-- hero -->
       <div class="text-center mb-12">
         <div
           class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-orange-400 to-amber-500 rounded-2xl shadow-lg mb-6"
@@ -51,9 +51,9 @@ useSeoMeta({
         </p>
       </div>
 
-      <!-- Règles -->
+      <!-- règles -->
       <div class="space-y-6">
-        <!-- Pas de spam -->
+        <!-- pas de spam -->
         <section
           class="bg-white rounded-2xl p-6 md:p-8 border border-gray-200 shadow-sm"
         >
@@ -88,7 +88,7 @@ useSeoMeta({
           </div>
         </section>
 
-        <!-- Pas de services pros déguisés -->
+        <!-- pas de services pros déguisés -->
         <section
           class="bg-white rounded-2xl p-6 md:p-8 border border-gray-200 shadow-sm"
         >
@@ -130,7 +130,7 @@ useSeoMeta({
           </div>
         </section>
 
-        <!-- Respect et bienveillance -->
+        <!-- respect et bienveillance -->
         <section
           class="bg-white rounded-2xl p-6 md:p-8 border border-gray-200 shadow-sm"
         >
@@ -218,7 +218,7 @@ useSeoMeta({
           </div>
         </section>
 
-        <!-- Sécurité -->
+        <!-- sécurité -->
         <section
           class="bg-white rounded-2xl p-6 md:p-8 border border-gray-200 shadow-sm"
         >
@@ -277,7 +277,7 @@ useSeoMeta({
         </section>
       </div>
 
-      <!-- Note finale -->
+      <!-- note finale -->
       <div
         class="mt-12 bg-gradient-to-br from-orange-100 to-amber-100 rounded-2xl p-8 border border-orange-200 text-center"
       >

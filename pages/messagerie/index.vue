@@ -1,3 +1,52 @@
+<script setup lang="ts">
+const {
+  conversations,
+  loading,
+  error,
+  fetchConversations,
+  fetchUnreadCount,
+  receivedUnread,
+  sentUnread,
+} = useMessaging();
+const { user } = useAuth();
+
+const activeTab = ref<"received" | "sent">("received");
+
+function switchTab(tab: "received" | "sent") {
+  activeTab.value = tab;
+  loadConversations();
+}
+
+async function loadConversations() {
+  await fetchConversations(activeTab.value);
+}
+
+function formatDate(dateStr: string): string {
+  const date = new Date(dateStr);
+  const now = new Date();
+  const diffMs = now.getTime() - date.getTime();
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+  if (diffDays === 0) {
+    return date.toLocaleTimeString("fr-FR", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  } else if (diffDays === 1) {
+    return "Hier";
+  } else if (diffDays < 7) {
+    return date.toLocaleDateString("fr-FR", { weekday: "long" });
+  } else {
+    return date.toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
+  }
+}
+
+onMounted(async () => {
+  await fetchUnreadCount();
+  await loadConversations();
+});
+</script>
+
 <template>
   <div
     class="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-white"
@@ -5,13 +54,13 @@
     <AppHeader />
 
     <main class="max-w-4xl mx-auto px-4 py-8">
-      <!-- En-tête -->
+      <!-- en-tête -->
       <div class="mb-8">
         <h1 class="text-3xl font-bold text-gray-800 mb-2">Messagerie</h1>
         <p class="text-gray-600">Gérez vos conversations et échanges</p>
       </div>
 
-      <!-- Onglets -->
+      <!-- onglets -->
       <div class="flex gap-2 mb-6">
         <button
           type="button"
@@ -61,10 +110,10 @@
         </button>
       </div>
 
-      <!-- Chargement -->
+      <!-- chargement -->
       <LoadingSpinner v-if="loading" text="Chargement des conversations..." />
 
-      <!-- Erreur -->
+      <!-- erreur -->
       <div
         v-else-if="error"
         class="bg-red-50 border border-red-200 text-red-700 p-6 rounded-2xl text-center"
@@ -79,7 +128,7 @@
         </button>
       </div>
 
-      <!-- Liste vide -->
+      <!-- liste vide -->
       <div
         v-else-if="conversations.length === 0"
         class="bg-white rounded-2xl border border-gray-200 p-12 text-center"
@@ -103,7 +152,7 @@
         </p>
       </div>
 
-      <!-- Liste des conversations -->
+      <!-- liste des conversations -->
       <div v-else class="space-y-3">
         <NuxtLink
           v-for="conv in conversations"
@@ -114,7 +163,7 @@
         >
           <div class="flex items-start justify-between gap-4">
             <div class="flex-1 min-w-0">
-              <!-- Titre annonce -->
+              <!-- titre annonce -->
               <div class="flex items-center gap-2">
                 <h3
                   class="font-semibold text-gray-800 group-hover:text-orange-600 transition-colors truncate"
@@ -130,7 +179,7 @@
                 </span>
               </div>
 
-              <!-- Interlocuteur -->
+              <!-- interlocuteur -->
               <p class="text-sm text-gray-500 mt-1">
                 <template v-if="activeTab === 'received'">
                   De :
@@ -146,7 +195,7 @@
                 </template>
               </p>
 
-              <!-- Dernier message -->
+              <!-- dernier message -->
               <p
                 v-if="conv.lastMessage"
                 class="text-sm text-gray-600 mt-2 line-clamp-2"
@@ -157,12 +206,12 @@
             </div>
 
             <div class="flex flex-col items-end gap-2 shrink-0">
-              <!-- Date -->
+              <!-- date -->
               <span class="text-xs text-gray-400">
                 {{ formatDate(conv.updatedAt) }}
               </span>
 
-              <!-- Badge non lu -->
+              <!-- badge non lu -->
               <span
                 v-if="conv.unreadCount > 0"
                 class="px-2.5 py-1 bg-orange-500 text-white text-xs font-bold rounded-full"
@@ -176,52 +225,3 @@
     </main>
   </div>
 </template>
-
-<script setup lang="ts">
-const {
-  conversations,
-  loading,
-  error,
-  fetchConversations,
-  fetchUnreadCount,
-  receivedUnread,
-  sentUnread,
-} = useMessaging();
-const { user } = useAuth();
-
-const activeTab = ref<"received" | "sent">("received");
-
-function switchTab(tab: "received" | "sent") {
-  activeTab.value = tab;
-  loadConversations();
-}
-
-async function loadConversations() {
-  await fetchConversations(activeTab.value);
-}
-
-function formatDate(dateStr: string): string {
-  const date = new Date(dateStr);
-  const now = new Date();
-  const diffMs = now.getTime() - date.getTime();
-  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-
-  if (diffDays === 0) {
-    return date.toLocaleTimeString("fr-FR", {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  } else if (diffDays === 1) {
-    return "Hier";
-  } else if (diffDays < 7) {
-    return date.toLocaleDateString("fr-FR", { weekday: "long" });
-  } else {
-    return date.toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
-  }
-}
-
-onMounted(async () => {
-  await fetchUnreadCount();
-  await loadConversations();
-});
-</script>

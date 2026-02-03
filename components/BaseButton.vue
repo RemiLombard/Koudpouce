@@ -1,6 +1,6 @@
-<!-- Composant bouton réutilisable avec plusieurs variantes de style -->
+<!-- composant bouton réutilisable avec plusieurs variantes de style -->
 <script setup lang="ts">
-// Props du bouton avec valeurs par défaut
+// props du bouton avec valeurs par défaut
 interface Props {
   type?: "button" | "submit" | "reset";
   variant?: "primary" | "outline" | "ghost" | "danger" | "soft";
@@ -86,7 +86,7 @@ const classes = computed(() => {
 
 <template>
   <button :type="type" :disabled="disabled || loading" :class="classes">
-    <!-- Spinner de chargement -->
+    <!-- spinner de chargement -->
     <svg
       v-if="loading"
       class="animate-spin h-4 w-4"

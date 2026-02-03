@@ -1,4 +1,4 @@
-<!-- Badge pour afficher le type d'annonce (demande ou proposition) -->
+<!-- badge pour afficher le type d'annonce (demande ou proposition) -->
 <script setup lang="ts">
 import type { ListingType } from "~/composables/useListings";
 
@@ -8,7 +8,7 @@ interface Props {
 
 const props = defineProps<Props>();
 
-// Config selon le type (couleur, icône, label)
+// config selon le type (couleur, icône, label)
 const config = computed(() => {
   if (props.type === "demande") {
     return {

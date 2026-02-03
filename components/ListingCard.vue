@@ -1,15 +1,15 @@
-<!-- Carte d'affichage d'une annonce (utilisée dans les listes) -->
+<!-- carte d'affichage d'une annonce (utilisée dans les listes) -->
 <script setup lang="ts">
 import type { ListingPublic, ServiceType } from "~/composables/useListings";
 
 interface Props {
   listing: ListingPublic;
-  serviceTypes: Record<string, ServiceType>; // Pour afficher les labels des services
+  serviceTypes: Record<string, ServiceType>; // pour afficher les labels des services
 }
 
 const props = defineProps<Props>();
 
-// Formater la date en français (ex: "15 janvier")
+// formater la date en français (ex: "15 janvier")
 const formattedDate = computed(() => {
   const date = new Date(props.listing.createdAt);
   return date.toLocaleDateString("fr-FR", {
@@ -40,11 +40,11 @@ const remainingServices = computed(() => {
 <template>
   <NuxtLink :to="`/annonces/${listing.id}`" class="group block">
     <BaseCard variant="interactive" padding="none" class="overflow-hidden">
-      <!-- Barre colorée en haut -->
+      <!-- barre colorée en haut -->
       <div class="h-1.5 bg-gradient-to-r from-orange-400 to-amber-400" />
 
       <div class="p-5">
-        <!-- En-tête : badges -->
+        <!-- en-tête : badges -->
         <div class="flex flex-wrap items-center gap-2 mb-3">
           <ListingTypeBadge :type="listing.type" />
           <ServiceTypeBadge
@@ -60,19 +60,19 @@ const remainingServices = computed(() => {
           </span>
         </div>
 
-        <!-- Titre -->
+        <!-- titre -->
         <h3
           class="text-lg font-bold text-stone-800 mb-2 group-hover:text-orange-600 transition-colors line-clamp-2"
         >
           {{ listing.title }}
         </h3>
 
-        <!-- Extrait description -->
+        <!-- extrait description -->
         <p class="text-sm text-stone-600 mb-4 line-clamp-2 leading-relaxed">
           {{ excerpt }}
         </p>
 
-        <!-- Pied de carte : localisation, auteur et date -->
+        <!-- pied de carte : localisation, auteur et date -->
         <div
           class="flex items-center justify-between pt-3 border-t border-stone-100"
         >
@@ -93,7 +93,7 @@ const remainingServices = computed(() => {
           </div>
 
           <div class="flex items-center gap-3">
-            <!-- Auteur -->
+            <!-- auteur -->
             <div class="flex items-center gap-1.5 text-stone-500">
               <Icon name="user" class="w-4 h-4" />
               <span class="text-xs font-medium">{{
@@ -101,7 +101,7 @@ const remainingServices = computed(() => {
               }}</span>
             </div>
 
-            <!-- Date -->
+            <!-- date -->
             <div class="flex items-center gap-1.5 text-stone-400">
               <Icon name="calendar" class="w-4 h-4" />
               <span class="text-xs">{{ formattedDate }}</span>
@@ -109,7 +109,7 @@ const remainingServices = computed(() => {
           </div>
         </div>
 
-        <!-- Badge fermé si applicable -->
+        <!-- badge fermé si applicable -->
         <div v-if="listing.status === 'closed'" class="mt-3">
           <BaseBadge variant="soft" color="neutral"> Clôturée </BaseBadge>
         </div>

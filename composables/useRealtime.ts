@@ -1,5 +1,5 @@
-// Composable pour gérer la connexion Supabase Realtime côté client
-// Permet de s'abonner aux nouveaux messages en temps réel
+// composable pour gérer la connexion Supabase Realtime côté client
+// permet de s'abonner aux nouveaux messages en temps réel
 
 import {
   createClient,
@@ -14,11 +14,11 @@ export function useRealtimeClient() {
 
   function getClient(): SupabaseClient {
     if (!_realtimeClient) {
-      // Créer un client Supabase anon pour le realtime côté client
-      // Note: On utilise la clé anon (publique) pour le client
+      // créer un client Supabase anon pour le realtime côté client
+      // note: on utilise la clé anon (publique) pour le client
       _realtimeClient = createClient(
         config.public.supabaseUrl as string,
-        // Clé anon publique - à ajouter dans runtimeConfig.public
+        // clé anon publique - à ajouter dans runtimeConfig.public
         config.public.supabaseAnonKey as string,
         {
           realtime: {
@@ -37,7 +37,7 @@ export function useRealtimeClient() {
   };
 }
 
-// Type pour les callbacks de messages
+// type pour les callbacks de messages
 export interface RealtimeMessage {
   id: string;
   conversation_id: string;
@@ -46,7 +46,7 @@ export interface RealtimeMessage {
   created_at: string;
 }
 
-// Hook pour s'abonner aux messages d'une conversation
+// hook pour s'abonner aux messages d'une conversation
 export function useRealtimeMessages(
   conversationId: Ref<string>,
   onNewMessage: (message: RealtimeMessage) => void,
@@ -68,12 +68,12 @@ export function useRealtimeMessages(
       );
     }
 
-    // Se désabonner du channel précédent si existant
+    // se désabonner du channel précédent si existant
     if (channel) {
       channel.unsubscribe();
     }
 
-    // S'abonner aux nouveaux messages de cette conversation
+    // s'abonner aux nouveaux messages de cette conversation
     channel = client
       .channel(`messages:${conversationId.value}`)
       .on(
@@ -98,7 +98,7 @@ export function useRealtimeMessages(
     }
   }
 
-  // Observer les changements de conversationId
+  // observer les changements de conversationId
   watch(conversationId, (newId, oldId) => {
     if (newId !== oldId && newId) {
       subscribe();
@@ -121,7 +121,7 @@ export function useRealtimeMessages(
   };
 }
 
-// Hook pour s'abonner aux notifications globales (nouveaux messages dans toutes les conversations)
+// hook pour s'abonner aux notifications globales (nouveaux messages dans toutes les conversations)
 export function useRealtimeNotifications(
   userId: Ref<string | undefined>,
   onNewMessage: (message: RealtimeMessage) => void,
@@ -146,8 +146,8 @@ export function useRealtimeNotifications(
       channel.unsubscribe();
     }
 
-    // S'abonner à tous les nouveaux messages
-    // On filtrera côté client ceux qui nous concernent
+    // s'abonner à tous les nouveaux messages
+    // on filtrera côté client ceux qui nous concernent
     channel = client
       .channel("global-messages")
       .on(
@@ -159,7 +159,7 @@ export function useRealtimeNotifications(
         },
         (payload) => {
           const msg = payload.new as RealtimeMessage;
-          // Ne pas notifier pour nos propres messages
+          // ne pas notifier pour nos propres messages
           if (msg.sender_id !== userId.value) {
             onNewMessage(msg);
           }

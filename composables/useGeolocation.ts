@@ -1,5 +1,5 @@
-// Composable pour gérer la géolocalisation de l'utilisateur
-// Utilise l'API Geolocation du navigateur
+// composable pour gérer la géolocalisation de l'utilisateur
+// utilise l'API Geolocation du navigateur
 
 export type GeoStatus =
   | "idle"
@@ -13,10 +13,10 @@ export interface GeoPosition {
   lng: number;
 }
 
-// Clé pour stocker le consentement en localStorage
+// clé pour stocker le consentement en localStorage
 const STORAGE_KEY = "koudpouce_geoloc_consent";
 
-// États partagés (réactifs)
+// états partagés (réactifs)
 const status = ref<GeoStatus>("idle");
 const position = ref<GeoPosition | null>(null);
 const error = ref<string | null>(null);

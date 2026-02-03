@@ -1,5 +1,5 @@
 <!--
-  Page À propos - Pourquoi Koudpouce existe.
+  page À propos - Pourquoi Koudpouce existe.
 -->
 <script setup lang="ts">
 useHead({
@@ -27,7 +27,7 @@ useSeoMeta({
     <AppHeader />
 
     <main class="max-w-4xl mx-auto px-4 py-12">
-      <!-- Hero -->
+      <!-- hero -->
       <div class="text-center mb-12">
         <div
           class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-orange-400 to-amber-500 rounded-2xl shadow-lg mb-6"
@@ -50,7 +50,7 @@ useSeoMeta({
         </p>
       </div>
 
-      <!-- L'idée -->
+      <!-- l'idée -->
       <section
         class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm mb-8"
       >
@@ -89,7 +89,7 @@ useSeoMeta({
         </div>
       </section>
 
-      <!-- À qui ça s'adresse -->
+      <!-- à qui ça s'adresse -->
       <section
         class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm mb-8"
       >
@@ -139,7 +139,7 @@ useSeoMeta({
         </div>
       </section>
 
-      <!-- Ce que ce n'est pas -->
+      <!-- ce que ce n'est pas -->
       <section
         class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm mb-8"
       >
@@ -187,7 +187,7 @@ useSeoMeta({
         </div>
       </section>
 
-      <!-- Comment ça marche -->
+      <!-- comment ça marche -->
       <section
         class="bg-gradient-to-br from-orange-100 to-amber-100 rounded-2xl p-8 border border-orange-200"
       >

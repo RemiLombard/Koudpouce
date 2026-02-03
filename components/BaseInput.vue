@@ -60,7 +60,6 @@ const baseClasses = computed(() => {
 
 <template>
   <div class="relative">
-    <!-- Icône à gauche -->
     <div
       v-if="icon"
       class="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 pointer-events-none"

@@ -1,6 +1,6 @@
-<!-- Formulaire d'authentification réutilisable (login ou register) -->
+<!-- formulaire d'authentification réutilisable (login ou register) -->
 <script setup lang="ts">
-// Props : mode (login/register), loading, error
+// props : mode (login/register), loading, error
 interface Props {
   mode: "register" | "login";
   loading?: boolean;
@@ -16,7 +16,7 @@ const emit = defineEmits<{
   submit: [data: { email: string; password: string; displayName?: string }];
 }>();
 
-// Champs du formulaire
+// champs du formulaire
 const form = reactive({
   email: "",
   password: "",
@@ -49,7 +49,7 @@ function handleSubmit() {
 
 <template>
   <form class="space-y-5" @submit.prevent="handleSubmit">
-    <!-- Email -->
+    <!-- email -->
     <div>
       <label for="email" class="label">Adresse email</label>
       <BaseInput
@@ -63,7 +63,7 @@ function handleSubmit() {
       />
     </div>
 
-    <!-- Mot de passe -->
+    <!-- mot de passe -->
     <div>
       <label for="password" class="label">Mot de passe</label>
       <BaseInput
@@ -78,7 +78,7 @@ function handleSubmit() {
       />
     </div>
 
-    <!-- Confirmation mot de passe (inscription uniquement) -->
+    <!-- confirmation mot de passe (inscription uniquement) -->
     <div v-if="mode === 'register'">
       <label for="passwordConfirm" class="label"
         >Confirmer le mot de passe</label
@@ -93,9 +93,9 @@ function handleSubmit() {
       />
     </div>
 
-    <!-- Nom (inscription uniquement) -->
+    <!-- nom (inscription uniquement) -->
     <div v-if="mode === 'register'">
-      <label for="displayName" class="label">Prénom ou nom</label>
+      <label for="displayName" class="label">Pseudonyme</label>
       <BaseInput
         id="displayName"
         v-model="form.displayName"
@@ -106,7 +106,7 @@ function handleSubmit() {
       />
     </div>
 
-    <!-- Message d'erreur -->
+    <!-- message d'erreur -->
     <div
       v-if="error || localError"
       class="flex items-start gap-2 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm"
@@ -115,7 +115,7 @@ function handleSubmit() {
       <span>{{ localError || error }}</span>
     </div>
 
-    <!-- Bouton submit -->
+    <!-- bouton submit -->
     <BaseButton
       type="submit"
       variant="primary"

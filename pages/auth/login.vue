@@ -1,4 +1,4 @@
-<!-- Page de connexion -->
+<!-- page de connexion -->
 <script setup lang="ts">
 // SEO
 useHead({
@@ -12,15 +12,15 @@ useHead({
   ],
 });
 
-// Composable auth et navigation
+// composable auth et navigation
 const { login, loading, error, isAdmin } = useAuth();
 const router = useRouter();
 const route = useRoute();
 
-// Gestion erreur OAuth Google
+// gestion erreur OAuth Google
 const googleError = computed(() => route.query.error === "google_failed");
 
-// Connexion puis redirection
+// connexion puis redirection
 async function handleLogin(data: { email: string; password: string }) {
   const success = await login(data.email, data.password);
   if (success) {
@@ -41,7 +41,7 @@ async function handleLogin(data: { email: string; password: string }) {
     <main class="flex-1 flex items-center justify-center px-4 py-12">
       <div class="w-full max-w-md">
         <BaseCard variant="elevated" padding="lg">
-          <!-- Icône et titre -->
+          <!-- icône et titre -->
           <div class="text-center mb-8">
             <div
               class="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-2xl flex items-center justify-center"
@@ -52,7 +52,7 @@ async function handleLogin(data: { email: string; password: string }) {
             <p class="text-stone-600">Retrouvez votre compte Koudpouce</p>
           </div>
 
-          <!-- Formulaire -->
+          <!-- formulaire -->
           <AuthForm
             mode="login"
             :loading="loading"
@@ -60,7 +60,7 @@ async function handleLogin(data: { email: string; password: string }) {
             @submit="handleLogin"
           />
 
-          <!-- Séparateur -->
+          <!-- séparateur -->
           <div class="relative my-6">
             <div class="absolute inset-0 flex items-center">
               <div class="w-full border-t border-stone-200"></div>
@@ -70,15 +70,15 @@ async function handleLogin(data: { email: string; password: string }) {
             </div>
           </div>
 
-          <!-- Bouton Google -->
+          <!-- bouton Google -->
           <GoogleAuthButton />
 
-          <!-- Message d'erreur Google -->
+          <!-- message d'erreur Google -->
           <p v-if="googleError" class="mt-4 text-center text-sm text-red-600">
             La connexion avec Google a échoué. Veuillez réessayer.
           </p>
 
-          <!-- Lien inscription -->
+          <!-- lien inscription -->
           <div class="mt-8 pt-6 border-t border-stone-100 text-center">
             <p class="text-stone-600 text-sm">
               Pas encore de compte ?

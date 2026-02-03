@@ -1,392 +1,3 @@
-<template>
-  <div class="min-h-screen bg-gradient-warm flex flex-col">
-    <!-- Header Admin -->
-    <header
-      class="sticky top-0 z-50 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 shadow-lg"
-    >
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
-          <div class="flex items-center gap-3">
-            <div
-              class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center"
-            >
-              <Icon name="shield" class="w-5 h-5 text-white" />
-            </div>
-            <div>
-              <h1 class="text-lg font-bold text-white">Administration</h1>
-              <p class="text-xs text-white/70">Koudpouce</p>
-            </div>
-          </div>
-          <button
-            type="button"
-            class="flex items-center gap-2 px-4 py-2 text-white font-medium rounded-xl border border-white/40 hover:bg-white/10 transition-colors"
-            @click="handleLogout"
-          >
-            <Icon name="logout" class="w-4 h-4" />
-            Déconnexion
-          </button>
-        </div>
-      </div>
-    </header>
-
-    <main class="flex-1 max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
-      <!-- Onglets -->
-      <div class="flex gap-2 mb-6">
-        <button
-          type="button"
-          class="px-5 py-2.5 rounded-xl font-medium transition-all"
-          :class="
-            activeTab === 'listings'
-              ? 'bg-orange-500 text-white shadow-md'
-              : 'bg-white text-gray-600 hover:bg-orange-50 border border-gray-200'
-          "
-          @click="activeTab = 'listings'"
-        >
-          Annonces
-          <span
-            v-if="listingReportsCount > 0"
-            class="ml-1.5 px-2 py-0.5 text-xs rounded-full"
-            :class="
-              activeTab === 'listings'
-                ? 'bg-white/20 text-white'
-                : 'bg-orange-500 text-white'
-            "
-          >
-            {{ listingReportsCount }}
-          </span>
-        </button>
-        <button
-          type="button"
-          class="px-5 py-2.5 rounded-xl font-medium transition-all"
-          :class="
-            activeTab === 'users'
-              ? 'bg-orange-500 text-white shadow-md'
-              : 'bg-white text-gray-600 hover:bg-orange-50 border border-gray-200'
-          "
-          @click="activeTab = 'users'"
-        >
-          Utilisateurs
-          <span
-            v-if="userReportsCount > 0"
-            class="ml-1.5 px-2 py-0.5 text-xs rounded-full"
-            :class="
-              activeTab === 'users'
-                ? 'bg-white/20 text-white'
-                : 'bg-orange-500 text-white'
-            "
-          >
-            {{ userReportsCount }}
-          </span>
-        </button>
-      </div>
-
-      <!-- Titre dynamique -->
-      <div class="mb-8">
-        <h2 class="text-2xl font-bold text-stone-800 mb-1">
-          {{
-            activeTab === "listings"
-              ? "Signalements d'annonces"
-              : "Signalements d'utilisateurs"
-          }}
-        </h2>
-        <p class="text-stone-600 text-sm">
-          {{
-            activeTab === "listings"
-              ? "Examinez et traitez les signalements d'annonces"
-              : "Examinez et traitez les signalements d'utilisateurs"
-          }}
-        </p>
-      </div>
-
-      <!-- ========== ONGLET ANNONCES ========== -->
-      <template v-if="activeTab === 'listings'">
-        <!-- État de chargement -->
-        <LoadingSpinner
-          v-if="listingLoading"
-          text="Chargement des signalements..."
-        />
-
-        <!-- Message si aucun signalement -->
-        <BaseCard
-          v-else-if="listingReports.length === 0"
-          variant="elevated"
-          padding="lg"
-          class="text-center"
-        >
-          <div
-            class="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-2xl flex items-center justify-center"
-          >
-            <Icon name="check-circle" class="w-8 h-8 text-green-600" />
-          </div>
-          <p class="text-stone-600 text-lg font-medium">
-            Aucun signalement à traiter
-          </p>
-          <p class="text-stone-500 text-sm mt-1">
-            Tous les signalements ont été traités. Bravo !
-          </p>
-        </BaseCard>
-
-        <!-- Liste des signalements d'annonces -->
-        <div v-else class="space-y-4">
-          <BaseCard
-            v-for="report in listingReports"
-            :key="report.id"
-            variant="interactive"
-            padding="none"
-            class="overflow-hidden"
-          >
-            <!-- Barre de statut -->
-            <div
-              :class="[
-                'h-1',
-                report.status === 'pending'
-                  ? 'bg-gradient-to-r from-orange-400 to-amber-400'
-                  : report.status === 'actioned'
-                    ? 'bg-gradient-to-r from-green-400 to-emerald-400'
-                    : 'bg-stone-300',
-              ]"
-            />
-
-            <div class="p-6">
-              <div class="flex flex-col lg:flex-row lg:items-start gap-4">
-                <!-- Infos du signalement -->
-                <div class="flex-1 min-w-0">
-                  <div class="flex flex-wrap items-center gap-2 mb-3">
-                    <span
-                      :class="[
-                        'inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold',
-                        listingReasonBadgeClass(report.reason),
-                      ]"
-                    >
-                      {{ listingReasonLabel(report.reason) }}
-                    </span>
-                  </div>
-
-                  <!-- Annonce signalée -->
-                  <div v-if="report.listing" class="mb-3">
-                    <h3 class="font-bold text-stone-800 text-lg mb-1">
-                      {{ report.listing.title }}
-                    </h3>
-                    <p class="text-sm text-stone-500 flex items-center gap-1">
-                      <Icon name="location" class="w-4 h-4" />
-                      {{ report.listing.cityName }} ({{
-                        report.listing.departmentCode
-                      }})
-                    </p>
-                  </div>
-                  <div v-else class="mb-3">
-                    <p class="text-stone-400 italic flex items-center gap-2">
-                      <Icon name="alert-triangle" class="w-4 h-4" />
-                      Annonce supprimée
-                    </p>
-                  </div>
-
-                  <!-- Message optionnel -->
-                  <div
-                    v-if="report.message"
-                    class="bg-stone-50 rounded-xl p-4 mb-3 border border-stone-100"
-                  >
-                    <p class="text-sm text-stone-700 italic leading-relaxed">
-                      « {{ report.message }} »
-                    </p>
-                  </div>
-
-                  <!-- Meta infos -->
-                  <div
-                    class="flex flex-wrap items-center gap-4 text-xs text-stone-500"
-                  >
-                    <span class="flex items-center gap-1">
-                      <Icon name="user" class="w-3.5 h-3.5" />
-                      {{ report.reporter?.firstName || "Utilisateur inconnu" }}
-                    </span>
-                    <span class="flex items-center gap-1">
-                      <Icon name="calendar" class="w-3.5 h-3.5" />
-                      {{ formatDate(report.createdAt) }}
-                    </span>
-                  </div>
-                </div>
-
-                <!-- Actions -->
-                <div
-                  class="flex flex-col sm:flex-row gap-2 lg:flex-col lg:w-auto"
-                >
-                  <NuxtLink :to="`/admin/reports/${report.id}`">
-                    <BaseButton variant="primary" size="sm" class="w-full">
-                      <Icon name="eye" class="w-4 h-4" />
-                      Voir détails
-                    </BaseButton>
-                  </NuxtLink>
-                  <BaseButton
-                    variant="outline"
-                    size="sm"
-                    :loading="listingActionLoading === report.id"
-                    @click="dismissListingReport(report.id)"
-                  >
-                    <Icon name="x" class="w-4 h-4" />
-                    Rejeter
-                  </BaseButton>
-                  <BaseButton
-                    variant="danger"
-                    size="sm"
-                    :loading="listingActionLoading === report.id"
-                    @click="actionListingReport(report.id)"
-                  >
-                    <Icon name="trash" class="w-4 h-4" />
-                    Supprimer
-                  </BaseButton>
-                </div>
-              </div>
-            </div>
-          </BaseCard>
-        </div>
-      </template>
-
-      <!-- ========== ONGLET UTILISATEURS ========== -->
-      <template v-else-if="activeTab === 'users'">
-        <!-- État de chargement -->
-        <LoadingSpinner
-          v-if="userLoading"
-          text="Chargement des signalements..."
-        />
-
-        <!-- Message si aucun signalement -->
-        <BaseCard
-          v-else-if="userReports.length === 0"
-          variant="elevated"
-          padding="lg"
-          class="text-center"
-        >
-          <div
-            class="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-2xl flex items-center justify-center"
-          >
-            <Icon name="check-circle" class="w-8 h-8 text-green-600" />
-          </div>
-          <p class="text-stone-600 text-lg font-medium">
-            Aucun signalement à traiter
-          </p>
-          <p class="text-stone-500 text-sm mt-1">
-            Tous les signalements ont été traités. Bravo !
-          </p>
-        </BaseCard>
-
-        <!-- Liste des signalements d'utilisateurs -->
-        <div v-else class="space-y-4">
-          <BaseCard
-            v-for="report in userReports"
-            :key="report.id"
-            variant="interactive"
-            padding="none"
-            class="overflow-hidden"
-          >
-            <!-- Barre de statut -->
-            <div
-              :class="[
-                'h-1',
-                report.status === 'pending'
-                  ? 'bg-gradient-to-r from-orange-400 to-amber-400'
-                  : report.status === 'actioned'
-                    ? 'bg-gradient-to-r from-green-400 to-emerald-400'
-                    : 'bg-stone-300',
-              ]"
-            />
-
-            <div class="p-6">
-              <div class="flex flex-col lg:flex-row lg:items-start gap-4">
-                <!-- Infos du signalement -->
-                <div class="flex-1 min-w-0">
-                  <div class="flex flex-wrap items-center gap-2 mb-3">
-                    <span
-                      :class="[
-                        'inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold',
-                        userReasonBadgeClass(report.reason),
-                      ]"
-                    >
-                      {{ userReasonLabel(report.reason) }}
-                    </span>
-                  </div>
-
-                  <!-- Utilisateur signalé -->
-                  <div v-if="report.reportedUser" class="mb-3">
-                    <h3 class="font-bold text-stone-800 text-lg mb-1">
-                      {{ report.reportedUser.firstName }}
-                      {{ report.reportedUser.lastName }}
-                    </h3>
-                    <p class="text-sm text-stone-500 flex items-center gap-1">
-                      <Icon name="envelope" class="w-4 h-4" />
-                      {{ report.reportedUser.email }}
-                    </p>
-                  </div>
-                  <div v-else class="mb-3">
-                    <p class="text-stone-400 italic flex items-center gap-2">
-                      <Icon name="alert-triangle" class="w-4 h-4" />
-                      Utilisateur supprimé
-                    </p>
-                  </div>
-
-                  <!-- Message optionnel -->
-                  <div
-                    v-if="report.message"
-                    class="bg-stone-50 rounded-xl p-4 mb-3 border border-stone-100"
-                  >
-                    <p class="text-sm text-stone-700 italic leading-relaxed">
-                      « {{ report.message }} »
-                    </p>
-                  </div>
-
-                  <!-- Meta infos -->
-                  <div
-                    class="flex flex-wrap items-center gap-4 text-xs text-stone-500"
-                  >
-                    <span class="flex items-center gap-1">
-                      <Icon name="user" class="w-3.5 h-3.5" />
-                      Signalé par :
-                      {{ report.reporter?.firstName || "Utilisateur inconnu" }}
-                    </span>
-                    <span class="flex items-center gap-1">
-                      <Icon name="calendar" class="w-3.5 h-3.5" />
-                      {{ formatDate(report.createdAt) }}
-                    </span>
-                  </div>
-                </div>
-
-                <!-- Actions -->
-                <div
-                  class="flex flex-col sm:flex-row gap-2 lg:flex-col lg:w-auto"
-                >
-                  <NuxtLink :to="`/admin/user-reports/${report.id}`">
-                    <BaseButton variant="primary" size="sm" class="w-full">
-                      <Icon name="eye" class="w-4 h-4" />
-                      Voir détails
-                    </BaseButton>
-                  </NuxtLink>
-                  <BaseButton
-                    variant="outline"
-                    size="sm"
-                    :loading="userActionLoading === report.id"
-                    @click="dismissUserReport(report.id)"
-                  >
-                    <Icon name="x" class="w-4 h-4" />
-                    Rejeter
-                  </BaseButton>
-                  <BaseButton
-                    variant="danger"
-                    size="sm"
-                    :loading="userActionLoading === report.id"
-                    @click="actionUserReport(report.id)"
-                  >
-                    <Icon name="ban" class="w-4 h-4" />
-                    Sanctionner
-                  </BaseButton>
-                </div>
-              </div>
-            </div>
-          </BaseCard>
-        </div>
-      </template>
-    </main>
-  </div>
-</template>
-
 <script setup lang="ts">
 definePageMeta({
   middleware: ["admin"],
@@ -440,16 +51,16 @@ const router = useRouter();
 
 const activeTab = ref<"listings" | "users">("listings");
 
-// Compteurs
+// compteurs
 const listingReportsCount = ref(0);
 const userReportsCount = ref(0);
 
-// Signalements d'annonces
+// signalements d'annonces
 const listingReports = ref<ListingReport[]>([]);
 const listingLoading = ref(true);
 const listingActionLoading = ref<string | null>(null);
 
-// Signalements d'utilisateurs
+// signalements d'utilisateurs
 const userReports = ref<UserReport[]>([]);
 const userLoading = ref(true);
 const userActionLoading = ref<string | null>(null);
@@ -628,7 +239,7 @@ function formatDate(dateStr: string): string {
   });
 }
 
-// Charger les données quand on change d'onglet
+// charger les données quand on change d'onglet
 watch(
   activeTab,
   (newTab) => {
@@ -647,3 +258,390 @@ onMounted(() => {
   loadUserReports();
 });
 </script>
+
+<template>
+  <div class="min-h-screen bg-gradient-warm flex flex-col">
+    <!-- header Admin -->
+    <header
+      class="sticky top-0 z-50 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 shadow-lg"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center"
+            >
+              <Icon name="shield" class="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h1 class="text-lg font-bold text-white">Administration</h1>
+              <p class="text-xs text-white/70">Koudpouce</p>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="flex items-center gap-2 px-4 py-2 text-white font-medium rounded-xl border border-white/40 hover:bg-white/10 transition-colors"
+            @click="handleLogout"
+          >
+            <Icon name="logout" class="w-4 h-4" />
+            Déconnexion
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+      <!-- onglets -->
+      <div class="flex gap-2 mb-6">
+        <button
+          type="button"
+          class="px-5 py-2.5 rounded-xl font-medium transition-all"
+          :class="
+            activeTab === 'listings'
+              ? 'bg-orange-500 text-white shadow-md'
+              : 'bg-white text-gray-600 hover:bg-orange-50 border border-gray-200'
+          "
+          @click="activeTab = 'listings'"
+        >
+          Annonces
+          <span
+            v-if="listingReportsCount > 0"
+            class="ml-1.5 px-2 py-0.5 text-xs rounded-full"
+            :class="
+              activeTab === 'listings'
+                ? 'bg-white/20 text-white'
+                : 'bg-orange-500 text-white'
+            "
+          >
+            {{ listingReportsCount }}
+          </span>
+        </button>
+        <button
+          type="button"
+          class="px-5 py-2.5 rounded-xl font-medium transition-all"
+          :class="
+            activeTab === 'users'
+              ? 'bg-orange-500 text-white shadow-md'
+              : 'bg-white text-gray-600 hover:bg-orange-50 border border-gray-200'
+          "
+          @click="activeTab = 'users'"
+        >
+          Utilisateurs
+          <span
+            v-if="userReportsCount > 0"
+            class="ml-1.5 px-2 py-0.5 text-xs rounded-full"
+            :class="
+              activeTab === 'users'
+                ? 'bg-white/20 text-white'
+                : 'bg-orange-500 text-white'
+            "
+          >
+            {{ userReportsCount }}
+          </span>
+        </button>
+      </div>
+
+      <!-- titre dynamique -->
+      <div class="mb-8">
+        <h2 class="text-2xl font-bold text-stone-800 mb-1">
+          {{
+            activeTab === "listings"
+              ? "Signalements d'annonces"
+              : "Signalements d'utilisateurs"
+          }}
+        </h2>
+        <p class="text-stone-600 text-sm">
+          {{
+            activeTab === "listings"
+              ? "Examinez et traitez les signalements d'annonces"
+              : "Examinez et traitez les signalements d'utilisateurs"
+          }}
+        </p>
+      </div>
+
+      <template v-if="activeTab === 'listings'">
+        <!-- état de chargement -->
+        <LoadingSpinner
+          v-if="listingLoading"
+          text="Chargement des signalements..."
+        />
+
+        <!-- message si aucun signalement -->
+        <BaseCard
+          v-else-if="listingReports.length === 0"
+          variant="elevated"
+          padding="lg"
+          class="text-center"
+        >
+          <div
+            class="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-2xl flex items-center justify-center"
+          >
+            <Icon name="check-circle" class="w-8 h-8 text-green-600" />
+          </div>
+          <p class="text-stone-600 text-lg font-medium">
+            Aucun signalement à traiter
+          </p>
+          <p class="text-stone-500 text-sm mt-1">
+            Tous les signalements ont été traités. Bravo !
+          </p>
+        </BaseCard>
+
+        <!-- liste des signalements d'annonces -->
+        <div v-else class="space-y-4">
+          <BaseCard
+            v-for="report in listingReports"
+            :key="report.id"
+            variant="interactive"
+            padding="none"
+            class="overflow-hidden"
+          >
+            <!-- barre de statut -->
+            <div
+              :class="[
+                'h-1',
+                report.status === 'pending'
+                  ? 'bg-gradient-to-r from-orange-400 to-amber-400'
+                  : report.status === 'actioned'
+                    ? 'bg-gradient-to-r from-green-400 to-emerald-400'
+                    : 'bg-stone-300',
+              ]"
+            />
+
+            <div class="p-6">
+              <div class="flex flex-col lg:flex-row lg:items-start gap-4">
+                <!-- infos du signalement -->
+                <div class="flex-1 min-w-0">
+                  <div class="flex flex-wrap items-center gap-2 mb-3">
+                    <span
+                      :class="[
+                        'inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold',
+                        listingReasonBadgeClass(report.reason),
+                      ]"
+                    >
+                      {{ listingReasonLabel(report.reason) }}
+                    </span>
+                  </div>
+
+                  <!-- annonce signalée -->
+                  <div v-if="report.listing" class="mb-3">
+                    <h3 class="font-bold text-stone-800 text-lg mb-1">
+                      {{ report.listing.title }}
+                    </h3>
+                    <p class="text-sm text-stone-500 flex items-center gap-1">
+                      <Icon name="location" class="w-4 h-4" />
+                      {{ report.listing.cityName }} ({{
+                        report.listing.departmentCode
+                      }})
+                    </p>
+                  </div>
+                  <div v-else class="mb-3">
+                    <p class="text-stone-400 italic flex items-center gap-2">
+                      <Icon name="alert-triangle" class="w-4 h-4" />
+                      Annonce supprimée
+                    </p>
+                  </div>
+
+                  <!-- message optionnel -->
+                  <div
+                    v-if="report.message"
+                    class="bg-stone-50 rounded-xl p-4 mb-3 border border-stone-100"
+                  >
+                    <p class="text-sm text-stone-700 italic leading-relaxed">
+                      « {{ report.message }} »
+                    </p>
+                  </div>
+
+                  <!-- meta infos -->
+                  <div
+                    class="flex flex-wrap items-center gap-4 text-xs text-stone-500"
+                  >
+                    <span class="flex items-center gap-1">
+                      <Icon name="user" class="w-3.5 h-3.5" />
+                      {{ report.reporter?.firstName || "Utilisateur inconnu" }}
+                    </span>
+                    <span class="flex items-center gap-1">
+                      <Icon name="calendar" class="w-3.5 h-3.5" />
+                      {{ formatDate(report.createdAt) }}
+                    </span>
+                  </div>
+                </div>
+
+                <!-- actions -->
+                <div
+                  class="flex flex-col sm:flex-row gap-2 lg:flex-col lg:w-auto"
+                >
+                  <NuxtLink :to="`/admin/reports/${report.id}`">
+                    <BaseButton variant="primary" size="sm" class="w-full">
+                      <Icon name="eye" class="w-4 h-4" />
+                      Voir détails
+                    </BaseButton>
+                  </NuxtLink>
+                  <BaseButton
+                    variant="outline"
+                    size="sm"
+                    :loading="listingActionLoading === report.id"
+                    @click="dismissListingReport(report.id)"
+                  >
+                    <Icon name="x" class="w-4 h-4" />
+                    Rejeter
+                  </BaseButton>
+                  <BaseButton
+                    variant="danger"
+                    size="sm"
+                    :loading="listingActionLoading === report.id"
+                    @click="actionListingReport(report.id)"
+                  >
+                    <Icon name="trash" class="w-4 h-4" />
+                    Supprimer
+                  </BaseButton>
+                </div>
+              </div>
+            </div>
+          </BaseCard>
+        </div>
+      </template>
+
+      <template v-else-if="activeTab === 'users'">
+        <!-- état de chargement -->
+        <LoadingSpinner
+          v-if="userLoading"
+          text="Chargement des signalements..."
+        />
+
+        <!-- message si aucun signalement -->
+        <BaseCard
+          v-else-if="userReports.length === 0"
+          variant="elevated"
+          padding="lg"
+          class="text-center"
+        >
+          <div
+            class="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-2xl flex items-center justify-center"
+          >
+            <Icon name="check-circle" class="w-8 h-8 text-green-600" />
+          </div>
+          <p class="text-stone-600 text-lg font-medium">
+            Aucun signalement à traiter
+          </p>
+          <p class="text-stone-500 text-sm mt-1">
+            Tous les signalements ont été traités. Bravo !
+          </p>
+        </BaseCard>
+
+        <!-- liste des signalements d'utilisateurs -->
+        <div v-else class="space-y-4">
+          <BaseCard
+            v-for="report in userReports"
+            :key="report.id"
+            variant="interactive"
+            padding="none"
+            class="overflow-hidden"
+          >
+            <!-- barre de statut -->
+            <div
+              :class="[
+                'h-1',
+                report.status === 'pending'
+                  ? 'bg-gradient-to-r from-orange-400 to-amber-400'
+                  : report.status === 'actioned'
+                    ? 'bg-gradient-to-r from-green-400 to-emerald-400'
+                    : 'bg-stone-300',
+              ]"
+            />
+
+            <div class="p-6">
+              <div class="flex flex-col lg:flex-row lg:items-start gap-4">
+                <!-- infos du signalement -->
+                <div class="flex-1 min-w-0">
+                  <div class="flex flex-wrap items-center gap-2 mb-3">
+                    <span
+                      :class="[
+                        'inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold',
+                        userReasonBadgeClass(report.reason),
+                      ]"
+                    >
+                      {{ userReasonLabel(report.reason) }}
+                    </span>
+                  </div>
+
+                  <!-- utilisateur signalé -->
+                  <div v-if="report.reportedUser" class="mb-3">
+                    <h3 class="font-bold text-stone-800 text-lg mb-1">
+                      {{ report.reportedUser.firstName }}
+                      {{ report.reportedUser.lastName }}
+                    </h3>
+                    <p class="text-sm text-stone-500 flex items-center gap-1">
+                      <Icon name="envelope" class="w-4 h-4" />
+                      {{ report.reportedUser.email }}
+                    </p>
+                  </div>
+                  <div v-else class="mb-3">
+                    <p class="text-stone-400 italic flex items-center gap-2">
+                      <Icon name="alert-triangle" class="w-4 h-4" />
+                      Utilisateur supprimé
+                    </p>
+                  </div>
+
+                  <!-- message optionnel -->
+                  <div
+                    v-if="report.message"
+                    class="bg-stone-50 rounded-xl p-4 mb-3 border border-stone-100"
+                  >
+                    <p class="text-sm text-stone-700 italic leading-relaxed">
+                      « {{ report.message }} »
+                    </p>
+                  </div>
+
+                  <!-- meta infos -->
+                  <div
+                    class="flex flex-wrap items-center gap-4 text-xs text-stone-500"
+                  >
+                    <span class="flex items-center gap-1">
+                      <Icon name="user" class="w-3.5 h-3.5" />
+                      Signalé par :
+                      {{ report.reporter?.firstName || "Utilisateur inconnu" }}
+                    </span>
+                    <span class="flex items-center gap-1">
+                      <Icon name="calendar" class="w-3.5 h-3.5" />
+                      {{ formatDate(report.createdAt) }}
+                    </span>
+                  </div>
+                </div>
+
+                <!-- actions -->
+                <div
+                  class="flex flex-col sm:flex-row gap-2 lg:flex-col lg:w-auto"
+                >
+                  <NuxtLink :to="`/admin/user-reports/${report.id}`">
+                    <BaseButton variant="primary" size="sm" class="w-full">
+                      <Icon name="eye" class="w-4 h-4" />
+                      Voir détails
+                    </BaseButton>
+                  </NuxtLink>
+                  <BaseButton
+                    variant="outline"
+                    size="sm"
+                    :loading="userActionLoading === report.id"
+                    @click="dismissUserReport(report.id)"
+                  >
+                    <Icon name="x" class="w-4 h-4" />
+                    Rejeter
+                  </BaseButton>
+                  <BaseButton
+                    variant="danger"
+                    size="sm"
+                    :loading="userActionLoading === report.id"
+                    @click="actionUserReport(report.id)"
+                  >
+                    <Icon name="ban" class="w-4 h-4" />
+                    Sanctionner
+                  </BaseButton>
+                </div>
+              </div>
+            </div>
+          </BaseCard>
+        </div>
+      </template>
+    </main>
+  </div>
+</template>

@@ -1,9 +1,9 @@
-<!-- Page "Je propose un service" : affiche les demandes d'aide des autres utilisateurs -->
+<!-- page "Je propose un service" : affiche les demandes d'aide des autres utilisateurs -->
 <script setup lang="ts">
 import type { ListingFilters, ServiceType } from "~/composables/useListings";
 import { fetchServiceTypes, ITEMS_PER_PAGE } from "~/composables/useListings";
 
-// Récupération des fonctions et données depuis les composables
+// récupération des fonctions et données depuis les composables
 const {
   listings,
   loading,
@@ -17,7 +17,7 @@ const {
 } = useListings();
 const { user } = useAuth();
 
-// Liste des types de service pour les filtres
+// liste des types de service pour les filtres
 const serviceTypes = ref<ServiceType[]>([]);
 const serviceTypesMap = computed<Record<string, ServiceType>>(() => {
   const map: Record<string, ServiceType> = {};
@@ -55,7 +55,7 @@ function onFiltersChange(newFilters: ListingFilters) {
     <AppHeader />
 
     <main class="max-w-5xl mx-auto px-4 py-8">
-      <!-- Header -->
+      <!-- header -->
       <BaseCard variant="highlighted" color="primary" padding="lg" class="mb-8">
         <div
           class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6"
@@ -106,7 +106,7 @@ function onFiltersChange(newFilters: ListingFilters) {
         </div>
       </BaseCard>
 
-      <!-- Filtres -->
+      <!-- filtres -->
       <ListingFilters
         v-model="filters"
         :service-types="serviceTypes"
@@ -114,13 +114,13 @@ function onFiltersChange(newFilters: ListingFilters) {
         @update:model-value="onFiltersChange"
       />
 
-      <!-- Chargement -->
+      <!-- chargement -->
       <LoadingSpinner
         v-if="loading && listings.length === 0"
         text="Chargement des annonces..."
       />
 
-      <!-- Erreur -->
+      <!-- erreur -->
       <BaseCard
         v-else-if="error"
         variant="default"
@@ -138,7 +138,7 @@ function onFiltersChange(newFilters: ListingFilters) {
         </BaseButton>
       </BaseCard>
 
-      <!-- Liste des annonces -->
+      <!-- liste des annonces -->
       <template v-else>
         <EmptyState
           v-if="listings.length === 0"
@@ -156,13 +156,13 @@ function onFiltersChange(newFilters: ListingFilters) {
           />
         </div>
 
-        <!-- Pagination -->
+        <!-- pagination -->
         <nav
           v-if="totalPages > 1"
           class="flex items-center justify-center gap-2 pt-8"
           aria-label="Pagination"
         >
-          <!-- Bouton précédent -->
+          <!-- bouton précédent -->
           <button
             :disabled="currentPage === 1"
             class="px-3 py-2 rounded-lg text-sm font-medium transition-colors"
@@ -176,7 +176,7 @@ function onFiltersChange(newFilters: ListingFilters) {
             <Icon name="arrow-left" class="w-5 h-5" />
           </button>
 
-          <!-- Numéros de page -->
+          <!-- numéros de page -->
           <button
             v-for="page in totalPages"
             :key="page"
@@ -191,7 +191,7 @@ function onFiltersChange(newFilters: ListingFilters) {
             {{ page }}
           </button>
 
-          <!-- Bouton suivant -->
+          <!-- bouton suivant -->
           <button
             :disabled="currentPage === totalPages"
             class="px-3 py-2 rounded-lg text-sm font-medium transition-colors"
@@ -206,7 +206,7 @@ function onFiltersChange(newFilters: ListingFilters) {
           </button>
         </nav>
 
-        <!-- Indicateur de page -->
+        <!-- indicateur de page -->
         <p
           v-if="totalPages > 1"
           class="text-center text-sm text-stone-500 mt-4"

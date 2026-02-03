@@ -1,16 +1,16 @@
-<!-- Page détail d'une annonce : affichage complet + actions (contacter, signaler) -->
+<!-- page détail d'une annonce : affichage complet + actions (contacter, signaler) -->
 <script setup lang="ts">
 import type { ListingPublic, ServiceType } from "~/composables/useListings";
 import { fetchServiceTypes } from "~/composables/useListings";
 
-// Composables Vue
+// composables Vue
 const route = useRoute();
 const router = useRouter();
 const { user } = useAuth();
 const { fetchListingById } = useListings();
 const { startConversation } = useMessaging();
 
-// Données de l'annonce
+// données de l'annonce
 const listing = ref<ListingPublic | null>(null);
 const serviceTypes = ref<ServiceType[]>([]);
 const loading = ref(true);
@@ -201,13 +201,13 @@ async function handleReport() {
     <AppHeader />
 
     <main class="max-w-3xl mx-auto px-4 py-8">
-      <!-- Bouton retour -->
+      <!-- bouton retour -->
       <BackLink to="/cherche" label="Retour aux annonces" />
 
-      <!-- Chargement -->
+      <!-- chargement -->
       <LoadingSpinner v-if="loading" text="Chargement..." />
 
-      <!-- Erreur -->
+      <!-- erreur -->
       <BaseCard
         v-else-if="error"
         variant="default"
@@ -225,9 +225,9 @@ async function handleReport() {
         </BaseButton>
       </BaseCard>
 
-      <!-- Contenu de l'annonce -->
+      <!-- contenu de l'annonce -->
       <article v-else-if="listing">
-        <!-- Bandeau si clôturée -->
+        <!-- bandeau si clôturée -->
         <div
           v-if="isClosed"
           class="mb-4 flex items-center gap-3 p-4 bg-stone-100 rounded-xl text-stone-600"
@@ -242,11 +242,11 @@ async function handleReport() {
         </div>
 
         <BaseCard variant="elevated" padding="none" class="overflow-hidden">
-          <!-- Barre colorée en haut -->
+          <!-- barre colorée en haut -->
           <div class="h-2 bg-gradient-to-r from-orange-400 to-amber-400" />
 
           <div class="p-8">
-            <!-- Badges -->
+            <!-- badges -->
             <div class="flex flex-wrap items-center gap-2 mb-6">
               <ListingTypeBadge :type="listing.type" />
               <ServiceTypeBadge
@@ -256,12 +256,12 @@ async function handleReport() {
               />
             </div>
 
-            <!-- Titre -->
+            <!-- titre -->
             <h1 class="text-3xl font-bold text-stone-800 mb-6">
               {{ listing.title }}
             </h1>
 
-            <!-- Description -->
+            <!-- description -->
             <div class="prose prose-stone max-w-none mb-8">
               <p
                 class="whitespace-pre-wrap text-stone-700 leading-relaxed text-lg"
@@ -270,7 +270,7 @@ async function handleReport() {
               </p>
             </div>
 
-            <!-- Infos secondaires -->
+            <!-- infos secondaires -->
             <div
               class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-stone-100"
             >
@@ -318,12 +318,12 @@ async function handleReport() {
             </div>
           </div>
 
-          <!-- Actions -->
+          <!-- actions -->
           <div
             v-if="!isClosed"
             class="bg-stone-50 px-8 py-6 border-t border-stone-100"
           >
-            <!-- Propriétaire -->
+            <!-- propriétaire -->
             <div v-if="isOwner">
               <p class="text-stone-600 mb-4">
                 Vous êtes l'auteur de cette annonce.
@@ -340,7 +340,7 @@ async function handleReport() {
               </p>
             </div>
 
-            <!-- Connecté mais pas propriétaire -->
+            <!-- connecté mais pas propriétaire -->
             <div v-else-if="user">
               <p class="text-stone-600 mb-4">
                 Vous souhaitez répondre à cette annonce ?
@@ -368,7 +368,7 @@ async function handleReport() {
               </p>
             </div>
 
-            <!-- Non connecté -->
+            <!-- non connecté -->
             <div v-else>
               <p class="text-stone-600 mb-4">
                 Connectez-vous pour répondre à cette annonce.
@@ -384,7 +384,7 @@ async function handleReport() {
         </BaseCard>
       </article>
 
-      <!-- Modale de signalement -->
+      <!-- modale de signalement -->
       <Teleport to="body">
         <div
           v-if="showReportModal"
@@ -394,7 +394,7 @@ async function handleReport() {
           <div
             class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden border border-stone-100"
           >
-            <!-- Header -->
+            <!-- header -->
             <div
               class="bg-gradient-to-r from-orange-50 to-amber-50 px-6 py-5 border-b border-stone-100"
             >
@@ -419,9 +419,9 @@ async function handleReport() {
               </div>
             </div>
 
-            <!-- Contenu -->
+            <!-- contenu -->
             <div class="p-6">
-              <!-- Message de succès -->
+              <!-- message de succès -->
               <div v-if="reportSuccess" class="text-center py-6">
                 <div
                   class="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-2xl flex items-center justify-center"
@@ -440,7 +440,7 @@ async function handleReport() {
                 </BaseButton>
               </div>
 
-              <!-- Formulaire -->
+              <!-- formulaire -->
               <form v-else @submit.prevent="handleReport" class="space-y-4">
                 <div>
                   <label class="block text-sm font-medium text-stone-700 mb-2">
@@ -485,12 +485,12 @@ async function handleReport() {
                   ></textarea>
                 </div>
 
-                <!-- Erreur -->
+                <!-- erreur -->
                 <p v-if="reportError" class="text-sm text-red-600">
                   {{ reportError }}
                 </p>
 
-                <!-- Actions -->
+                <!-- actions -->
                 <div class="flex gap-3 pt-2">
                   <BaseButton
                     type="button"

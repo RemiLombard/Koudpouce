@@ -1,9 +1,9 @@
-// Composable pour gérer l'authentification des utilisateurs
-// Gère la connexion, l'inscription, la déconnexion et la session
+// composable pour gérer l'authentification des utilisateurs
+// gère la connexion, l'inscription, la déconnexion et la session
 
 export type UserRole = "user" | "admin";
 
-// Interface qui représente un utilisateur connecté
+// interface qui représente un utilisateur connecté
 export interface User {
   id: string;
   email: string;
@@ -12,7 +12,7 @@ export interface User {
   role: UserRole;
 }
 
-// État global réactif (partagé entre tous les composants)
+// état global réactif (partagé entre tous les composants)
 const user = ref<User | null>(null);
 const loading = ref(false);
 const error = ref<string | null>(null);
@@ -78,7 +78,6 @@ export function useAuth() {
     }
   }
 
-  // Forward optional server cookie header when running on server-side
   async function fetchUser(cookieHeader?: string): Promise<void> {
     try {
       const opts: any = {};
@@ -92,7 +91,7 @@ export function useAuth() {
     }
   }
 
-  // Défini directement l'utilisateur côté serveur (évite appel réseau)
+  // défini directement l'utilisateur côté serveur (évite appel réseau)
   function setServerUser(serverUser: Partial<User> | null) {
     if (serverUser) {
       user.value = {
@@ -170,6 +169,7 @@ export function useAuth() {
     isAuthenticated,
     isAdmin,
     initialized: readonly(initialized),
+    setServerUser,
     register,
     login,
     logout,

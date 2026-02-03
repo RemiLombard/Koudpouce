@@ -1,11 +1,11 @@
-<!-- Page de callback OAuth (Google, etc.) -->
+<!-- page de callback OAuth (Google, etc.) -->
 <script setup lang="ts">
 const route = useRoute();
 const router = useRouter();
 const { fetchUser } = useAuth();
 
 onMounted(async () => {
-  // Récupérer les paramètres de l'URL (access_token dans le hash fragment)
+  // récupérer les paramètres de l'URL (access_token dans le hash fragment)
   const hash = window.location.hash.substring(1);
   const params = new URLSearchParams(hash);
 
@@ -22,7 +22,7 @@ onMounted(async () => {
 
   if (accessToken) {
     try {
-      // Envoyer le token au serveur pour créer la session
+      // envoyer le token au serveur pour créer la session
       await $fetch("/api/auth/oauth-callback", {
         method: "POST",
         body: {
@@ -31,17 +31,17 @@ onMounted(async () => {
         },
       });
 
-      // Mettre à jour l'état client sans recharger la page
+      // mettre à jour l'état client sans recharger la page
       await fetchUser();
 
-      // Rediriger vers la page d'accueil
+      // rediriger vers la page d'accueil
       router.push("/");
     } catch (err) {
       console.error("Erreur lors de la connexion OAuth:", err);
       router.push("/auth/login?error=oauth");
     }
   } else {
-    // Pas de token, rediriger vers login
+    // pas de token, rediriger vers login
     router.push("/auth/login");
   }
 });

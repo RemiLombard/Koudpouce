@@ -1,4 +1,4 @@
-<!-- Page profil utilisateur : infos perso, mes annonces, modification compte -->
+<!-- page profil utilisateur : infos perso, mes annonces, modification compte -->
 <script setup lang="ts">
 import type { ListingPublic, ServiceType } from "~/composables/useListings";
 import { fetchServiceTypes } from "~/composables/useListings";
@@ -11,11 +11,11 @@ useHead({
       content:
         "Gérez votre profil Koudpouce, consultez vos annonces et modifiez vos informations personnelles.",
     },
-    { name: "robots", content: "noindex" }, // Page privée
+    { name: "robots", content: "noindex" }, // page privée
   ],
 });
 
-// Fonctions d'authentification
+// fonctions d'authentification
 const {
   user,
   isAuthenticated,
@@ -26,7 +26,7 @@ const {
 } = useAuth();
 const router = useRouter();
 
-// États de la page
+// états de la page
 const loading = ref(false);
 const error = ref<string | null>(null);
 const myListings = ref<ListingPublic[]>([]);
@@ -224,7 +224,7 @@ const activePropositions = computed(() =>
     <AppHeader />
 
     <main class="max-w-5xl mx-auto px-4 py-8">
-      <!-- En-tête profil -->
+      <!-- en-tête profil -->
       <BaseCard
         variant="highlighted"
         color="primary"
@@ -275,7 +275,7 @@ const activePropositions = computed(() =>
         </div>
       </BaseCard>
 
-      <!-- Modal de modification du profil -->
+      <!-- modal de modification du profil -->
       <div
         v-if="showEditForm"
         class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
@@ -350,7 +350,7 @@ const activePropositions = computed(() =>
               </div>
             </div>
 
-            <!-- Message d'erreur -->
+            <!-- message d'erreur -->
             <div
               v-if="editError"
               class="flex items-start gap-2 p-3 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm"
@@ -359,7 +359,7 @@ const activePropositions = computed(() =>
               <span>{{ editError }}</span>
             </div>
 
-            <!-- Message de succès -->
+            <!-- message de succès -->
             <div
               v-if="editSuccess"
               class="flex items-start gap-2 p-3 bg-green-50 border border-green-200 rounded-xl text-green-700 text-sm"
@@ -388,7 +388,7 @@ const activePropositions = computed(() =>
             </div>
           </form>
 
-          <!-- Section suppression de compte -->
+          <!-- section suppression de compte -->
           <div class="mt-6 pt-6 border-t border-stone-200">
             <BaseButton
               variant="danger"
@@ -403,7 +403,7 @@ const activePropositions = computed(() =>
         </BaseCard>
       </div>
 
-      <!-- Modal de confirmation de suppression -->
+      <!-- modal de confirmation de suppression -->
       <div
         v-if="showDeleteConfirm"
         class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
@@ -447,10 +447,10 @@ const activePropositions = computed(() =>
         </BaseCard>
       </div>
 
-      <!-- État de chargement -->
+      <!-- état de chargement -->
       <LoadingSpinner v-if="loading" text="Chargement de vos annonces..." />
 
-      <!-- Erreur -->
+      <!-- erreur -->
       <BaseCard
         v-else-if="error"
         variant="default"
@@ -460,9 +460,9 @@ const activePropositions = computed(() =>
         <div class="text-red-600">{{ error }}</div>
       </BaseCard>
 
-      <!-- Mes annonces -->
+      <!-- mes annonces -->
       <div v-else class="space-y-12">
-        <!-- Mes demandes actives -->
+        <!-- mes demandes actives -->
         <section>
           <div class="flex items-center gap-3 mb-6">
             <div
@@ -558,7 +558,7 @@ const activePropositions = computed(() =>
           </div>
         </section>
 
-        <!-- Mes propositions actives -->
+        <!-- mes propositions actives -->
         <section>
           <div class="flex items-center gap-3 mb-6">
             <div
@@ -654,7 +654,7 @@ const activePropositions = computed(() =>
           </div>
         </section>
 
-        <!-- Annonces clôturées -->
+        <!-- annonces clôturées -->
         <section v-if="closedListings.length > 0">
           <div class="flex items-center gap-3 mb-6">
             <div

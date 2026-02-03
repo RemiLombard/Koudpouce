@@ -1,4 +1,4 @@
-<!-- Badge pour afficher une catégorie de service -->
+<!-- badge pour afficher une catégorie de service -->
 <script setup lang="ts">
 interface Props {
   label: string;

@@ -1,16 +1,16 @@
 /**
- * Middleware de protection des routes admin.
- * Redirige vers la page d'accueil si l'utilisateur n'est pas admin.
+ * middleware de protection des routes admin.
+ * redirige vers la page d'accueil si l'utilisateur n'est pas admin.
  */
 
 export default defineNuxtRouteMiddleware(async (to) => {
   const { isAuthenticated, isAdmin, initialized, fetchUser } = useAuth();
 
-  // Attendre l'initialisation de l'auth si nécessaire
+  // attendre l'initialisation de l'auth si nécessaire
   if (!initialized.value) {
     if (process.server) {
       const event = useRequestEvent();
-      const cookieHeader = event.node.req.headers.cookie || "";
+      const cookieHeader = event?.node?.req?.headers?.cookie ?? "";
       try {
         const { getTokenFromEvent, getUserFromToken } =
           await import("~/server/utils/supabase");
@@ -34,12 +34,12 @@ export default defineNuxtRouteMiddleware(async (to) => {
     }
   }
 
-  // Rediriger si non connecté
+  // rediriger si non connecté
   if (!isAuthenticated.value) {
     return navigateTo("/auth/login");
   }
 
-  // Rediriger si non admin
+  // rediriger si non admin
   if (!isAdmin.value) {
     return navigateTo("/");
   }

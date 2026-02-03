@@ -1,19 +1,19 @@
-<!-- Page de création d'une nouvelle annonce -->
+<!-- page de création d'une nouvelle annonce -->
 <script setup lang="ts">
 import type { ListingType, ServiceType } from "~/composables/useListings";
 import { fetchServiceTypes } from "~/composables/useListings";
 
-// Composables Vue et de l'app
+// composables Vue et de l'app
 const router = useRouter();
 const route = useRoute();
 const { isAuthenticated, fetchUser } = useAuth();
 const { createListing } = useListings();
 
-// États du formulaire
+// états du formulaire
 const loading = ref(false);
 const error = ref<string | null>(null);
 
-// On récupère le type depuis l'URL (demande par défaut)
+// on récupère le type depuis l'URL (demande par défaut)
 const typeFromUrl = (route.query.type as string) || "demande";
 const type = ref<ListingType>(
   typeFromUrl === "proposition" ? "proposition" : "demande",
@@ -111,7 +111,7 @@ async function handleSubmit() {
     <AppHeader />
 
     <main class="max-w-3xl mx-auto px-4 py-12">
-      <!-- En-tête -->
+      <!-- en-tête -->
       <div class="text-center mb-10">
         <div
           class="inline-flex items-center gap-2 glass px-5 py-2.5 rounded-full shadow-lg mb-6"
@@ -129,7 +129,7 @@ async function handleSubmit() {
         </p>
       </div>
 
-      <!-- Erreur -->
+      <!-- erreur -->
       <BaseCard
         v-if="error"
         variant="default"
@@ -143,7 +143,7 @@ async function handleSubmit() {
       </BaseCard>
 
       <form class="space-y-8" @submit.prevent="handleSubmit">
-        <!-- Type d'annonce -->
+        <!-- type d'annonce -->
         <BaseCard variant="elevated" padding="lg">
           <h2
             class="text-lg font-bold text-stone-800 mb-4 flex items-center gap-2"
@@ -237,7 +237,7 @@ async function handleSubmit() {
           </div>
         </BaseCard>
 
-        <!-- Titre et description -->
+        <!-- titre et description -->
         <BaseCard variant="elevated" padding="lg">
           <h2
             class="text-lg font-bold text-stone-800 mb-4 flex items-center gap-2"
@@ -269,7 +269,7 @@ async function handleSubmit() {
           </div>
         </BaseCard>
 
-        <!-- Types de service -->
+        <!-- types de service -->
         <BaseCard variant="elevated" padding="lg">
           <h2
             class="text-lg font-bold text-stone-800 mb-4 flex items-center gap-2"
@@ -296,7 +296,7 @@ async function handleSubmit() {
           </div>
         </BaseCard>
 
-        <!-- Localisation -->
+        <!-- localisation -->
         <BaseCard variant="elevated" padding="lg">
           <h2
             class="text-lg font-bold text-stone-800 mb-4 flex items-center gap-2"

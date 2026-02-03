@@ -1,7 +1,7 @@
-// Composable pour la messagerie entre utilisateurs
-// Gère les conversations et les messages
+// composable pour la messagerie entre utilisateurs
+// gère les conversations et les messages
 
-// Structure d'une conversation
+// structure d'une conversation
 export interface ConversationPublic {
   id: string;
   listingId: string;
@@ -21,7 +21,7 @@ export interface ConversationPublic {
   listingClosed?: boolean;
 }
 
-// Structure d'un message
+// structure d'un message
 export interface MessagePublic {
   id: string;
   conversationId: string;

@@ -1,18 +1,18 @@
-// Composable pour gérer les annonces (CRUD + filtres + pagination)
-// C'est le coeur de l'application côté données
+// composable pour gérer les annonces (CRUD + filtres + pagination)
+// c'est le coeur de l'application côté données
 
-// Une annonce peut être une demande d'aide ou une proposition de service
+// une annonce peut être une demande d'aide ou une proposition de service
 export type ListingType = "demande" | "proposition";
 
 export type ListingStatus = "active" | "closed";
 
-// Type de service (jardinage, bricolage, etc.)
+// type de service (jardinage, bricolage, etc.)
 export interface ServiceType {
   id: string;
   label: string;
 }
 
-// Structure d'une annonce telle que renvoyée par l'API
+// structure d'une annonce telle que renvoyée par l'API
 export interface ListingPublic {
   readonly id: string;
   readonly type: ListingType;

@@ -195,9 +195,9 @@ if (import.meta.client) {
   <div class="space-y-4">
     <label class="label">Ville</label>
 
-    <!-- Mode idle : Choix initial -->
+    <!-- mode idle : choix initial -->
     <div v-if="mode === 'idle'" class="space-y-3">
-      <!-- Recherche de ville -->
+      <!-- recherche de ville -->
       <div class="location-search-container relative">
         <div class="relative">
           <BaseInput
@@ -217,7 +217,7 @@ if (import.meta.client) {
           </div>
         </div>
 
-        <!-- Dropdown résultats -->
+        <!-- dropdown résultats -->
         <div
           v-if="showDropdown && cityResults.length > 0"
           class="absolute z-50 w-full mt-1 bg-white border-2 border-orange-200 rounded-xl shadow-xl max-h-64 overflow-y-auto"
@@ -246,14 +246,14 @@ if (import.meta.client) {
         </div>
       </div>
 
-      <!-- Séparateur -->
+      <!-- séparateur -->
       <div class="flex items-center gap-3">
         <div class="flex-1 h-px bg-stone-200" />
         <span class="text-sm text-stone-500">ou</span>
         <div class="flex-1 h-px bg-stone-200" />
       </div>
 
-      <!-- Bouton géoloc -->
+      <!-- bouton géoloc -->
       <BaseButton
         type="button"
         variant="primary"
@@ -266,7 +266,7 @@ if (import.meta.client) {
       </BaseButton>
     </div>
 
-    <!-- Mode actif -->
+    <!-- mode actif -->
     <div v-else class="space-y-4">
       <div
         class="flex items-center justify-between p-4 bg-orange-50 rounded-xl border border-orange-200"
@@ -295,7 +295,7 @@ if (import.meta.client) {
         </button>
       </div>
 
-      <!-- Slider rayon -->
+      <!-- slider rayon -->
       <div>
         <div class="flex justify-between text-sm text-stone-600 mb-2">
           <span>Rayon de recherche</span>

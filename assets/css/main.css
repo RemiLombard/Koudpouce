@@ -259,6 +259,25 @@ h6 {
     animation: float 6s ease-in-out infinite;
   }
 
+  /* Petit rebond discret pour éléments UI (ex: badge d'intro) */
+  .animate-bounce-small {
+    will-change: transform;
+    animation: bounceSmall 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+  }
+
+  @keyframes bounceSmall {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-6px);
+    }
+    60% {
+      transform: translateY(-3px);
+    }
+  }
+
   @keyframes float {
     0%,
     100% {

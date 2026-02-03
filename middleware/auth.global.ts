@@ -1,33 +1,33 @@
 /**
- * Middleware d'authentification GLOBAL.
- * - Redirige vers la page de connexion si l'utilisateur n'est pas connecté.
- * - Redirige les admins vers /admin s'ils essaient d'accéder à l'app normale.
- * - Exclut les pages publiques.
+ * middleware d'authentification GLOBAL.
+ * - redirige vers la page de connexion si l'utilisateur n'est pas connecté.
+ * - redirige les admins vers /admin s'ils essaient d'accéder à l'app normale.
+ * - exclut les pages publiques.
  */
 export default defineNuxtRouteMiddleware(async (to) => {
-  // Pages publiques (pas besoin d'être connecté)
+  // pages publiques (pas besoin d'être connecté)
   const publicPaths = ["/", "/auth", "/a-propos", "/charte", "/contact"];
   const isPublic = publicPaths.some(
     (path) => to.path === path || to.path.startsWith(path + "/"),
   );
 
-  // Pages admin (gérées par leur propre middleware)
+  // pages admin (gérées par leur propre middleware)
   const isAdminPath = to.path.startsWith("/admin");
 
-  // Si c'est une page admin, laisser le middleware admin gérer
+  // si c'est une page admin, laisser le middleware admin gérer
   if (isAdminPath) {
     return;
   }
 
   const { isAuthenticated, isAdmin, fetchUser, initialized } = useAuth();
 
-  // S'assurer que l'état d'authentification est initialisé
+  // s'assurer que l'état d'authentification est initialisé
   if (!initialized.value) {
     if (process.server) {
       const event = useRequestEvent();
-      const cookieHeader = event.node.req.headers.cookie || "";
+      const cookieHeader = event?.node?.req?.headers?.cookie ?? "";
       try {
-        // Vérifier rapidement le token côté serveur pour éviter les appels réseau internes
+        // vérifier rapidement le token côté serveur pour éviter les appels réseau internes
         const { getTokenFromEvent, getUserFromToken } =
           await import("~/server/utils/supabase");
         const token = getTokenFromEvent(event);
@@ -43,7 +43,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
           await fetchUser(cookieHeader);
         }
       } catch (e) {
-        // Fallback: essayer d'appeler l'API normalement
+        // fallback: essayer d'appeler l'API normalement
         await fetchUser(cookieHeader);
       }
     } else {
@@ -51,12 +51,12 @@ export default defineNuxtRouteMiddleware(async (to) => {
     }
   }
 
-  // Rediriger les admins vers /admin (ils ne peuvent pas utiliser l'app normale)
+  // rediriger les admins vers /admin (ils ne peuvent pas utiliser l'app normale)
   if (isAuthenticated.value && isAdmin.value) {
     return navigateTo("/admin");
   }
 
-  // Les pages publiques sont accessibles sans authentification
+  // les pages publiques sont accessibles sans authentification
   if (isPublic) {
     return;
   }

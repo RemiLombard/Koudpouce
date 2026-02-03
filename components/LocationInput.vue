@@ -33,7 +33,7 @@ const isSearching = ref(false);
 const showDropdown = ref(false);
 const useGeoloc = ref(false);
 
-// Flag pour éviter les recherches lors de la sélection d'une adresse
+// flag pour éviter les recherches lors de la sélection d'une adresse
 const skipNextSearch = ref(false);
 
 let searchTimeout: ReturnType<typeof setTimeout> | null = null;
@@ -77,15 +77,15 @@ function debouncedSearch() {
   searchTimeout = setTimeout(performSearch, 300);
 }
 
-// Watch uniquement côté client pour éviter les problèmes SSR
+// watch uniquement côté client pour éviter les problèmes SSR
 if (import.meta.client) {
   watch(searchQuery, () => {
-    // Ignorer la recherche si on vient de sélectionner une adresse
+    // ignorer la recherche si on vient de sélectionner une adresse
     if (skipNextSearch.value) {
       skipNextSearch.value = false;
       return;
     }
-    // Ne pas rechercher si une adresse est déjà sélectionnée
+    // ne pas rechercher si une adresse est déjà sélectionnée
     if (selectedAddress.value) {
       return;
     }
@@ -188,7 +188,7 @@ if (import.meta.client) {
 
 <template>
   <div class="space-y-4">
-    <!-- Info confidentialité -->
+    <!-- info confidentialité -->
     <div
       class="flex items-start gap-2 bg-orange-50 rounded-xl p-4 border border-orange-200"
     >
@@ -208,9 +208,9 @@ if (import.meta.client) {
       </div>
     </div>
 
-    <!-- Sélection d'adresse OU géolocalisation -->
+    <!-- sélection d'adresse OU géolocalisation -->
     <div v-if="!selectedAddress" class="space-y-4">
-      <!-- Recherche d'adresse -->
+      <!-- recherche d'adresse -->
       <div class="location-input-container relative">
         <label class="block text-sm font-medium text-stone-700 mb-2">
           Saisir votre adresse
@@ -233,7 +233,7 @@ if (import.meta.client) {
           </div>
         </div>
 
-        <!-- Dropdown résultats -->
+        <!-- dropdown résultats -->
         <div
           v-if="showDropdown && addressResults.length > 0"
           class="absolute z-50 w-full mt-1 bg-white border-2 border-orange-200 rounded-xl shadow-xl max-h-64 overflow-y-auto"
@@ -257,7 +257,7 @@ if (import.meta.client) {
           </button>
         </div>
 
-        <!-- Message si aucun résultat -->
+        <!-- message si aucun résultat -->
         <div
           v-if="
             !isSearching &&
@@ -270,14 +270,14 @@ if (import.meta.client) {
         </div>
       </div>
 
-      <!-- Séparateur -->
+      <!-- séparateur -->
       <div class="flex items-center gap-3">
         <div class="flex-1 h-px bg-stone-200"></div>
         <span class="text-sm text-stone-500 font-medium">ou</span>
         <div class="flex-1 h-px bg-stone-200"></div>
       </div>
 
-      <!-- Bouton géolocalisation -->
+      <!-- bouton géolocalisation -->
       <BaseButton
         type="button"
         variant="outline"
@@ -290,7 +290,7 @@ if (import.meta.client) {
       </BaseButton>
     </div>
 
-    <!-- Adresse sélectionnée -->
+    <!-- adresse sélectionnée -->
     <div
       v-else
       class="flex items-start justify-between gap-3 bg-green-50 rounded-xl p-4 border-2 border-green-200"

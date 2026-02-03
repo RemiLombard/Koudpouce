@@ -1,4 +1,4 @@
-<!-- Composant pour filtrer les annonces (type, catégorie, localisation) -->
+<!-- composant pour filtrer les annonces (type, catégorie, localisation) -->
 <script setup lang="ts">
 import type {
   ListingFilters,
@@ -6,7 +6,7 @@ import type {
   ServiceType,
 } from "~/composables/useListings";
 
-// Props et events du composant
+// props et events du composant
 interface Props {
   serviceTypes: ServiceType[];
   modelValue: ListingFilters;
@@ -19,7 +19,7 @@ const emit = defineEmits<{
   "update:modelValue": [filters: ListingFilters];
 }>();
 
-// États locaux des filtres
+// états locaux des filtres
 const isExpanded = ref(false);
 
 const localType = ref<ListingType | "">("");
@@ -118,10 +118,10 @@ function toggleExpand() {
 
 <template>
   <div class="mb-6">
-    <!-- Barre de recherche toujours visible -->
+    <!-- barre de recherche toujours visible -->
     <BaseCard variant="default" padding="md">
       <div class="flex flex-col sm:flex-row gap-3">
-        <!-- Recherche texte -->
+        <!-- recherche texte -->
         <div class="flex-1">
           <BaseInput
             v-model="localQ"
@@ -133,7 +133,7 @@ function toggleExpand() {
           />
         </div>
 
-        <!-- Boutons -->
+        <!-- boutons -->
         <div class="flex gap-2">
           <BaseButton
             type="button"
@@ -167,7 +167,7 @@ function toggleExpand() {
         </div>
       </div>
 
-      <!-- Panneau filtres (repliable) -->
+      <!-- panneau filtres -->
       <Transition
         enter-active-class="transition-all duration-300 ease-out"
         enter-from-class="opacity-0 max-h-0"
@@ -178,7 +178,7 @@ function toggleExpand() {
       >
         <div v-if="isExpanded" class="overflow-hidden">
           <div class="pt-5 mt-5 border-t border-stone-100 space-y-5">
-            <!-- Type d'annonce -->
+            <!-- type d'annonce -->
             <div v-if="!hideTypeFilter">
               <label class="label">Type d'annonce</label>
               <div class="flex flex-wrap gap-2">
@@ -221,7 +221,7 @@ function toggleExpand() {
               </div>
             </div>
 
-            <!-- Types de service -->
+            <!-- types de service -->
             <div>
               <label class="label">Types de service</label>
               <div class="flex flex-wrap gap-2">
@@ -242,7 +242,7 @@ function toggleExpand() {
               </div>
             </div>
 
-            <!-- Filtre de localisation (renommé "Ville") -->
+            <!-- filtre de localisation -->
             <div>
               <LocationFilter
                 :initial-lat="localAroundLat"
@@ -253,7 +253,7 @@ function toggleExpand() {
               />
             </div>
 
-            <!-- Boutons d'action -->
+            <!-- boutons d'action -->
             <div class="flex gap-3 pt-2">
               <BaseButton
                 type="button"

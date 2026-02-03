@@ -1,4 +1,4 @@
-<!-- Page d'accueil de Koudpouce -->
+<!-- page d'accueil de Koudpouce -->
 <script setup lang="ts">
 // SEO
 useHead({
@@ -19,19 +19,19 @@ useSeoMeta({
   ogUrl: "https://koudpouce.fr",
 });
 
-// On récupère l'utilisateur pour adapter l'affichage (boutons différents si connecté)
+// on récupère l'utilisateur pour adapter l'affichage (boutons différents si connecté)
 const { user } = useAuth();
 </script>
 
 <template>
-  <!-- Fond dégradé chaleureux -->
+  <!-- fond dégradé chaleureux -->
   <div class="min-h-screen bg-gradient-warm flex flex-col">
     <AppHeader />
 
     <main
       class="flex-1 flex items-center justify-center px-4 py-16 relative overflow-hidden"
     >
-      <!-- Décorations de fond -->
+      <!-- décorations de fond -->
       <div class="absolute inset-0 pointer-events-none overflow-hidden">
         <div
           class="absolute top-20 -left-20 w-80 h-80 bg-orange-300/20 rounded-full blur-3xl animate-pulse-soft"
@@ -46,9 +46,9 @@ const { user } = useAuth();
       </div>
 
       <div class="text-center max-w-3xl relative z-10">
-        <!-- Badge intro -->
+        <!-- badge intro -->
         <div
-          class="inline-flex items-center gap-2 glass px-5 py-2.5 rounded-full shadow-lg mb-8"
+          class="inline-flex items-center gap-2 glass px-5 py-2.5 rounded-full shadow-lg mb-8 animate-bounce-small"
         >
           <span
             class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center"
@@ -60,7 +60,7 @@ const { user } = useAuth();
           >
         </div>
 
-        <!-- Titre principal -->
+        <!-- titre principal -->
         <h1
           class="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-[1.1]"
         >
@@ -69,7 +69,7 @@ const { user } = useAuth();
           <span class="text-stone-800">près de chez vous</span>
         </h1>
 
-        <!-- Sous-texte -->
+        <!-- sous-texte -->
         <p
           class="text-xl text-stone-600 mb-12 max-w-2xl mx-auto leading-relaxed"
         >
@@ -80,7 +80,7 @@ const { user } = useAuth();
           >
         </p>
 
-        <!-- Boutons d'entrée -->
+        <!-- boutons d'entrée -->
         <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
           <NuxtLink :to="user ? '/cherche' : '/auth/login?redirect=/cherche'">
             <BaseButton
@@ -105,7 +105,7 @@ const { user } = useAuth();
           </NuxtLink>
         </div>
 
-        <!-- Points forts -->
+        <!-- points forts -->
         <div class="grid grid-cols-3 gap-4 max-w-lg mx-auto">
           <div class="glass rounded-2xl p-4 text-center">
             <div class="text-2xl font-bold text-orange-600 mb-1">100%</div>

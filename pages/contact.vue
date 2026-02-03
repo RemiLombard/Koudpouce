@@ -1,10 +1,68 @@
-<!-- Page de contact avec formulaire d'envoi d'email -->
+<script setup lang="ts">
+useHead({
+  title: "Contact - Koudpouce",
+});
+
+const loading = ref(false);
+const error = ref<string | null>(null);
+const success = ref(false);
+
+const form = reactive({
+  name: "",
+  email: "",
+  subject: "",
+  message: "",
+});
+
+const subjectLabels: Record<string, string> = {
+  question: "Question générale",
+  bug: "Problème technique",
+  suggestion: "Suggestion",
+  partenariat: "Partenariat",
+  autre: "Autre",
+};
+
+async function sendMessage() {
+  loading.value = true;
+  error.value = null;
+
+  try {
+    await $fetch("/api/contact", {
+      method: "POST",
+      body: {
+        name: form.name,
+        email: form.email,
+        subject: subjectLabels[form.subject] || form.subject,
+        message: form.message,
+      },
+    });
+    success.value = true;
+  } catch (err: any) {
+    error.value =
+      err?.data?.message ||
+      "Une erreur est survenue lors de l'envoi du message.";
+  } finally {
+    loading.value = false;
+  }
+}
+
+function resetForm() {
+  form.name = "";
+  form.email = "";
+  form.subject = "";
+  form.message = "";
+  success.value = false;
+  error.value = null;
+}
+</script>
+
+<!-- page de contact avec formulaire d'envoi d'email -->
 <template>
   <div class="min-h-screen bg-gradient-warm">
     <AppHeader />
 
     <main class="max-w-2xl mx-auto px-4 py-12">
-      <!-- Titre -->
+      <!-- titre -->
       <div class="text-center mb-10">
         <h1 class="text-3xl md:text-4xl font-bold text-stone-800 mb-3">
           Contactez-nous
@@ -14,12 +72,12 @@
         </p>
       </div>
 
-      <!-- Formulaire -->
+      <!-- formulaire -->
       <form
         @submit.prevent="sendMessage"
         class="bg-white rounded-2xl shadow-card p-6 md:p-8 space-y-6"
       >
-        <!-- Message de succès -->
+        <!-- message de succès -->
         <div
           v-if="success"
           class="p-4 bg-green-50 border border-green-200 rounded-xl text-green-700 text-center"
@@ -30,7 +88,7 @@
           </p>
         </div>
 
-        <!-- Message d'erreur -->
+        <!-- message d'erreur -->
         <div
           v-if="error"
           class="p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-center"
@@ -39,7 +97,7 @@
         </div>
 
         <template v-if="!success">
-          <!-- Nom -->
+          <!-- nom -->
           <div>
             <label
               for="name"
@@ -57,7 +115,7 @@
             />
           </div>
 
-          <!-- Email -->
+          <!-- email -->
           <div>
             <label
               for="email"
@@ -75,7 +133,7 @@
             />
           </div>
 
-          <!-- Sujet -->
+          <!-- sujet -->
           <div>
             <label
               for="subject"
@@ -98,7 +156,7 @@
             </select>
           </div>
 
-          <!-- Message -->
+          <!-- message -->
           <div>
             <label
               for="message"
@@ -116,7 +174,7 @@
             />
           </div>
 
-          <!-- Bouton d'envoi -->
+          <!-- bouton d'envoi -->
           <button
             type="submit"
             :disabled="loading"
@@ -148,7 +206,7 @@
           </button>
         </template>
 
-        <!-- Bouton pour renvoyer un message -->
+        <!-- bouton pour renvoyer un message -->
         <button
           v-if="success"
           type="button"
@@ -159,7 +217,7 @@
         </button>
       </form>
 
-      <!-- Informations de contact alternatives -->
+      <!-- informations de contact alternatives -->
       <div class="mt-8 text-center text-stone-600">
         <p class="text-sm">
           Vous pouvez aussi nous contacter directement à

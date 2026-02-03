@@ -1,4 +1,4 @@
-<!-- Page d'inscription -->
+<!-- page d'inscription -->
 <script setup lang="ts">
 // SEO
 useHead({
@@ -12,11 +12,11 @@ useHead({
   ],
 });
 
-// Composable auth et navigation
+// composable auth et navigation
 const { register, loading, error } = useAuth();
 const router = useRouter();
 
-// Inscription puis redirection vers l'accueil
+// inscription puis redirection vers l'accueil
 async function handleRegister(data: {
   email: string;
   password: string;
@@ -40,7 +40,7 @@ async function handleRegister(data: {
     <main class="flex-1 flex items-center justify-center px-4 py-12">
       <div class="w-full max-w-md">
         <BaseCard variant="elevated" padding="lg">
-          <!-- Icône et titre -->
+          <!-- icône et titre -->
           <div class="text-center mb-8">
             <div
               class="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-2xl flex items-center justify-center"
@@ -55,7 +55,7 @@ async function handleRegister(data: {
             </p>
           </div>
 
-          <!-- Formulaire -->
+          <!-- formulaire -->
           <AuthForm
             mode="register"
             :loading="loading"
@@ -63,7 +63,7 @@ async function handleRegister(data: {
             @submit="handleRegister"
           />
 
-          <!-- Séparateur -->
+          <!-- séparateur -->
           <div class="relative my-6">
             <div class="absolute inset-0 flex items-center">
               <div class="w-full border-t border-stone-200"></div>
@@ -73,10 +73,10 @@ async function handleRegister(data: {
             </div>
           </div>
 
-          <!-- Bouton Google -->
+          <!-- bouton Google -->
           <GoogleAuthButton />
 
-          <!-- Lien connexion -->
+          <!-- lien connexion -->
           <div class="mt-8 pt-6 border-t border-stone-100 text-center">
             <p class="text-stone-600 text-sm">
               Déjà inscrit ?
