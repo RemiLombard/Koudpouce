@@ -24,11 +24,12 @@ export default defineNuxtConfig({
     preconnect: true,
   },
 
-  // Configuration runtime - Supabase
+  // Configuration runtime - Supabase + Resend
   runtimeConfig: {
     // Variables privées (côté serveur uniquement)
     supabaseUrl: process.env.SUPABASE_URL ?? "",
     supabaseServiceKey: process.env.SUPABASE_SERVICE_KEY ?? "",
+    resendApiKey: process.env.RESEND_API_KEY ?? "",
 
     // Variables publiques (côté client aussi)
     public: {

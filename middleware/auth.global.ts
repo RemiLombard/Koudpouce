@@ -6,7 +6,7 @@
  */
 export default defineNuxtRouteMiddleware(async (to) => {
   // Pages publiques (pas besoin d'être connecté)
-  const publicPaths = ["/", "/auth", "/a-propos", "/charte"];
+  const publicPaths = ["/", "/auth", "/a-propos", "/charte", "/contact"];
   const isPublic = publicPaths.some(
     (path) => to.path === path || to.path.startsWith(path + "/"),
   );

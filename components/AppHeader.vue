@@ -30,6 +30,12 @@
         >
           Charte
         </NuxtLink>
+        <NuxtLink
+          to="/contact"
+          class="text-white/90 hover:text-white font-medium transition-colors"
+        >
+          Contact
+        </NuxtLink>
 
         <!-- Séparateur (visible seulement si connecté) -->
         <div v-if="user" class="w-px h-6 bg-white/30 mx-2" />
@@ -162,6 +168,13 @@
             @click="menuOpen = false"
           >
             Charte
+          </NuxtLink>
+          <NuxtLink
+            to="/contact"
+            class="text-2xl text-white/90 hover:text-white font-medium transition-colors"
+            @click="menuOpen = false"
+          >
+            Contact
           </NuxtLink>
 
           <!-- Séparateur -->
