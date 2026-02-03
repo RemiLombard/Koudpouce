@@ -4,6 +4,10 @@
  * exclut les pages d'authentification (/auth/*).
  */
 export default defineNuxtRouteMiddleware(async (to) => {
+  // si la route n'est pas appariée (404), laisser Nuxt afficher la page d'erreur
+  if (!to.matched || to.matched.length === 0) {
+    return;
+  }
   // exclure les pages d'auth
   if (to.path.startsWith("/auth")) {
     return;
