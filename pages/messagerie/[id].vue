@@ -133,7 +133,9 @@
       </div>
 
       <!-- Zone de saisie -->
-      <div class="bg-white border-t border-gray-200 shadow-lg sticky bottom-0 z-40">
+      <div
+        class="bg-white border-t border-gray-200 shadow-lg sticky bottom-0 z-40"
+      >
         <div class="max-w-4xl mx-auto px-4 py-4">
           <!-- Annonce clôturée -->
           <div
