@@ -50,7 +50,7 @@ async function performSearch() {
   isSearching.value = true;
   try {
     const response = await $fetch<{ features: AddressResult[] }>(
-      "https://api-adresse.data.gouv.fr/search/",
+      "/api/geocode-search",
       {
         query: {
           q: query,
