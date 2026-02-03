@@ -1,5 +1,9 @@
 <!-- Composant racine de l'application Nuxt -->
 <template>
+  <!-- Animation de lancement -->
+  <SplashScreen />
+  
+  <!-- Contenu de l'application -->
   <NuxtPage />
 </template>
 
