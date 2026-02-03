@@ -33,6 +33,14 @@ export default defineEventHandler(async (event) => {
     });
   }
 
+  // Log minimal info to help debugging in production (masked key length)
+  try {
+    const masked = `***${String(resendApiKey).slice(-6)}`;
+    console.log(`RESEND_API_KEY présent (masqué): ${masked} length=${String(resendApiKey).length}`);
+  } catch (e) {
+    // ignore
+  }
+
   // Préparer le contenu HTML de l'email
   const htmlContent = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -102,13 +110,21 @@ ${message}
   } catch (err: any) {
     console.error("Erreur lors de l'envoi de l'email:", err);
 
-    // Si l'erreur vient de Resend, on peut avoir plus de détails
-    const errorMessage =
-      err?.data?.message || err?.message || "Erreur lors de l'envoi";
+    // Extraire les détails possibles depuis la réponse Resend
+    let details = err?.data || err?.response || err?.body || err?.message || err;
+    try {
+      // si c'est un objet FetchError avec json body
+      if (typeof details === "string") {
+        // keep as-is
+      } else if (details && typeof details === "object") {
+        details = JSON.stringify(details);
+      }
+    } catch (e) {
+      details = String(details);
+    }
 
-    throw createError({
-      statusCode: 500,
-      message: `Impossible d'envoyer le message: ${errorMessage}`,
-    });
+    const message = `Impossible d'envoyer le message. Détails: ${details}`;
+
+    throw createError({ statusCode: 500, message });
   }
 });
