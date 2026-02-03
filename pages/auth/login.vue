@@ -1,5 +1,6 @@
 <!-- Page de connexion -->
 <script setup lang="ts">
+// SEO
 useHead({
   title: "Connexion - Koudpouce",
   meta: [
@@ -10,6 +11,27 @@ useHead({
     },
   ],
 });
+
+// Composable auth et navigation
+const { login, loading, error, isAdmin } = useAuth();
+const router = useRouter();
+const route = useRoute();
+
+// Gestion erreur OAuth Google
+const googleError = computed(() => route.query.error === "google_failed");
+
+// Connexion puis redirection
+async function handleLogin(data: { email: string; password: string }) {
+  const success = await login(data.email, data.password);
+  if (success) {
+    if (isAdmin.value) {
+      router.push("/admin");
+    } else {
+      const redirectTo = (route.query.redirect as string) || "/";
+      router.push(redirectTo);
+    }
+  }
+}
 </script>
 
 <template>
@@ -73,26 +95,3 @@ useHead({
     </main>
   </div>
 </template>
-
-<script setup lang="ts">
-// Composable auth et navigation
-const { login, loading, error, isAdmin } = useAuth();
-const router = useRouter();
-const route = useRoute();
-
-// Gestion erreur OAuth Google
-const googleError = computed(() => route.query.error === "google_failed");
-
-// Connexion puis redirection
-async function handleLogin(data: { email: string; password: string }) {
-  const success = await login(data.email, data.password);
-  if (success) {
-    if (isAdmin.value) {
-      router.push("/admin");
-    } else {
-      const redirectTo = (route.query.redirect as string) || "/";
-      router.push(redirectTo);
-    }
-  }
-}
-</script>
