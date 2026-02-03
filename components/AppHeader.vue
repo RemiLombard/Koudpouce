@@ -235,8 +235,31 @@ const { unreadCount, fetchUnreadCount } = useMessaging();
 
 const menuOpen = ref(false);
 
-onMounted(() => {
+// Temps réel : mettre à jour le compteur quand un nouveau message arrive
+const userId = computed(() => user.value?.id);
+
+onMounted(async () => {
   fetchUnreadCount();
+  
+  // S'abonner aux notifications en temps réel si connecté
+  if (userId.value) {
+    try {
+      const { useRealtimeNotifications } = await import("~/composables/useRealtime");
+      useRealtimeNotifications(userId, () => {
+        // Rafraîchir le compteur quand un nouveau message arrive
+        fetchUnreadCount();
+      });
+    } catch (e) {
+      // Realtime non disponible, on continue sans
+    }
+  }
+});
+
+// Recharger le compteur quand l'utilisateur se connecte
+watch(userId, (newId) => {
+  if (newId) {
+    fetchUnreadCount();
+  }
 });
 
 const route = useRoute();

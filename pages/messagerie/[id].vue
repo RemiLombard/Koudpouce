@@ -309,6 +309,7 @@ import type {
   ConversationPublic,
   MessagePublic,
 } from "~/composables/useMessaging";
+import type { RealtimeMessage } from "~/composables/useRealtime";
 
 const route = useRoute();
 const { user } = useAuth();
@@ -326,6 +327,41 @@ const newMessage = ref("");
 const sending = ref(false);
 
 const messagesContainer = ref<HTMLElement | null>(null);
+
+// Temps réel : s'abonner aux nouveaux messages
+const { useRealtimeMessages } = await import("~/composables/useRealtime");
+
+function handleRealtimeMessage(realtimeMsg: RealtimeMessage) {
+  // Ne pas ajouter si c'est notre propre message (déjà ajouté localement)
+  if (realtimeMsg.sender_id === user.value?.id) return;
+  
+  // Vérifier si le message n'existe pas déjà
+  if (messages.value.some((m) => m.id === realtimeMsg.id)) return;
+
+  // Récupérer le nom de l'expéditeur
+  const senderName = realtimeMsg.sender_id === conversation.value?.contacterId
+    ? conversation.value?.contacterName
+    : conversation.value?.listingAuthorName;
+
+  // Ajouter le message
+  messages.value.push({
+    id: realtimeMsg.id,
+    conversationId: realtimeMsg.conversation_id,
+    senderId: realtimeMsg.sender_id,
+    senderName: senderName || "Utilisateur",
+    content: realtimeMsg.content,
+    createdAt: realtimeMsg.created_at,
+    isRead: false,
+  });
+
+  // Scroll en bas
+  nextTick(() => scrollToBottom());
+  
+  // Marquer comme lu si on est sur la page
+  markAsRead(conversationId.value);
+}
+
+useRealtimeMessages(conversationId, handleRealtimeMessage);
 
 const showReportModal = ref(false);
 const reportReason = ref("");

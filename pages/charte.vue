@@ -1,3 +1,22 @@
+<script setup lang="ts">
+useHead({
+  title: "Charte & bonnes pratiques - Koudpouce",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Consultez la charte de Koudpouce et nos bonnes pratiques pour une entraide respectueuse et bienveillante entre voisins.",
+    },
+  ],
+});
+
+useSeoMeta({
+  ogTitle: "Charte & bonnes pratiques - Koudpouce",
+  ogDescription:
+    "Les règles de bonne conduite pour une entraide locale réussie.",
+});
+</script>
+
 <template>
   <div
     class="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-white"

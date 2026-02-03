@@ -3,6 +3,18 @@
 import type { ListingPublic, ServiceType } from "~/composables/useListings";
 import { fetchServiceTypes } from "~/composables/useListings";
 
+useHead({
+  title: "Mon profil - Koudpouce",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Gérez votre profil Koudpouce, consultez vos annonces et modifiez vos informations personnelles.",
+    },
+    { name: "robots", content: "noindex" }, // Page privée
+  ],
+});
+
 // Fonctions d'authentification
 const {
   user,

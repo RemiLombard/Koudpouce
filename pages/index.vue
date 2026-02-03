@@ -1,5 +1,24 @@
 <!-- Page d'accueil de Koudpouce -->
 <script setup lang="ts">
+// SEO
+useHead({
+  title: "Koudpouce - Entraide locale entre voisins",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Koudpouce est une plateforme gratuite d'entraide entre voisins. Proposez ou demandez de l'aide près de chez vous : bricolage, jardinage, courses, garde d'animaux.",
+    },
+  ],
+});
+
+useSeoMeta({
+  ogTitle: "Koudpouce - Entraide locale entre voisins",
+  ogDescription:
+    "Plateforme gratuite d'entraide entre voisins. Proposez ou demandez de l'aide près de chez vous.",
+  ogUrl: "https://koudpouce.fr",
+});
+
 // On récupère l'utilisateur pour adapter l'affichage (boutons différents si connecté)
 const { user } = useAuth();
 </script>

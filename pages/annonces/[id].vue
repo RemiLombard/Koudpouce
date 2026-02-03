@@ -27,6 +27,25 @@ const reporting = ref(false);
 const reportError = ref<string | null>(null);
 const reportSuccess = ref(false);
 
+// SEO dynamique basé sur l'annonce
+useHead(() => ({
+  title: listing.value
+    ? `${listing.value.title} - Koudpouce`
+    : "Annonce - Koudpouce",
+  meta: [
+    {
+      name: "description",
+      content: listing.value
+        ? `${listing.value.type === "demande" ? "Demande" : "Proposition"} d'aide à ${listing.value.cityName} : ${listing.value.description.slice(0, 150)}...`
+        : "Consultez cette annonce d'entraide sur Koudpouce.",
+    },
+  ],
+}));
+
+useSeoMeta({
+  ogType: "article",
+});
+
 const reportReasons = [
   { value: "spam", label: "Spam ou contenu dupliqué" },
   { value: "professional", label: "Activité professionnelle déguisée" },

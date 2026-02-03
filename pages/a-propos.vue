@@ -1,6 +1,25 @@
 <!--
   Page À propos - Pourquoi Koudpouce existe.
 -->
+<script setup lang="ts">
+useHead({
+  title: "À propos - Koudpouce",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Découvrez l'histoire de Koudpouce, une plateforme d'entraide locale gratuite créée pour renforcer les liens entre voisins.",
+    },
+  ],
+});
+
+useSeoMeta({
+  ogTitle: "À propos de Koudpouce",
+  ogDescription:
+    "L'entraide de proximité, simple et humaine. Découvrez pourquoi Koudpouce existe.",
+});
+</script>
+
 <template>
   <div
     class="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-white"

@@ -1,4 +1,17 @@
 <!-- Page d'inscription -->
+<script setup lang="ts">
+useHead({
+  title: "Créer un compte - Koudpouce",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Inscrivez-vous gratuitement sur Koudpouce et rejoignez une communauté d'entraide locale entre voisins.",
+    },
+  ],
+});
+</script>
+
 <template>
   <div class="min-h-screen bg-gradient-warm flex flex-col">
     <AppHeader />

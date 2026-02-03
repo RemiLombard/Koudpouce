@@ -1,4 +1,17 @@
 <!-- Page de connexion -->
+<script setup lang="ts">
+useHead({
+  title: "Connexion - Koudpouce",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Connectez-vous à votre compte Koudpouce pour proposer ou demander de l'aide près de chez vous.",
+    },
+  ],
+});
+</script>
+
 <template>
   <div class="min-h-screen bg-gradient-warm flex flex-col">
     <AppHeader />
