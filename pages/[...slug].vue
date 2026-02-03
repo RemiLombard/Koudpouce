@@ -13,22 +13,9 @@ function goBack() {
 
     <main class="flex-1 flex items-center justify-center px-4 py-24">
       <div class="text-center max-w-2xl w-full">
-        <div
-          class="inline-flex items-center gap-3 glass px-4 py-2 rounded-full mb-6 mx-auto"
-          style="max-width: 260px"
-        >
-          <span
-            class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center"
-          >
-            <Icon name="lightbulb" class="w-4 h-4 text-orange-600" />
-          </span>
-          <span class="text-sm font-semibold text-stone-700"
-            >Entraide locale</span
-          >
-        </div>
 
         <h1 class="text-5xl font-extrabold mb-4 text-stone-800">
-          Page introuvable
+          Erreur 404
         </h1>
 
         <p class="text-stone-600 mb-8 leading-relaxed">
