@@ -16,7 +16,7 @@ export function useRealtimeClient() {
     if (!_realtimeClient) {
       // Créer un client Supabase anon pour le realtime côté client
       // Note: On utilise la clé anon (publique) pour le client
-      console.debug('[useRealtime] Creating Supabase realtime client');
+      console.debug("[useRealtime] Creating Supabase realtime client");
       _realtimeClient = createClient(
         config.public.supabaseUrl as string,
         // Clé anon publique - à ajouter dans runtimeConfig.public
@@ -29,7 +29,10 @@ export function useRealtimeClient() {
           },
         },
       );
-      console.debug('[useRealtime] Supabase realtime client created', _realtimeClient ? true : false);
+      console.debug(
+        "[useRealtime] Supabase realtime client created",
+        _realtimeClient ? true : false,
+      );
     }
     return _realtimeClient;
   }
@@ -68,13 +71,13 @@ export function useRealtimeMessages(
         config.public.supabaseUrl as string,
         config.public.supabaseAnonKey as string,
       );
-      console.debug('[useRealtimeMessages] client created');
+      console.debug("[useRealtimeMessages] client created");
     }
 
     // Se désabonner du channel précédent si existant
     if (channel) {
       channel.unsubscribe();
-      console.debug('[useRealtimeMessages] previous channel unsubscribed');
+      console.debug("[useRealtimeMessages] previous channel unsubscribed");
     }
 
     // S'abonner aux nouveaux messages de cette conversation
@@ -89,19 +92,22 @@ export function useRealtimeMessages(
           filter: `conversation_id=eq.${conversationId.value}`,
         },
         (payload) => {
-          console.debug('[useRealtimeMessages] payload received', payload);
+          console.debug("[useRealtimeMessages] payload received", payload);
           onNewMessage(payload.new as RealtimeMessage);
         },
       )
       .subscribe();
-    console.debug('[useRealtimeMessages] subscribed to channel', `messages:${conversationId.value}`);
+    console.debug(
+      "[useRealtimeMessages] subscribed to channel",
+      `messages:${conversationId.value}`,
+    );
   }
 
   function unsubscribe() {
     if (channel) {
       channel.unsubscribe();
       channel = null;
-      console.debug('[useRealtimeMessages] unsubscribed');
+      console.debug("[useRealtimeMessages] unsubscribed");
     }
   }
 
