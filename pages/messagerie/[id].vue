@@ -516,7 +516,27 @@ function formatMessageDate(dateStr: string): string {
 }
 
 // Charger au montage
+
+import { useRealtimeMessages } from '~/composables/useRealtime';
+
 onMounted(() => {
   loadConversation();
+
+  // Abonnement temps réel aux nouveaux messages
+  useRealtimeMessages(conversationId, (msg) => {
+    // Vérifier que le message n'est pas déjà dans la liste
+    if (!messages.value.find(m => m.id === msg.id)) {
+      messages.value.push({
+        id: msg.id,
+        conversationId: msg.conversation_id,
+        senderId: msg.sender_id,
+        senderName: msg.sender_id === user?.id ? user?.name : otherPartyName,
+        content: msg.content,
+        createdAt: msg.created_at,
+        isRead: false,
+      });
+      nextTick().then(scrollToBottom);
+    }
+  });
 });
 </script>
