@@ -5,10 +5,6 @@
  * - exclut les pages publiques.
  */
 export default defineNuxtRouteMiddleware(async (to) => {
-  // si la route n'est pas appariée (404), laisser Nuxt afficher la page d'erreur
-  if (!to.matched || to.matched.length === 0) {
-    return;
-  }
   // pages publiques (pas besoin d'être connecté)
   const publicPaths = ["/", "/auth", "/a-propos", "/charte", "/contact"];
   const isPublic = publicPaths.some(
