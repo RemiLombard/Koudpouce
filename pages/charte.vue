@@ -19,7 +19,7 @@ useSeoMeta({
 
 <template>
   <div
-    class="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-white"
+    class="min-h-screen bg-gradient-to-br from-primary-50 via-secondary-50 to-white"
   >
     <AppHeader />
 
@@ -27,7 +27,7 @@ useSeoMeta({
       <!-- hero -->
       <div class="text-center mb-12">
         <div
-          class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-orange-400 to-amber-500 rounded-2xl shadow-lg mb-6"
+          class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary-400 to-secondary-500 rounded-2xl shadow-lg mb-6"
         >
           <svg
             class="w-10 h-10 text-white"
@@ -43,10 +43,10 @@ useSeoMeta({
             />
           </svg>
         </div>
-        <h1 class="text-4xl font-bold text-gray-800 mb-4">
+        <h1 class="text-4xl font-bold text-stone-800 mb-4">
           Charte & bonnes pratiques
         </h1>
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        <p class="text-xl text-stone-600 max-w-2xl mx-auto">
           Quelques règles simples pour que l'entraide reste un plaisir.
         </p>
       </div>
@@ -55,7 +55,7 @@ useSeoMeta({
       <div class="space-y-6">
         <!-- pas de spam -->
         <section
-          class="bg-white rounded-2xl p-6 md:p-8 border border-gray-200 shadow-sm"
+          class="bg-white rounded-2xl p-6 md:p-8 border border-stone-200 shadow-sm"
         >
           <div class="flex items-start gap-4">
             <div
@@ -76,10 +76,10 @@ useSeoMeta({
               </svg>
             </div>
             <div>
-              <h2 class="text-xl font-semibold text-gray-800 mb-2">
+              <h2 class="text-xl font-semibold text-stone-800 mb-2">
                 Pas de spam
               </h2>
-              <p class="text-gray-600 leading-relaxed">
+              <p class="text-stone-600 leading-relaxed">
                 Une annonce = un besoin ou une offre réelle. Pas de messages
                 copiés-collés ni de sollicitations répétées. Si ton annonce n'a
                 plus lieu d'être, pense à la clôturer.
@@ -90,14 +90,14 @@ useSeoMeta({
 
         <!-- pas de services pros déguisés -->
         <section
-          class="bg-white rounded-2xl p-6 md:p-8 border border-gray-200 shadow-sm"
+          class="bg-white rounded-2xl p-6 md:p-8 border border-stone-200 shadow-sm"
         >
           <div class="flex items-start gap-4">
             <div
-              class="shrink-0 w-14 h-14 bg-amber-100 rounded-xl flex items-center justify-center"
+              class="shrink-0 w-14 h-14 bg-secondary-100 rounded-xl flex items-center justify-center"
             >
               <svg
-                class="w-7 h-7 text-amber-600"
+                class="w-7 h-7 text-secondary-600"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -117,10 +117,10 @@ useSeoMeta({
               </svg>
             </div>
             <div>
-              <h2 class="text-xl font-semibold text-gray-800 mb-2">
+              <h2 class="text-xl font-semibold text-stone-800 mb-2">
                 Pas de services pros déguisés
               </h2>
-              <p class="text-gray-600 leading-relaxed">
+              <p class="text-stone-600 leading-relaxed">
                 C'est de l'entraide entre particuliers, pas du travail
                 dissimulé. Si tu es un professionnel, cette plateforme n'est pas
                 faite pour trouver des clients. Koudpouce est fait pour les
@@ -132,7 +132,7 @@ useSeoMeta({
 
         <!-- respect et bienveillance -->
         <section
-          class="bg-white rounded-2xl p-6 md:p-8 border border-gray-200 shadow-sm"
+          class="bg-white rounded-2xl p-6 md:p-8 border border-stone-200 shadow-sm"
         >
           <div class="flex items-start gap-4">
             <div
@@ -149,15 +149,15 @@ useSeoMeta({
               </svg>
             </div>
             <div>
-              <h2 class="text-xl font-semibold text-gray-800 mb-2">
+              <h2 class="text-xl font-semibold text-stone-800 mb-2">
                 Respect et bienveillance
               </h2>
-              <p class="text-gray-600 leading-relaxed mb-4">
+              <p class="text-stone-600 leading-relaxed mb-4">
                 On est tous là pour s'entraider. Un peu de courtoisie fait toute
                 la différence :
               </p>
               <div class="grid sm:grid-cols-2 gap-3">
-                <div class="flex items-center gap-2 text-gray-700">
+                <div class="flex items-center gap-2 text-stone-700">
                   <svg
                     class="w-5 h-5 text-green-500"
                     fill="currentColor"
@@ -171,7 +171,7 @@ useSeoMeta({
                   </svg>
                   <span>Réponds aux messages</span>
                 </div>
-                <div class="flex items-center gap-2 text-gray-700">
+                <div class="flex items-center gap-2 text-stone-700">
                   <svg
                     class="w-5 h-5 text-green-500"
                     fill="currentColor"
@@ -185,7 +185,7 @@ useSeoMeta({
                   </svg>
                   <span>Dis merci</span>
                 </div>
-                <div class="flex items-center gap-2 text-gray-700">
+                <div class="flex items-center gap-2 text-stone-700">
                   <svg
                     class="w-5 h-5 text-green-500"
                     fill="currentColor"
@@ -199,7 +199,7 @@ useSeoMeta({
                   </svg>
                   <span>Préviens si tu annules</span>
                 </div>
-                <div class="flex items-center gap-2 text-gray-700">
+                <div class="flex items-center gap-2 text-stone-700">
                   <svg
                     class="w-5 h-5 text-green-500"
                     fill="currentColor"
@@ -220,7 +220,7 @@ useSeoMeta({
 
         <!-- sécurité -->
         <section
-          class="bg-white rounded-2xl p-6 md:p-8 border border-gray-200 shadow-sm"
+          class="bg-white rounded-2xl p-6 md:p-8 border border-stone-200 shadow-sm"
         >
           <div class="flex items-start gap-4">
             <div
@@ -241,11 +241,11 @@ useSeoMeta({
               </svg>
             </div>
             <div>
-              <h2 class="text-xl font-semibold text-gray-800 mb-2">Sécurité</h2>
-              <p class="text-gray-600 leading-relaxed mb-4">
+              <h2 class="text-xl font-semibold text-stone-800 mb-2">Sécurité</h2>
+              <p class="text-stone-600 leading-relaxed mb-4">
                 Ta sécurité passe avant tout. Quelques conseils de bon sens :
               </p>
-              <ul class="space-y-2 text-gray-700">
+              <ul class="space-y-2 text-stone-700">
                 <li class="flex items-start gap-2">
                   <span class="text-blue-500 mt-1">•</span>
                   <span
@@ -279,11 +279,11 @@ useSeoMeta({
 
       <!-- note finale -->
       <div
-        class="mt-12 bg-gradient-to-br from-orange-100 to-amber-100 rounded-2xl p-8 border border-orange-200 text-center"
+        class="mt-12 bg-gradient-to-br from-primary-100 to-secondary-100 rounded-2xl p-8 border border-primary-200 text-center"
       >
-        <p class="text-gray-700 text-lg">
+        <p class="text-stone-700 text-lg">
           En utilisant Koudpouce, tu acceptes de respecter ces principes.<br />
-          <span class="font-medium text-orange-700"
+          <span class="font-medium text-primary-700"
             >Ensemble, créons une communauté d'entraide saine et
             bienveillante.</span
           >

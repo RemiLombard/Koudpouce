@@ -212,7 +212,7 @@ if (import.meta.client) {
             class="absolute right-3 top-1/2 -translate-y-1/2"
           >
             <div
-              class="w-5 h-5 border-2 border-orange-500 border-t-transparent rounded-full animate-spin"
+              class="w-5 h-5 border-2 border-primary-500 border-t-transparent rounded-full animate-spin"
             />
           </div>
         </div>
@@ -220,13 +220,13 @@ if (import.meta.client) {
         <!-- dropdown résultats -->
         <div
           v-if="showDropdown && cityResults.length > 0"
-          class="absolute z-50 w-full mt-1 bg-white border-2 border-orange-200 rounded-xl shadow-xl max-h-64 overflow-y-auto"
+          class="absolute z-50 w-full mt-1 bg-white border-2 border-primary-200 rounded-xl shadow-xl max-h-64 overflow-y-auto"
         >
           <button
             v-for="city in cityResults"
             :key="city.code"
             type="button"
-            class="w-full px-4 py-3 text-left hover:bg-orange-50 transition-colors border-b border-stone-100 last:border-b-0"
+            class="w-full px-4 py-3 text-left hover:bg-primary-50 transition-colors border-b border-stone-100 last:border-b-0"
             @click="selectCity(city)"
           >
             <div class="font-medium text-stone-800">{{ city.nom }}</div>
@@ -269,13 +269,13 @@ if (import.meta.client) {
     <!-- mode actif -->
     <div v-else class="space-y-4">
       <div
-        class="flex items-center justify-between p-4 bg-orange-50 rounded-xl border border-orange-200"
+        class="flex items-center justify-between p-4 bg-primary-50 rounded-xl border border-primary-200"
       >
         <div class="flex items-center gap-3">
           <div
-            class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center"
+            class="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center"
           >
-            <Icon name="location" class="w-5 h-5 text-orange-600" />
+            <Icon name="location" class="w-5 h-5 text-primary-600" />
           </div>
           <div>
             <div class="font-medium text-stone-800">
@@ -299,7 +299,7 @@ if (import.meta.client) {
       <div>
         <div class="flex justify-between text-sm text-stone-600 mb-2">
           <span>Rayon de recherche</span>
-          <span class="font-semibold text-orange-600"
+          <span class="font-semibold text-primary-600"
             >{{ selectedRadius }} km</span
           >
         </div>
@@ -309,7 +309,7 @@ if (import.meta.client) {
           min="1"
           max="100"
           step="1"
-          class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-orange-500"
+          class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-primary-500"
           @input="updateRadius(selectedRadius)"
         />
         <div class="flex justify-between text-xs text-stone-400 mt-1">

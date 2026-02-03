@@ -27,11 +27,11 @@ const variantClasses = computed(() => {
     case "elevated":
       return `${base} bg-white border border-stone-100 shadow-md`;
     case "interactive":
-      return `${base} bg-white border border-stone-100 shadow-sm hover:shadow-lg hover:border-orange-200 hover:-translate-y-0.5 cursor-pointer`;
+      return `${base} bg-white border border-stone-100 shadow-sm hover:shadow-lg hover:border-primary-200 hover:-translate-y-0.5 cursor-pointer`;
     case "highlighted":
       const borderColors = {
         primary:
-          "border-orange-200 bg-gradient-to-br from-white to-orange-50/30",
+          "border-primary-200 bg-gradient-to-br from-white to-primary-50/30",
         accent: "border-red-200 bg-gradient-to-br from-white to-red-50/30",
         success: "border-green-200 bg-gradient-to-br from-white to-green-50/30",
       };

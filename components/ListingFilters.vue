@@ -154,7 +154,7 @@ function toggleExpand() {
             <span class="hidden sm:inline">Filtres</span>
             <span
               v-if="activeFiltersCount > 0"
-              class="ml-1 w-5 h-5 bg-orange-500 text-white text-xs font-bold rounded-full flex items-center justify-center"
+              class="ml-1 w-5 h-5 bg-primary-500 text-white text-xs font-bold rounded-full flex items-center justify-center"
             >
               {{ activeFiltersCount }}
             </span>
@@ -187,7 +187,7 @@ function toggleExpand() {
                   class="px-4 py-2 text-sm font-medium rounded-xl border-2 transition-all"
                   :class="
                     localType === ''
-                      ? 'bg-orange-100 border-orange-300 text-orange-700'
+                      ? 'bg-primary-100 border-primary-300 text-primary-700'
                       : 'bg-white border-stone-200 text-stone-600 hover:border-stone-300'
                   "
                   @click="localType = ''"
@@ -199,7 +199,7 @@ function toggleExpand() {
                   class="px-4 py-2 text-sm font-medium rounded-xl border-2 transition-all"
                   :class="
                     localType === 'demande'
-                      ? 'bg-orange-100 border-orange-300 text-orange-700'
+                      ? 'bg-primary-100 border-primary-300 text-primary-700'
                       : 'bg-white border-stone-200 text-stone-600 hover:border-stone-300'
                   "
                   @click="localType = 'demande'"
@@ -211,7 +211,7 @@ function toggleExpand() {
                   class="px-4 py-2 text-sm font-medium rounded-xl border-2 transition-all"
                   :class="
                     localType === 'proposition'
-                      ? 'bg-orange-100 border-orange-300 text-orange-700'
+                      ? 'bg-primary-100 border-primary-300 text-primary-700'
                       : 'bg-white border-stone-200 text-stone-600 hover:border-stone-300'
                   "
                   @click="localType = 'proposition'"

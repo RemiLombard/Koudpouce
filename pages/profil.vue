@@ -236,11 +236,11 @@ const activePropositions = computed(() =>
         >
           <div class="flex items-center gap-4 sm:gap-6">
             <div
-              class="w-16 h-16 sm:w-20 sm:h-20 bg-orange-200 rounded-2xl flex items-center justify-center shrink-0"
+              class="w-16 h-16 sm:w-20 sm:h-20 bg-primary-200 rounded-2xl flex items-center justify-center shrink-0"
             >
               <Icon
                 name="user"
-                class="w-8 h-8 sm:w-10 sm:h-10 text-orange-600"
+                class="w-8 h-8 sm:w-10 sm:h-10 text-primary-600"
               />
             </div>
             <div class="min-w-0">
@@ -466,9 +466,9 @@ const activePropositions = computed(() =>
         <section>
           <div class="flex items-center gap-3 mb-6">
             <div
-              class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center"
+              class="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center"
             >
-              <Icon name="search" class="w-5 h-5 text-orange-600" />
+              <Icon name="search" class="w-5 h-5 text-primary-600" />
             </div>
             <h2 class="text-xl font-bold text-stone-800">
               Mes demandes d'aide
@@ -501,7 +501,7 @@ const activePropositions = computed(() =>
               :key="listing.id"
               variant="default"
               padding="md"
-              class="border-l-4 border-l-orange-400"
+              class="border-l-4 border-l-primary-400"
             >
               <div
                 class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4"
@@ -562,9 +562,9 @@ const activePropositions = computed(() =>
         <section>
           <div class="flex items-center gap-3 mb-6">
             <div
-              class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center"
+              class="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center"
             >
-              <Icon name="sparkles" class="w-5 h-5 text-orange-600" />
+              <Icon name="sparkles" class="w-5 h-5 text-primary-600" />
             </div>
             <h2 class="text-xl font-bold text-stone-800">
               Mes propositions de service
@@ -597,7 +597,7 @@ const activePropositions = computed(() =>
               :key="listing.id"
               variant="default"
               padding="md"
-              class="border-l-4 border-l-orange-400"
+              class="border-l-4 border-l-primary-400"
             >
               <div
                 class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4"

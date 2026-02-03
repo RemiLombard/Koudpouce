@@ -26,7 +26,7 @@ function handleClick() {
   <NuxtLink
     v-if="to"
     :to="to"
-    class="inline-flex items-center gap-2 text-sm text-stone-600 hover:text-orange-600 mb-6 font-medium transition-colors"
+    class="inline-flex items-center gap-2 text-sm text-stone-600 hover:text-primary-600 mb-6 font-medium transition-colors"
   >
     <Icon name="arrow-right" class="w-4 h-4 rotate-180" />
     {{ label }}
@@ -34,7 +34,7 @@ function handleClick() {
   <button
     v-else
     type="button"
-    class="inline-flex items-center gap-2 text-sm text-stone-600 hover:text-orange-600 mb-6 font-medium transition-colors"
+    class="inline-flex items-center gap-2 text-sm text-stone-600 hover:text-primary-600 mb-6 font-medium transition-colors"
     @click="handleClick"
   >
     <Icon name="arrow-right" class="w-4 h-4 rotate-180" />

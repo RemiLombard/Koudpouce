@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 useHead({ title: "Page non trouvée - Koudpouce" });
 
 const router = useRouter();
@@ -42,7 +42,7 @@ function goBack() {
         <div class="mt-8 text-sm text-stone-500">
           <p>
             Si le problème persiste, contactez-nous via
-            <NuxtLink to="/contact" class="text-orange-600 hover:underline"
+            <NuxtLink to="/contact" class="text-primary-600 hover:underline"
               >la page de contact</NuxtLink
             >.
           </p>

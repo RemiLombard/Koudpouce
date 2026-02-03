@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 import type {
   ConversationPublic,
   MessagePublic,
@@ -218,17 +218,17 @@ onMounted(() => {
 
 <template>
   <div
-    class="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-white flex flex-col"
+    class="min-h-screen bg-gradient-to-br from-primary-50 via-secondary-50 to-white flex flex-col"
   >
     <AppHeader />
 
     <!-- barre de navigation conversation -->
-    <div class="bg-white border-b border-gray-200 shadow-sm sticky top-16 z-30">
+    <div class="bg-white border-b border-stone-200 shadow-sm sticky top-16 z-30">
       <div class="max-w-4xl mx-auto px-4 py-3">
         <div class="flex items-center gap-4">
           <NuxtLink
             to="/messagerie"
-            class="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-all"
+            class="p-2 text-stone-500 hover:text-stone-700 hover:bg-stone-100 rounded-lg transition-all"
             title="Retour"
           >
             <Icon name="arrow-left" class="w-5 h-5" />
@@ -237,26 +237,26 @@ onMounted(() => {
           <div v-if="conversation" class="flex-1 min-w-0">
             <NuxtLink
               :to="`/annonces/${conversation.listingId}`"
-              class="font-semibold text-gray-800 hover:text-orange-600 transition-colors truncate block"
+              class="font-semibold text-stone-800 hover:text-primary-600 transition-colors truncate block"
             >
               {{ conversation.listingTitle }}
             </NuxtLink>
-            <p class="text-sm text-gray-500">
+            <p class="text-sm text-stone-500">
               Conversation avec
               <span class="font-medium">{{ otherPartyName }}</span>
             </p>
           </div>
 
           <div v-else class="flex-1">
-            <div class="h-5 w-48 bg-gray-200 rounded animate-pulse" />
-            <div class="h-4 w-32 bg-gray-100 rounded mt-1 animate-pulse" />
+            <div class="h-5 w-48 bg-stone-200 rounded animate-pulse" />
+            <div class="h-4 w-32 bg-stone-100 rounded mt-1 animate-pulse" />
           </div>
 
           <!-- bouton signaler -->
           <button
             v-if="conversation && canReportUser"
             type="button"
-            class="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
+            class="p-2 text-stone-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
             title="Signaler cet utilisateur"
             @click="showReportModal = true"
           >
@@ -300,11 +300,11 @@ onMounted(() => {
           <!-- message vide -->
           <div
             v-if="messages.length === 0"
-            class="text-center py-12 text-gray-500"
+            class="text-center py-12 text-stone-500"
           >
             <Icon
               name="envelope"
-              class="w-12 h-12 mx-auto text-gray-300 mb-3"
+              class="w-12 h-12 mx-auto text-stone-300 mb-3"
             />
             <p>Aucun message pour le moment.</p>
             <p class="text-sm">Envoyez le premier message !</p>
@@ -321,14 +321,14 @@ onMounted(() => {
               class="max-w-[75%] rounded-2xl px-4 py-3 shadow-sm"
               :class="
                 msg.senderId === user?.id
-                  ? 'bg-orange-500 text-white rounded-br-md'
-                  : 'bg-white text-gray-800 border border-gray-200 rounded-bl-md'
+                  ? 'bg-primary-500 text-white rounded-br-md'
+                  : 'bg-white text-stone-800 border border-stone-200 rounded-bl-md'
               "
             >
               <!-- nom expéditeur si ce n'est pas moi -->
               <p
                 v-if="msg.senderId !== user?.id"
-                class="text-xs font-medium text-orange-600 mb-1"
+                class="text-xs font-medium text-primary-600 mb-1"
               >
                 {{ msg.senderName }}
               </p>
@@ -340,7 +340,7 @@ onMounted(() => {
               <p
                 class="text-xs mt-1.5"
                 :class="
-                  msg.senderId === user?.id ? 'text-white/70' : 'text-gray-400'
+                  msg.senderId === user?.id ? 'text-white/70' : 'text-stone-400'
                 "
               >
                 {{ formatMessageDate(msg.createdAt) }}
@@ -352,7 +352,7 @@ onMounted(() => {
 
       <!-- zone de saisie -->
       <div
-        class="bg-white border-t border-gray-200 shadow-lg sticky bottom-0 z-40"
+        class="bg-white border-t border-stone-200 shadow-lg sticky bottom-0 z-40"
       >
         <div class="max-w-4xl mx-auto px-4 py-4">
           <!-- annonce clôturée -->
@@ -372,14 +372,14 @@ onMounted(() => {
             <textarea
               v-model="newMessage"
               rows="1"
-              class="flex-1 resize-none px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all"
+              class="flex-1 resize-none px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-primary-400 focus:border-transparent transition-all"
               placeholder="Écrivez votre message..."
               :disabled="sending"
               @keydown.enter.exact.prevent="handleSendMessage"
             />
             <button
               type="submit"
-              class="px-5 py-3 bg-orange-500 text-white rounded-xl font-medium hover:bg-orange-600 focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+              class="px-5 py-3 bg-primary-500 text-white rounded-xl font-medium hover:bg-primary-600 focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
               :disabled="!newMessage.trim() || sending"
             >
               <Icon name="paper-airplane" class="w-5 h-5" />
@@ -402,16 +402,16 @@ onMounted(() => {
         >
           <!-- header -->
           <div
-            class="bg-gradient-to-r from-orange-50 to-amber-50 px-6 py-5 border-b border-stone-100"
+            class="bg-gradient-to-r from-primary-50 to-secondary-50 px-6 py-5 border-b border-stone-100"
           >
             <div class="flex items-center justify-between">
               <h3
                 class="text-lg font-bold text-stone-800 flex items-center gap-3"
               >
                 <div
-                  class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center"
+                  class="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center"
                 >
-                  <Icon name="flag" class="w-5 h-5 text-orange-600" />
+                  <Icon name="flag" class="w-5 h-5 text-primary-600" />
                 </div>
                 Signaler {{ otherPartyName }}
               </h3>
@@ -459,7 +459,7 @@ onMounted(() => {
                     class="flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-colors"
                     :class="
                       reportReason === reason.value
-                        ? 'border-orange-400 bg-orange-50'
+                        ? 'border-primary-400 bg-primary-50'
                         : 'border-stone-200 hover:bg-stone-50'
                     "
                   >
@@ -468,7 +468,7 @@ onMounted(() => {
                       name="reportReason"
                       :value="reason.value"
                       v-model="reportReason"
-                      class="w-4 h-4 text-orange-600 focus:ring-orange-500"
+                      class="w-4 h-4 text-primary-600 focus:ring-primary-500"
                     />
                     <span class="text-stone-700">{{ reason.label }}</span>
                   </label>
@@ -486,7 +486,7 @@ onMounted(() => {
                   id="reportMessage"
                   v-model="reportMessage"
                   rows="3"
-                  class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 resize-none"
+                  class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none"
                   placeholder="Précisez votre signalement si nécessaire..."
                 ></textarea>
               </div>

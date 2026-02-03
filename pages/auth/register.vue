@@ -43,9 +43,9 @@ async function handleRegister(data: {
           <!-- icône et titre -->
           <div class="text-center mb-8">
             <div
-              class="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-2xl flex items-center justify-center"
+              class="w-16 h-16 mx-auto mb-4 bg-primary-100 rounded-2xl flex items-center justify-center"
             >
-              <Icon name="sparkles" class="w-8 h-8 text-orange-600" />
+              <Icon name="sparkles" class="w-8 h-8 text-primary-600" />
             </div>
             <h1 class="text-2xl font-bold text-stone-800 mb-2">
               Créer un compte
@@ -82,7 +82,7 @@ async function handleRegister(data: {
               Déjà inscrit ?
               <NuxtLink
                 to="/auth/login"
-                class="text-orange-600 hover:text-orange-700 font-semibold ml-1"
+                class="text-primary-600 hover:text-primary-700 font-semibold ml-1"
               >
                 Connectez-vous
               </NuxtLink>

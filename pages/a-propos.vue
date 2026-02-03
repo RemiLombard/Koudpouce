@@ -22,7 +22,7 @@ useSeoMeta({
 
 <template>
   <div
-    class="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-white"
+    class="min-h-screen bg-gradient-to-br from-primary-50 via-secondary-50 to-white"
   >
     <AppHeader />
 
@@ -30,7 +30,7 @@ useSeoMeta({
       <!-- hero -->
       <div class="text-center mb-12">
         <div
-          class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-orange-400 to-amber-500 rounded-2xl shadow-lg mb-6"
+          class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary-400 to-secondary-500 rounded-2xl shadow-lg mb-6"
         >
           <svg
             class="w-10 h-10 text-white"
@@ -42,24 +42,24 @@ useSeoMeta({
             />
           </svg>
         </div>
-        <h1 class="text-4xl font-bold text-gray-800 mb-4">
+        <h1 class="text-4xl font-bold text-stone-800 mb-4">
           Pourquoi Koudpouce ?
         </h1>
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        <p class="text-xl text-stone-600 max-w-2xl mx-auto">
           L'entraide de proximité, simple et humaine.
         </p>
       </div>
 
       <!-- l'idée -->
       <section
-        class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm mb-8"
+        class="bg-white rounded-2xl p-8 border border-stone-200 shadow-sm mb-8"
       >
         <div class="flex items-start gap-4">
           <div
-            class="shrink-0 w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center"
+            class="shrink-0 w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center"
           >
             <svg
-              class="w-6 h-6 text-orange-600"
+              class="w-6 h-6 text-primary-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -73,15 +73,15 @@ useSeoMeta({
             </svg>
           </div>
           <div>
-            <h2 class="text-xl font-semibold text-gray-800 mb-3">L'idée</h2>
-            <p class="text-gray-700 leading-relaxed mb-4">
+            <h2 class="text-xl font-semibold text-stone-800 mb-3">L'idée</h2>
+            <p class="text-stone-700 leading-relaxed mb-4">
               On a tous eu besoin un jour d'un coup de main : faire garder son
               chat, trouver quelqu'un pour arroser ses plantes, ou avoir de
               l'aide pour monter un meuble. Et on a tous eu du temps ou des
               compétences à offrir.
             </p>
-            <p class="text-gray-700 leading-relaxed">
-              <strong class="text-orange-600">Koudpouce</strong> connecte ces
+            <p class="text-stone-700 leading-relaxed">
+              <strong class="text-primary-600">Koudpouce</strong> connecte ces
               deux mondes. Une plateforme simple pour s'entraider entre voisins,
               sans prise de tête.
             </p>
@@ -91,7 +91,7 @@ useSeoMeta({
 
       <!-- à qui ça s'adresse -->
       <section
-        class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm mb-8"
+        class="bg-white rounded-2xl p-8 border border-stone-200 shadow-sm mb-8"
       >
         <div class="flex items-start gap-4">
           <div
@@ -112,25 +112,25 @@ useSeoMeta({
             </svg>
           </div>
           <div>
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">
+            <h2 class="text-xl font-semibold text-stone-800 mb-4">
               À qui ça s'adresse
             </h2>
             <div class="space-y-3">
               <div class="flex items-center gap-3">
                 <div class="w-2 h-2 bg-green-500 rounded-full" />
-                <span class="text-gray-700"
+                <span class="text-stone-700"
                   >Ceux qui cherchent un service ponctuel près de chez eux</span
                 >
               </div>
               <div class="flex items-center gap-3">
                 <div class="w-2 h-2 bg-green-500 rounded-full" />
-                <span class="text-gray-700"
+                <span class="text-stone-700"
                   >Ceux qui ont du temps libre et veulent se rendre utiles</span
                 >
               </div>
               <div class="flex items-center gap-3">
                 <div class="w-2 h-2 bg-green-500 rounded-full" />
-                <span class="text-gray-700"
+                <span class="text-stone-700"
                   >Ceux qui croient en l'entraide de proximité</span
                 >
               </div>
@@ -141,7 +141,7 @@ useSeoMeta({
 
       <!-- ce que ce n'est pas -->
       <section
-        class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm mb-8"
+        class="bg-white rounded-2xl p-8 border border-stone-200 shadow-sm mb-8"
       >
         <div class="flex items-start gap-4">
           <div
@@ -162,25 +162,25 @@ useSeoMeta({
             </svg>
           </div>
           <div>
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">
+            <h2 class="text-xl font-semibold text-stone-800 mb-4">
               Ce que Koudpouce n'est pas
             </h2>
             <div class="space-y-3">
               <div class="flex items-center gap-3">
                 <div class="w-2 h-2 bg-red-400 rounded-full" />
-                <span class="text-gray-700"
+                <span class="text-stone-700"
                   >Pas une plateforme pour les professionnels</span
                 >
               </div>
               <div class="flex items-center gap-3">
                 <div class="w-2 h-2 bg-red-400 rounded-full" />
-                <span class="text-gray-700"
+                <span class="text-stone-700"
                   >Pas une marketplace avec commissions</span
                 >
               </div>
               <div class="flex items-center gap-3">
                 <div class="w-2 h-2 bg-red-400 rounded-full" />
-                <span class="text-gray-700">Pas un réseau social</span>
+                <span class="text-stone-700">Pas un réseau social</span>
               </div>
             </div>
           </div>
@@ -189,9 +189,9 @@ useSeoMeta({
 
       <!-- comment ça marche -->
       <section
-        class="bg-gradient-to-br from-orange-100 to-amber-100 rounded-2xl p-8 border border-orange-200"
+        class="bg-gradient-to-br from-primary-100 to-secondary-100 rounded-2xl p-8 border border-primary-200"
       >
-        <h2 class="text-xl font-semibold text-gray-800 mb-6 text-center">
+        <h2 class="text-xl font-semibold text-stone-800 mb-6 text-center">
           Comment ça marche ?
         </h2>
         <div class="grid md:grid-cols-3 gap-6">
@@ -199,10 +199,10 @@ useSeoMeta({
             <div
               class="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm"
             >
-              <span class="text-xl font-bold text-orange-500">1</span>
+              <span class="text-xl font-bold text-primary-500">1</span>
             </div>
-            <h3 class="font-medium text-gray-800 mb-2">Publie ton annonce</h3>
-            <p class="text-sm text-gray-600">
+            <h3 class="font-medium text-stone-800 mb-2">Publie ton annonce</h3>
+            <p class="text-sm text-stone-600">
               Décris ce que tu cherches ou ce que tu proposes
             </p>
           </div>
@@ -210,10 +210,10 @@ useSeoMeta({
             <div
               class="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm"
             >
-              <span class="text-xl font-bold text-orange-500">2</span>
+              <span class="text-xl font-bold text-primary-500">2</span>
             </div>
-            <h3 class="font-medium text-gray-800 mb-2">Échange</h3>
-            <p class="text-sm text-gray-600">
+            <h3 class="font-medium text-stone-800 mb-2">Échange</h3>
+            <p class="text-sm text-stone-600">
               Les voisins intéressés te contactent via la messagerie
             </p>
           </div>
@@ -221,10 +221,10 @@ useSeoMeta({
             <div
               class="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm"
             >
-              <span class="text-xl font-bold text-orange-500">3</span>
+              <span class="text-xl font-bold text-primary-500">3</span>
             </div>
-            <h3 class="font-medium text-gray-800 mb-2">Coup de pouce !</h3>
-            <p class="text-sm text-gray-600">
+            <h3 class="font-medium text-stone-800 mb-2">Coup de pouce !</h3>
+            <p class="text-sm text-stone-600">
               Organisez-vous et profitez de l'entraide
             </p>
           </div>

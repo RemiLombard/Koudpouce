@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 definePageMeta({
   middleware: ["admin"],
   layout: false,
@@ -119,9 +119,9 @@ function reasonLabel(reason: string): string {
 function reasonBadgeClass(reason: string): string {
   const classes: Record<string, string> = {
     harassment: "bg-red-100 text-red-700 border border-red-200",
-    spam: "bg-amber-100 text-amber-700 border border-amber-200",
+    spam: "bg-secondary-100 text-secondary-700 border border-secondary-200",
     scam: "bg-red-100 text-red-700 border border-red-200",
-    inappropriate: "bg-orange-100 text-orange-700 border border-orange-200",
+    inappropriate: "bg-primary-100 text-primary-700 border border-primary-200",
     other: "bg-stone-100 text-stone-600 border border-stone-200",
   };
   return (
@@ -140,7 +140,7 @@ function statusLabel(status: string): string {
 
 function statusBadgeClass(status: string): string {
   const classes: Record<string, string> = {
-    pending: "bg-orange-100 text-orange-700 border border-orange-200",
+    pending: "bg-primary-100 text-primary-700 border border-primary-200",
     dismissed: "bg-stone-100 text-stone-600 border border-stone-200",
     actioned: "bg-green-100 text-green-700 border border-green-200",
   };
@@ -231,14 +231,14 @@ onMounted(() => {
             class="text-lg font-bold text-stone-800 mb-4 flex items-center gap-2"
           >
             <div
-              class="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center"
+              class="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center"
             >
-              <Icon name="message-square" class="w-4 h-4 text-orange-600" />
+              <Icon name="message-square" class="w-4 h-4 text-primary-600" />
             </div>
             Message du signaleur
           </h2>
           <blockquote
-            class="bg-stone-50 rounded-xl p-5 border-l-4 border-orange-400 italic text-stone-700 leading-relaxed"
+            class="bg-stone-50 rounded-xl p-5 border-l-4 border-primary-400 italic text-stone-700 leading-relaxed"
           >
             {{ report.message }}
           </blockquote>
@@ -250,9 +250,9 @@ onMounted(() => {
             class="text-lg font-bold text-stone-800 mb-4 flex items-center gap-2"
           >
             <div
-              class="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center"
+              class="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center"
             >
-              <Icon name="user" class="w-4 h-4 text-orange-600" />
+              <Icon name="user" class="w-4 h-4 text-primary-600" />
             </div>
             Signalé par
           </h2>
@@ -333,9 +333,9 @@ onMounted(() => {
             class="text-lg font-bold text-stone-800 mb-4 flex items-center gap-2"
           >
             <div
-              class="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center"
+              class="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center"
             >
-              <Icon name="envelope" class="w-4 h-4 text-orange-600" />
+              <Icon name="envelope" class="w-4 h-4 text-primary-600" />
             </div>
             Conversation liée
           </h2>

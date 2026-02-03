@@ -42,7 +42,7 @@ const baseClasses = computed(() => {
   } else {
     base.push(
       "border-stone-200 bg-white hover:border-stone-300",
-      "focus:border-orange-400 focus:shadow-[0_0_0_3px_rgba(249,115,22,0.1)]",
+      "focus:border-primary-400 focus:shadow-[0_0_0_3px_rgba(249,115,22,0.1)]",
     );
   }
 

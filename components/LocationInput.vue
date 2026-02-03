@@ -190,14 +190,14 @@ if (import.meta.client) {
   <div class="space-y-4">
     <!-- info confidentialité -->
     <div
-      class="flex items-start gap-2 bg-orange-50 rounded-xl p-4 border border-orange-200"
+      class="flex items-start gap-2 bg-primary-50 rounded-xl p-4 border border-primary-200"
     >
       <Icon
         name="location"
-        class="w-5 h-5 text-orange-600 mt-0.5 flex-shrink-0"
+        class="w-5 h-5 text-primary-600 mt-0.5 flex-shrink-0"
       />
       <div class="text-sm text-stone-700">
-        <p class="font-semibold text-orange-800 mb-1">
+        <p class="font-semibold text-primary-800 mb-1">
           Seule la ville sera affichée publiquement
         </p>
         <p class="text-stone-600">
@@ -220,7 +220,7 @@ if (import.meta.client) {
             v-model="searchQuery"
             type="text"
             placeholder="Ex: 10 rue de Rivoli, Paris..."
-            class="w-full px-4 py-3 border-2 border-stone-200 rounded-xl focus:border-orange-400 focus:outline-none transition-colors"
+            class="w-full px-4 py-3 border-2 border-stone-200 rounded-xl focus:border-primary-400 focus:outline-none transition-colors"
             @focus="handleSearchFocus"
           />
           <div
@@ -228,7 +228,7 @@ if (import.meta.client) {
             class="absolute right-3 top-1/2 -translate-y-1/2"
           >
             <div
-              class="w-5 h-5 border-2 border-orange-500 border-t-transparent rounded-full animate-spin"
+              class="w-5 h-5 border-2 border-primary-500 border-t-transparent rounded-full animate-spin"
             />
           </div>
         </div>
@@ -236,16 +236,16 @@ if (import.meta.client) {
         <!-- dropdown résultats -->
         <div
           v-if="showDropdown && addressResults.length > 0"
-          class="absolute z-50 w-full mt-1 bg-white border-2 border-orange-200 rounded-xl shadow-xl max-h-64 overflow-y-auto"
+          class="absolute z-50 w-full mt-1 bg-white border-2 border-primary-200 rounded-xl shadow-xl max-h-64 overflow-y-auto"
         >
           <button
             v-for="(address, idx) in addressResults"
             :key="idx"
             type="button"
-            class="w-full px-4 py-3 text-left hover:bg-orange-50 transition-colors border-b border-stone-100 last:border-b-0 flex items-start gap-3"
+            class="w-full px-4 py-3 text-left hover:bg-primary-50 transition-colors border-b border-stone-100 last:border-b-0 flex items-start gap-3"
             @click="selectAddress(address)"
           >
-            <Icon name="location" class="w-4 h-4 text-orange-600 mt-1" />
+            <Icon name="location" class="w-4 h-4 text-primary-600 mt-1" />
             <div class="flex-1">
               <div class="font-medium text-stone-800">
                 {{ address.properties.label }}

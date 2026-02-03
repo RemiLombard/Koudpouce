@@ -44,9 +44,9 @@ async function handleLogin(data: { email: string; password: string }) {
           <!-- icône et titre -->
           <div class="text-center mb-8">
             <div
-              class="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-2xl flex items-center justify-center"
+              class="w-16 h-16 mx-auto mb-4 bg-primary-100 rounded-2xl flex items-center justify-center"
             >
-              <Icon name="login" class="w-8 h-8 text-orange-600" />
+              <Icon name="login" class="w-8 h-8 text-primary-600" />
             </div>
             <h1 class="text-2xl font-bold text-stone-800 mb-2">Connexion</h1>
             <p class="text-stone-600">Retrouvez votre compte Koudpouce</p>
@@ -84,7 +84,7 @@ async function handleLogin(data: { email: string; password: string }) {
               Pas encore de compte ?
               <NuxtLink
                 to="/auth/register"
-                class="text-orange-600 hover:text-orange-700 font-semibold ml-1"
+                class="text-primary-600 hover:text-primary-700 font-semibold ml-1"
               >
                 Inscrivez-vous
               </NuxtLink>

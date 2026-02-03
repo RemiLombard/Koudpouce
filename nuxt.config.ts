@@ -10,9 +10,6 @@ export default defineNuxtConfig({
     preset: "netlify",
   },
 
-  // Fichier CSS global avec nos variables et classes custom
-  css: ["~/assets/css/main.css"],
-
   // Config des polices : Rubik pour les titres, Lato pour le texte
   googleFonts: {
     families: {

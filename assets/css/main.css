@@ -1,376 +1,55 @@
 /**
  * Système de design Koudpouce
- * Un style chaleureux, humain et cohérent
+ * Configuration Tailwind centralisée dans tailwind.config.ts
  */
 
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
-
-/* ============================================
-   VARIABLES CSS - Tokens de design
-   ============================================ */
-:root {
-  /* === PALETTE PRINCIPALE === */
-  /* Couleur primaire - Orange chaleureux */
-  --color-primary-50: #fff7ed;
-  --color-primary-100: #ffedd5;
-  --color-primary-200: #fed7aa;
-  --color-primary-300: #fdba74;
-  --color-primary-400: #fb923c;
-  --color-primary-500: #f97316;
-  --color-primary-600: #ea580c;
-  --color-primary-700: #c2410c;
-  --color-primary-800: #9a3412;
-
-  /* Couleur secondaire - Ambre doré */
-  --color-secondary-50: #fffbeb;
-  --color-secondary-100: #fef3c7;
-  --color-secondary-200: #fde68a;
-  --color-secondary-300: #fcd34d;
-  --color-secondary-400: #fbbf24;
-  --color-secondary-500: #f59e0b;
-  --color-secondary-600: #d97706;
-  --color-secondary-700: #b45309;
-
-  /* Couleur d'accent - Terracotta (demandes) */
-  --color-accent-50: #fef2f2;
-  --color-accent-100: #fee2e2;
-  --color-accent-200: #fecaca;
-  --color-accent-300: #fca5a5;
-  --color-accent-400: #f87171;
-  --color-accent-500: #ef4444;
-  --color-accent-600: #dc2626;
-  --color-accent-700: #b91c1c;
-
-  /* Couleurs neutres - Pierre chaude */
-  --color-neutral-50: #fafaf9;
-  --color-neutral-100: #f5f5f4;
-  --color-neutral-200: #e7e5e4;
-  --color-neutral-300: #d6d3d1;
-  --color-neutral-400: #a8a29e;
-  --color-neutral-500: #78716c;
-  --color-neutral-600: #57534e;
-  --color-neutral-700: #44403c;
-  --color-neutral-800: #292524;
-  --color-neutral-900: #1c1917;
-
-  /* Couleur de fond - Crème chaleureux */
-  --color-background: #fffbf5;
-  --color-surface: #ffffff;
-  --color-surface-elevated: #ffffff;
-
-  /* Couleurs sémantiques */
-  --color-success-50: #f0fdf4;
-  --color-success-100: #dcfce7;
-  --color-success-500: #22c55e;
-  --color-success-600: #16a34a;
-  --color-error-50: #fef2f2;
-  --color-error-500: #ef4444;
-  --color-error-600: #dc2626;
-
-  /* === TYPOGRAPHIE === */
-  /* Police pour les textes courants - Lato : élégante et très lisible */
-  --font-family-base:
-    "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  /* Police pour les titres - Rubik : carrée arrondie, moderne et chaleureuse */
-  --font-family-display:
-    "Rubik", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
-  --font-size-3xl: 1.875rem;
-  --font-size-4xl: 2.25rem;
-  --font-size-5xl: 3rem;
-  --font-size-6xl: 3.75rem;
-
-  --font-weight-normal: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
-  --font-weight-extrabold: 800;
-
-  --line-height-tight: 1.2;
-  --line-height-normal: 1.5;
-  --line-height-relaxed: 1.7;
-
-  /* === ESPACEMENTS === */
-  --spacing-0: 0;
-  --spacing-1: 0.25rem;
-  --spacing-2: 0.5rem;
-  --spacing-3: 0.75rem;
-  --spacing-4: 1rem;
-  --spacing-5: 1.25rem;
-  --spacing-6: 1.5rem;
-  --spacing-8: 2rem;
-  --spacing-10: 2.5rem;
-  --spacing-12: 3rem;
-  --spacing-16: 4rem;
-  --spacing-20: 5rem;
-
-  /* === BORDURES === */
-  --radius-sm: 0.5rem;
-  --radius-md: 0.75rem;
-  --radius-lg: 1rem;
-  --radius-xl: 1.25rem;
-  --radius-2xl: 1.5rem;
-  --radius-3xl: 2rem;
-  --radius-full: 9999px;
-
-  --border-width-default: 1px;
-  --border-width-2: 2px;
-
-  /* === OMBRES - Douces et diffuses === */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.03);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.06), 0 4px 8px rgba(0, 0, 0, 0.04);
-  --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.08), 0 8px 16px rgba(0, 0, 0, 0.04);
-  --shadow-2xl: 0 24px 60px rgba(0, 0, 0, 0.12);
-
-  /* Ombres colorées (effet glow) */
-  --shadow-primary: 0 8px 24px rgba(249, 115, 22, 0.2);
-  --shadow-accent: 0 8px 24px rgba(239, 68, 68, 0.2);
-
-  /* === TRANSITIONS === */
-  --transition-fast: 150ms ease;
-  --transition-normal: 200ms ease;
-  --transition-slow: 300ms ease;
-  --transition-spring: 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* ============================================
    STYLES DE BASE
    ============================================ */
-html {
-  font-family: var(--font-family-base);
-  line-height: var(--line-height-normal);
-  color: var(--color-neutral-800);
-  background-color: var(--color-background);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-  min-height: 100vh;
-}
-
-/* Titres avec style display */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-family-display);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-tight);
-  color: var(--color-neutral-900);
-}
-
-/* Focus visible amélioré */
-:focus-visible {
-  outline: 2px solid var(--color-primary-500);
-  outline-offset: 2px;
-}
-
-/* Scrollbar personnalisée */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--color-neutral-100);
-  border-radius: var(--radius-full);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-neutral-300);
-  border-radius: var(--radius-full);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-neutral-400);
-}
-
-/* ============================================
-   CLASSES UTILITAIRES PERSONNALISÉES
-   ============================================ */
-@layer utilities {
-  /* Gradient de fond principal */
-  .bg-gradient-warm {
-    background: linear-gradient(
-      135deg,
-      var(--color-primary-50) 0%,
-      var(--color-secondary-50) 50%,
-      #fff9f0 100%
-    );
+@layer base {
+  html {
+    @apply font-sans text-stone-800 bg-background antialiased;
+    line-height: 1.5;
   }
 
-  /* Gradient de texte */
-  .text-gradient-primary {
-    background: linear-gradient(
-      135deg,
-      var(--color-primary-600) 0%,
-      var(--color-secondary-600) 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  body {
+    @apply min-h-screen;
   }
 
-  /* Effet glassmorphism */
-  .glass {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+  /* Titres avec police display */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display font-bold text-stone-900;
+    line-height: 1.2;
   }
 
-  .glass-strong {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+  /* Focus visible amélioré */
+  :focus-visible {
+    @apply outline-2 outline-primary-500 outline-offset-2;
   }
 
-  /* Animation de pulse subtile */
-  .animate-pulse-soft {
-    animation: pulse-soft 3s ease-in-out infinite;
+  /* Scrollbar personnalisée (Webkit) */
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
   }
 
-  @keyframes pulse-soft {
-    0%,
-    100% {
-      opacity: 0.6;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 0.8;
-      transform: scale(1.02);
-    }
+  ::-webkit-scrollbar-track {
+    @apply bg-stone-100 rounded-full;
   }
 
-  /* Animation flottante */
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
+  ::-webkit-scrollbar-thumb {
+    @apply bg-stone-300 rounded-full;
   }
 
-  /* Petit rebond discret pour éléments UI (ex: badge d'intro) */
-  .animate-bounce-small {
-    will-change: transform;
-    animation: bounceSmall 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-stone-400;
   }
-
-  @keyframes bounceSmall {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    40% {
-      transform: translateY(-6px);
-    }
-    60% {
-      transform: translateY(-3px);
-    }
-  }
-
-  @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-}
-
-/* ============================================
-   COMPOSANTS DE BASE (LAYER)
-   ============================================ */
-@layer components {
-  /* Container principal */
-  .container-app {
-    width: 100%;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: var(--spacing-4);
-    padding-right: var(--spacing-4);
-  }
-
-  /* Carte de base */
-  .card {
-    background: var(--color-surface);
-    border-radius: var(--radius-2xl);
-    border: 1px solid var(--color-neutral-100);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .card-elevated {
-    background: var(--color-surface);
-    border-radius: var(--radius-2xl);
-    border: 1px solid var(--color-neutral-100);
-    box-shadow: var(--shadow-md);
-  }
-
-  .card-interactive {
-    background: var(--color-surface);
-    border-radius: var(--radius-2xl);
-    border: 1px solid var(--color-neutral-100);
-    box-shadow: var(--shadow-sm);
-    transition: all var(--transition-normal);
-  }
-
-  .card-interactive:hover {
-    border-color: var(--color-primary-200);
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-2px);
-  }
-
-  /* Champ de saisie */
-  .input-base {
-    width: 100%;
-    padding: var(--spacing-3) var(--spacing-4);
-    font-size: var(--font-size-base);
-    line-height: var(--line-height-normal);
-    color: var(--color-neutral-800);
-    background: var(--color-surface);
-    border: 2px solid var(--color-neutral-200);
-    border-radius: var(--radius-xl);
-    transition: all var(--transition-normal);
-  }
-
-  .input-base::placeholder {
-    color: var(--color-neutral-400);
-  }
-
-  .input-base:hover {
-    border-color: var(--color-neutral-300);
-  }
-
-  .input-base:focus {
-    border-color: var(--color-primary-400);
-    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
-    outline: none;
-  }
-
-  /* Label */
-  .label {
-    display: block;
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
-    color: var(--color-neutral-700);
-    margin-bottom: var(--spacing-2);
-  }
-}
-
-/* Bloquer le scroll global quand un overlay/menu est ouvert */
-.no-scroll {
-  overflow: hidden !important;
-  height: 100% !important;
 }

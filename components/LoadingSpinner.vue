@@ -21,7 +21,7 @@ const sizeClasses = {
 <template>
   <div :class="centered ? 'text-center py-16' : 'text-center'">
     <div
-      class="mx-auto border-orange-200 border-t-orange-500 rounded-full animate-spin"
+      class="mx-auto border-primary-200 border-t-primary-500 rounded-full animate-spin"
       :class="[sizeClasses[size], text ? 'mb-4' : '']"
     />
     <p v-if="text" class="text-stone-500 mt-4">{{ text }}</p>

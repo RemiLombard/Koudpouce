@@ -41,7 +41,7 @@ const remainingServices = computed(() => {
   <NuxtLink :to="`/annonces/${listing.id}`" class="group block">
     <BaseCard variant="interactive" padding="none" class="overflow-hidden">
       <!-- barre colorée en haut -->
-      <div class="h-1.5 bg-gradient-to-r from-orange-400 to-amber-400" />
+      <div class="h-1.5 bg-gradient-to-r from-primary-400 to-secondary-400" />
 
       <div class="p-5">
         <!-- en-tête : badges -->
@@ -62,7 +62,7 @@ const remainingServices = computed(() => {
 
         <!-- titre -->
         <h3
-          class="text-lg font-bold text-stone-800 mb-2 group-hover:text-orange-600 transition-colors line-clamp-2"
+          class="text-lg font-bold text-stone-800 mb-2 group-hover:text-primary-600 transition-colors line-clamp-2"
         >
           {{ listing.title }}
         </h3>
@@ -76,7 +76,7 @@ const remainingServices = computed(() => {
         <div
           class="flex items-center justify-between pt-3 border-t border-stone-100"
         >
-          <div class="flex items-center gap-1.5 text-orange-600">
+          <div class="flex items-center gap-1.5 text-primary-600">
             <Icon name="location" class="w-4 h-4" />
             <span class="text-sm font-medium">
               {{ listing.cityName }}
@@ -86,7 +86,7 @@ const remainingServices = computed(() => {
             </span>
             <span
               v-if="listing.distanceKm !== undefined"
-              class="ml-2 px-2 py-0.5 bg-orange-100 text-orange-700 text-xs font-bold rounded-full"
+              class="ml-2 px-2 py-0.5 bg-primary-100 text-primary-700 text-xs font-bold rounded-full"
             >
               {{ listing.distanceKm }} km
             </span>

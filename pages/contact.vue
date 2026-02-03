@@ -111,7 +111,7 @@ function resetForm() {
               type="text"
               required
               placeholder="Jean Dupont"
-              class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+              class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
             />
           </div>
 
@@ -129,7 +129,7 @@ function resetForm() {
               type="email"
               required
               placeholder="jean@exemple.com"
-              class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+              class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
             />
           </div>
 
@@ -145,7 +145,7 @@ function resetForm() {
               id="subject"
               v-model="form.subject"
               required
-              class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors bg-white"
+              class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors bg-white"
             >
               <option value="">Sélectionnez un sujet</option>
               <option value="question">Question générale</option>
@@ -170,7 +170,7 @@ function resetForm() {
               required
               rows="6"
               placeholder="Décrivez votre demande en détail..."
-              class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors resize-none"
+              class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors resize-none"
             />
           </div>
 
@@ -178,7 +178,7 @@ function resetForm() {
           <button
             type="submit"
             :disabled="loading"
-            class="w-full py-4 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-semibold rounded-xl hover:from-orange-600 hover:to-amber-600 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            class="w-full py-4 bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-semibold rounded-xl hover:from-primary-600 hover:to-secondary-600 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             <svg
               v-if="loading"
@@ -223,7 +223,7 @@ function resetForm() {
           Vous pouvez aussi nous contacter directement à
           <a
             href="mailto:remi.lombard70@gmail.com"
-            class="text-orange-600 hover:underline font-medium"
+            class="text-primary-600 hover:underline font-medium"
           >
             remi.lombard@edu.univ-fcomte.fr
           </a>

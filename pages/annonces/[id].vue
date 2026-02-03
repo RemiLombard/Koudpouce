@@ -1,4 +1,4 @@
-<!-- page détail d'une annonce : affichage complet + actions (contacter, signaler) -->
+﻿<!-- page détail d'une annonce : affichage complet + actions (contacter, signaler) -->
 <script setup lang="ts">
 import type { ListingPublic, ServiceType } from "~/composables/useListings";
 import { fetchServiceTypes } from "~/composables/useListings";
@@ -243,7 +243,7 @@ async function handleReport() {
 
         <BaseCard variant="elevated" padding="none" class="overflow-hidden">
           <!-- barre colorée en haut -->
-          <div class="h-2 bg-gradient-to-r from-orange-400 to-amber-400" />
+          <div class="h-2 bg-gradient-to-r from-primary-400 to-secondary-400" />
 
           <div class="p-8">
             <!-- badges -->
@@ -276,9 +276,9 @@ async function handleReport() {
             >
               <div class="flex items-center gap-3">
                 <div
-                  class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center"
+                  class="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center"
                 >
-                  <Icon name="location" class="w-5 h-5 text-orange-600" />
+                  <Icon name="location" class="w-5 h-5 text-primary-600" />
                 </div>
                 <div>
                   <div class="text-sm text-stone-500">Localisation</div>
@@ -290,9 +290,9 @@ async function handleReport() {
 
               <div class="flex items-center gap-3">
                 <div
-                  class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center"
+                  class="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center"
                 >
-                  <Icon name="user" class="w-5 h-5 text-orange-600" />
+                  <Icon name="user" class="w-5 h-5 text-primary-600" />
                 </div>
                 <div>
                   <div class="text-sm text-stone-500">Publiée par</div>
@@ -304,9 +304,9 @@ async function handleReport() {
 
               <div class="flex items-center gap-3">
                 <div
-                  class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center"
+                  class="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center"
                 >
-                  <Icon name="calendar" class="w-5 h-5 text-orange-600" />
+                  <Icon name="calendar" class="w-5 h-5 text-primary-600" />
                 </div>
                 <div>
                   <div class="text-sm text-stone-500">Date</div>
@@ -396,16 +396,16 @@ async function handleReport() {
           >
             <!-- header -->
             <div
-              class="bg-gradient-to-r from-orange-50 to-amber-50 px-6 py-5 border-b border-stone-100"
+              class="bg-gradient-to-r from-primary-50 to-secondary-50 px-6 py-5 border-b border-stone-100"
             >
               <div class="flex items-center justify-between">
                 <h3
                   class="text-lg font-bold text-stone-800 flex items-center gap-3"
                 >
                   <div
-                    class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center"
+                    class="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center"
                   >
-                    <Icon name="flag" class="w-5 h-5 text-orange-600" />
+                    <Icon name="flag" class="w-5 h-5 text-primary-600" />
                   </div>
                   Signaler cette annonce
                 </h3>
@@ -453,7 +453,7 @@ async function handleReport() {
                       class="flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-colors"
                       :class="
                         reportReason === reason.value
-                          ? 'border-orange-400 bg-orange-50'
+                          ? 'border-primary-400 bg-primary-50'
                           : 'border-stone-200 hover:bg-stone-50'
                       "
                     >
@@ -462,7 +462,7 @@ async function handleReport() {
                         name="reportReason"
                         :value="reason.value"
                         v-model="reportReason"
-                        class="w-4 h-4 text-orange-600 focus:ring-orange-500"
+                        class="w-4 h-4 text-primary-600 focus:ring-primary-500"
                       />
                       <span class="text-stone-700">{{ reason.label }}</span>
                     </label>
@@ -480,7 +480,7 @@ async function handleReport() {
                     id="reportMessage"
                     v-model="reportMessage"
                     rows="3"
-                    class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 resize-none"
+                    class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none"
                     placeholder="Précisez votre signalement si nécessaire..."
                   ></textarea>
                 </div>

@@ -49,15 +49,15 @@ onMounted(async () => {
 
 <template>
   <div
-    class="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-white"
+    class="min-h-screen bg-gradient-to-br from-primary-50 via-secondary-50 to-white"
   >
     <AppHeader />
 
     <main class="max-w-4xl mx-auto px-4 py-8">
       <!-- en-tête -->
       <div class="mb-8">
-        <h1 class="text-3xl font-bold text-gray-800 mb-2">Messagerie</h1>
-        <p class="text-gray-600">Gérez vos conversations et échanges</p>
+        <h1 class="text-3xl font-bold text-stone-800 mb-2">Messagerie</h1>
+        <p class="text-stone-600">Gérez vos conversations et échanges</p>
       </div>
 
       <!-- onglets -->
@@ -67,8 +67,8 @@ onMounted(async () => {
           class="px-5 py-2.5 rounded-xl font-medium transition-all"
           :class="
             activeTab === 'received'
-              ? 'bg-orange-500 text-white shadow-md'
-              : 'bg-white text-gray-600 hover:bg-orange-50 border border-gray-200'
+              ? 'bg-primary-500 text-white shadow-md'
+              : 'bg-white text-stone-600 hover:bg-primary-50 border border-stone-200'
           "
           @click="switchTab('received')"
         >
@@ -79,7 +79,7 @@ onMounted(async () => {
             :class="
               activeTab === 'received'
                 ? 'bg-white/20 text-white'
-                : 'bg-orange-500 text-white'
+                : 'bg-primary-500 text-white'
             "
           >
             {{ receivedUnread }}
@@ -90,8 +90,8 @@ onMounted(async () => {
           class="px-5 py-2.5 rounded-xl font-medium transition-all"
           :class="
             activeTab === 'sent'
-              ? 'bg-orange-500 text-white shadow-md'
-              : 'bg-white text-gray-600 hover:bg-orange-50 border border-gray-200'
+              ? 'bg-primary-500 text-white shadow-md'
+              : 'bg-white text-stone-600 hover:bg-primary-50 border border-stone-200'
           "
           @click="switchTab('sent')"
         >
@@ -102,7 +102,7 @@ onMounted(async () => {
             :class="
               activeTab === 'sent'
                 ? 'bg-white/20 text-white'
-                : 'bg-orange-500 text-white'
+                : 'bg-primary-500 text-white'
             "
           >
             {{ sentUnread }}
@@ -131,19 +131,19 @@ onMounted(async () => {
       <!-- liste vide -->
       <div
         v-else-if="conversations.length === 0"
-        class="bg-white rounded-2xl border border-gray-200 p-12 text-center"
+        class="bg-white rounded-2xl border border-stone-200 p-12 text-center"
       >
         <div
-          class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4"
+          class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4"
         >
-          <Icon name="envelope" class="w-8 h-8 text-orange-400" />
+          <Icon name="envelope" class="w-8 h-8 text-primary-400" />
         </div>
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">
+        <h3 class="text-lg font-semibold text-stone-800 mb-2">
           {{
             activeTab === "received" ? "Aucun message reçu" : "Aucun contact"
           }}
         </h3>
-        <p class="text-gray-500">
+        <p class="text-stone-500">
           {{
             activeTab === "received"
               ? "Personne n'a encore répondu à vos annonces."
@@ -158,16 +158,16 @@ onMounted(async () => {
           v-for="conv in conversations"
           :key="conv.id"
           :to="`/messagerie/${conv.id}`"
-          class="group block bg-white rounded-2xl border border-gray-200 p-5 hover:shadow-lg hover:border-orange-200 transition-all"
-          :class="{ 'ring-2 ring-orange-400': conv.unreadCount > 0 }"
+          class="group block bg-white rounded-2xl border border-stone-200 p-5 hover:shadow-lg hover:border-primary-200 transition-all"
+          :class="{ 'ring-2 ring-primary-400': conv.unreadCount > 0 }"
         >
           <div class="flex items-start justify-between gap-4">
             <div class="flex-1 min-w-0">
               <!-- titre annonce -->
               <div class="flex items-center gap-2">
                 <h3
-                  class="font-semibold text-gray-800 group-hover:text-orange-600 transition-colors truncate"
-                  :class="{ 'text-gray-500': conv.listingClosed }"
+                  class="font-semibold text-stone-800 group-hover:text-primary-600 transition-colors truncate"
+                  :class="{ 'text-stone-500': conv.listingClosed }"
                 >
                   {{ conv.listingTitle }}
                 </h3>
@@ -180,16 +180,16 @@ onMounted(async () => {
               </div>
 
               <!-- interlocuteur -->
-              <p class="text-sm text-gray-500 mt-1">
+              <p class="text-sm text-stone-500 mt-1">
                 <template v-if="activeTab === 'received'">
                   De :
-                  <span class="font-medium text-gray-700">{{
+                  <span class="font-medium text-stone-700">{{
                     conv.contacterName
                   }}</span>
                 </template>
                 <template v-else>
                   À :
-                  <span class="font-medium text-gray-700">{{
+                  <span class="font-medium text-stone-700">{{
                     conv.listingAuthorName
                   }}</span>
                 </template>
@@ -198,7 +198,7 @@ onMounted(async () => {
               <!-- dernier message -->
               <p
                 v-if="conv.lastMessage"
-                class="text-sm text-gray-600 mt-2 line-clamp-2"
+                class="text-sm text-stone-600 mt-2 line-clamp-2"
                 :class="{ 'font-medium': conv.unreadCount > 0 }"
               >
                 {{ conv.lastMessage.content }}
@@ -207,14 +207,14 @@ onMounted(async () => {
 
             <div class="flex flex-col items-end gap-2 shrink-0">
               <!-- date -->
-              <span class="text-xs text-gray-400">
+              <span class="text-xs text-stone-400">
                 {{ formatDate(conv.updatedAt) }}
               </span>
 
               <!-- badge non lu -->
               <span
                 v-if="conv.unreadCount > 0"
-                class="px-2.5 py-1 bg-orange-500 text-white text-xs font-bold rounded-full"
+                class="px-2.5 py-1 bg-primary-500 text-white text-xs font-bold rounded-full"
               >
                 {{ conv.unreadCount }}
               </span>

@@ -43,8 +43,7 @@ onMounted(async () => {
       useRealtimeNotifications(userId, () => {
         fetchUnreadCount();
       });
-    } catch (e) {
-    }
+    } catch (e) {}
   }
 });
 
@@ -77,7 +76,7 @@ watch(
 <template>
   <!-- header fixé en haut -->
   <header
-    class="sticky top-0 z-50 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 shadow-lg"
+    class="sticky top-0 z-50 bg-gradient-to-r from-primary-500 via-secondary-500 to-primary-500 shadow-lg"
   >
     <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
       <!-- logo -->
@@ -153,7 +152,7 @@ watch(
           </NuxtLink>
           <NuxtLink
             to="/auth/register"
-            class="px-4 py-2 bg-white text-orange-600 font-semibold rounded-xl hover:bg-orange-50 transition-colors"
+            class="px-4 py-2 bg-white text-primary-600 font-semibold rounded-xl hover:bg-primary-50 transition-colors"
           >
             Inscription
           </NuxtLink>
@@ -196,7 +195,7 @@ watch(
     >
       <div
         v-if="menuOpen"
-        class="fixed inset-0 z-[100] bg-gradient-to-br from-orange-500 via-amber-500 to-orange-400 flex flex-col"
+        class="fixed inset-0 z-[100] bg-gradient-to-br from-primary-500 via-secondary-500 to-primary-400 flex flex-col"
       >
         <!-- header du menu -->
         <div class="h-16 px-4 flex items-center justify-between">
@@ -292,7 +291,7 @@ watch(
             </NuxtLink>
             <NuxtLink
               to="/auth/register"
-              class="w-full max-w-xs flex items-center justify-center px-6 py-4 bg-white text-orange-600 text-xl font-semibold rounded-2xl shadow-lg hover:bg-orange-50 transition-colors"
+              class="w-full max-w-xs flex items-center justify-center px-6 py-4 bg-white text-primary-600 text-xl font-semibold rounded-2xl shadow-lg hover:bg-primary-50 transition-colors"
               @click="menuOpen = false"
             >
               Inscription

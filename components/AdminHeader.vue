@@ -10,7 +10,7 @@ async function handleLogout() {
 
 <template>
   <header
-    class="sticky top-0 z-50 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 shadow-lg"
+    class="sticky top-0 z-50 bg-gradient-to-r from-primary-500 via-secondary-500 to-primary-500 shadow-lg"
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">

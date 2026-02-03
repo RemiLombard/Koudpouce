@@ -29,12 +29,12 @@ const baseClasses = `
 
 const variantClasses = {
   primary: `
-    bg-gradient-to-r from-orange-500 to-amber-500
+    bg-gradient-to-r from-primary-500 to-secondary-500
     text-white
     border-2 border-transparent
-    hover:from-orange-600 hover:to-amber-600
+    hover:from-primary-600 hover:to-secondary-600
     active:scale-[0.98]
-    focus-visible:ring-orange-500
+    focus-visible:ring-primary-500
   `,
   ghost: `
     bg-transparent
@@ -52,19 +52,19 @@ const variantClasses = {
     focus-visible:ring-red-500
   `,
   soft: `
-    bg-orange-100
-    text-orange-700
+    bg-primary-100
+    text-primary-700
     border-2 border-transparent
-    hover:bg-orange-200
-    focus-visible:ring-orange-400
+    hover:bg-primary-200
+    focus-visible:ring-primary-400
   `,
   outline: `
     bg-transparent
-    text-orange-600
-    border-2 border-orange-400
-    hover:bg-orange-100 hover:border-orange-500 hover:text-orange-700
+    text-primary-600
+    border-2 border-primary-400
+    hover:bg-primary-100 hover:border-primary-500 hover:text-primary-700
     active:scale-[0.98]
-    focus-visible:ring-orange-500
+    focus-visible:ring-primary-500
   `,
 };
 

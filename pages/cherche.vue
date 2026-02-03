@@ -65,9 +65,9 @@ function onFiltersChange(newFilters: ListingFilters) {
               class="text-2xl lg:text-3xl font-bold text-stone-800 mb-2 flex items-center gap-3"
             >
               <div
-                class="w-12 h-12 rounded-xl flex items-center justify-center bg-orange-100"
+                class="w-12 h-12 rounded-xl flex items-center justify-center bg-primary-100"
               >
-                <Icon name="search" class="w-6 h-6 text-orange-600" />
+                <Icon name="search" class="w-6 h-6 text-primary-600" />
               </div>
               Vous cherchez de l'aide
             </h1>
@@ -169,7 +169,7 @@ function onFiltersChange(newFilters: ListingFilters) {
             :class="
               currentPage === 1
                 ? 'bg-stone-100 text-stone-400 cursor-not-allowed'
-                : 'bg-white text-stone-700 hover:bg-orange-50 hover:text-orange-600 border border-stone-200'
+                : 'bg-white text-stone-700 hover:bg-primary-50 hover:text-primary-600 border border-stone-200'
             "
             @click="goToPage(currentPage - 1)"
           >
@@ -183,8 +183,8 @@ function onFiltersChange(newFilters: ListingFilters) {
             class="w-10 h-10 rounded-lg text-sm font-semibold transition-colors"
             :class="
               page === currentPage
-                ? 'bg-orange-500 text-white shadow-md'
-                : 'bg-white text-stone-700 hover:bg-orange-50 hover:text-orange-600 border border-stone-200'
+                ? 'bg-primary-500 text-white shadow-md'
+                : 'bg-white text-stone-700 hover:bg-primary-50 hover:text-primary-600 border border-stone-200'
             "
             @click="goToPage(page)"
           >
@@ -198,7 +198,7 @@ function onFiltersChange(newFilters: ListingFilters) {
             :class="
               currentPage === totalPages
                 ? 'bg-stone-100 text-stone-400 cursor-not-allowed'
-                : 'bg-white text-stone-700 hover:bg-orange-50 hover:text-orange-600 border border-stone-200'
+                : 'bg-white text-stone-700 hover:bg-primary-50 hover:text-primary-600 border border-stone-200'
             "
             @click="goToPage(currentPage + 1)"
           >

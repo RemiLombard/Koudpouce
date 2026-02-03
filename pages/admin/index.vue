@@ -196,7 +196,7 @@ function listingReasonLabel(reason: string): string {
 
 function listingReasonBadgeClass(reason: string): string {
   const classes: Record<string, string> = {
-    spam: "bg-amber-100 text-amber-700 border border-amber-200",
+    spam: "bg-secondary-100 text-secondary-700 border border-secondary-200",
     professional: "bg-stone-100 text-stone-700 border border-stone-200",
     inappropriate: "bg-red-100 text-red-700 border border-red-200",
     scam: "bg-red-100 text-red-700 border border-red-200",
@@ -221,9 +221,9 @@ function userReasonLabel(reason: string): string {
 function userReasonBadgeClass(reason: string): string {
   const classes: Record<string, string> = {
     harassment: "bg-red-100 text-red-700 border border-red-200",
-    spam: "bg-amber-100 text-amber-700 border border-amber-200",
+    spam: "bg-secondary-100 text-secondary-700 border border-secondary-200",
     scam: "bg-red-100 text-red-700 border border-red-200",
-    inappropriate: "bg-orange-100 text-orange-700 border border-orange-200",
+    inappropriate: "bg-primary-100 text-primary-700 border border-primary-200",
     other: "bg-stone-100 text-stone-600 border border-stone-200",
   };
   return (
@@ -271,8 +271,8 @@ onMounted(() => {
           class="px-5 py-2.5 rounded-xl font-medium transition-all"
           :class="
             activeTab === 'listings'
-              ? 'bg-orange-500 text-white shadow-md'
-              : 'bg-white text-gray-600 hover:bg-orange-50 border border-gray-200'
+              ? 'bg-primary-500 text-white shadow-md'
+              : 'bg-white text-stone-600 hover:bg-primary-50 border border-stone-200'
           "
           @click="activeTab = 'listings'"
         >
@@ -283,7 +283,7 @@ onMounted(() => {
             :class="
               activeTab === 'listings'
                 ? 'bg-white/20 text-white'
-                : 'bg-orange-500 text-white'
+                : 'bg-primary-500 text-white'
             "
           >
             {{ listingReportsCount }}
@@ -294,8 +294,8 @@ onMounted(() => {
           class="px-5 py-2.5 rounded-xl font-medium transition-all"
           :class="
             activeTab === 'users'
-              ? 'bg-orange-500 text-white shadow-md'
-              : 'bg-white text-gray-600 hover:bg-orange-50 border border-gray-200'
+              ? 'bg-primary-500 text-white shadow-md'
+              : 'bg-white text-stone-600 hover:bg-primary-50 border border-stone-200'
           "
           @click="activeTab = 'users'"
         >
@@ -306,7 +306,7 @@ onMounted(() => {
             :class="
               activeTab === 'users'
                 ? 'bg-white/20 text-white'
-                : 'bg-orange-500 text-white'
+                : 'bg-primary-500 text-white'
             "
           >
             {{ userReportsCount }}
@@ -373,7 +373,7 @@ onMounted(() => {
               :class="[
                 'h-1',
                 report.status === 'pending'
-                  ? 'bg-gradient-to-r from-orange-400 to-amber-400'
+                  ? 'bg-gradient-to-r from-primary-400 to-secondary-400'
                   : report.status === 'actioned'
                     ? 'bg-gradient-to-r from-green-400 to-emerald-400'
                     : 'bg-stone-300',
@@ -515,7 +515,7 @@ onMounted(() => {
               :class="[
                 'h-1',
                 report.status === 'pending'
-                  ? 'bg-gradient-to-r from-orange-400 to-amber-400'
+                  ? 'bg-gradient-to-r from-primary-400 to-secondary-400'
                   : report.status === 'actioned'
                     ? 'bg-gradient-to-r from-green-400 to-emerald-400'
                     : 'bg-stone-300',

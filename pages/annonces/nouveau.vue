@@ -116,7 +116,7 @@ async function handleSubmit() {
         <div
           class="inline-flex items-center gap-2 glass px-5 py-2.5 rounded-full shadow-lg mb-6"
         >
-          <Icon name="sparkles" class="w-5 h-5 text-orange-600" />
+          <Icon name="sparkles" class="w-5 h-5 text-primary-600" />
           <span class="text-sm font-semibold text-stone-700"
             >Nouvelle annonce</span
           >
@@ -148,7 +148,7 @@ async function handleSubmit() {
           <h2
             class="text-lg font-bold text-stone-800 mb-4 flex items-center gap-2"
           >
-            <Icon name="target" class="w-5 h-5 text-orange-600" />
+            <Icon name="target" class="w-5 h-5 text-primary-600" />
             Type d'annonce
           </h2>
 
@@ -157,7 +157,7 @@ async function handleSubmit() {
               class="relative flex items-center gap-4 p-5 rounded-2xl border-2 cursor-pointer transition-all"
               :class="
                 type === 'demande'
-                  ? 'border-orange-300 bg-orange-50 shadow-md'
+                  ? 'border-primary-300 bg-primary-50 shadow-md'
                   : 'border-stone-200 hover:border-stone-300 bg-white'
               "
             >
@@ -169,13 +169,13 @@ async function handleSubmit() {
               />
               <div
                 class="w-12 h-12 rounded-xl flex items-center justify-center"
-                :class="type === 'demande' ? 'bg-orange-100' : 'bg-stone-100'"
+                :class="type === 'demande' ? 'bg-primary-100' : 'bg-stone-100'"
               >
                 <Icon
                   name="search"
                   class="w-6 h-6"
                   :class="
-                    type === 'demande' ? 'text-orange-600' : 'text-stone-400'
+                    type === 'demande' ? 'text-primary-600' : 'text-stone-400'
                   "
                 />
               </div>
@@ -187,7 +187,7 @@ async function handleSubmit() {
               </div>
               <div
                 v-if="type === 'demande'"
-                class="absolute top-3 right-3 w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center"
+                class="absolute top-3 right-3 w-6 h-6 bg-primary-500 rounded-full flex items-center justify-center"
               >
                 <Icon name="check" class="w-4 h-4 text-white" />
               </div>
@@ -197,7 +197,7 @@ async function handleSubmit() {
               class="relative flex items-center gap-4 p-5 rounded-2xl border-2 cursor-pointer transition-all"
               :class="
                 type === 'proposition'
-                  ? 'border-orange-300 bg-orange-50 shadow-md'
+                  ? 'border-primary-300 bg-primary-50 shadow-md'
                   : 'border-stone-200 hover:border-stone-300 bg-white'
               "
             >
@@ -210,7 +210,7 @@ async function handleSubmit() {
               <div
                 class="w-12 h-12 rounded-xl flex items-center justify-center"
                 :class="
-                  type === 'proposition' ? 'bg-orange-100' : 'bg-stone-100'
+                  type === 'proposition' ? 'bg-primary-100' : 'bg-stone-100'
                 "
               >
                 <Icon
@@ -218,7 +218,7 @@ async function handleSubmit() {
                   class="w-6 h-6"
                   :class="
                     type === 'proposition'
-                      ? 'text-orange-600'
+                      ? 'text-primary-600'
                       : 'text-stone-400'
                   "
                 />
@@ -229,7 +229,7 @@ async function handleSubmit() {
               </div>
               <div
                 v-if="type === 'proposition'"
-                class="absolute top-3 right-3 w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center"
+                class="absolute top-3 right-3 w-6 h-6 bg-primary-500 rounded-full flex items-center justify-center"
               >
                 <Icon name="check" class="w-4 h-4 text-white" />
               </div>
@@ -242,7 +242,7 @@ async function handleSubmit() {
           <h2
             class="text-lg font-bold text-stone-800 mb-4 flex items-center gap-2"
           >
-            <Icon name="megaphone" class="w-5 h-5 text-orange-600" />
+            <Icon name="megaphone" class="w-5 h-5 text-primary-600" />
             Votre annonce
           </h2>
 
@@ -263,7 +263,7 @@ async function handleSubmit() {
                 v-model="description"
                 :placeholder="placeholders.description"
                 rows="5"
-                class="w-full px-4 py-3 text-base border-2 border-stone-200 rounded-xl transition-all placeholder:text-stone-400 hover:border-stone-300 focus:border-orange-400 focus:outline-none focus:shadow-[0_0_0_3px_rgba(249,115,22,0.1)]"
+                class="w-full px-4 py-3 text-base border-2 border-stone-200 rounded-xl transition-all placeholder:text-stone-400 hover:border-stone-300 focus:border-primary-400 focus:outline-none focus:shadow-[0_0_0_3px_rgba(249,115,22,0.1)]"
               />
             </div>
           </div>
@@ -274,7 +274,7 @@ async function handleSubmit() {
           <h2
             class="text-lg font-bold text-stone-800 mb-4 flex items-center gap-2"
           >
-            <Icon name="lightbulb" class="w-5 h-5 text-orange-600" />
+            <Icon name="lightbulb" class="w-5 h-5 text-primary-600" />
             Catégories
           </h2>
 
@@ -286,8 +286,8 @@ async function handleSubmit() {
               class="px-4 py-2 text-sm font-semibold rounded-xl border-2 transition-all"
               :class="
                 selectedServiceTypeIds.includes(st.id)
-                  ? 'bg-orange-500 border-orange-500 text-white shadow-md'
-                  : 'bg-white border-stone-200 text-stone-600 hover:border-orange-300'
+                  ? 'bg-primary-500 border-primary-500 text-white shadow-md'
+                  : 'bg-white border-stone-200 text-stone-600 hover:border-primary-300'
               "
               @click="toggleServiceType(st.id)"
             >
@@ -301,7 +301,7 @@ async function handleSubmit() {
           <h2
             class="text-lg font-bold text-stone-800 mb-4 flex items-center gap-2"
           >
-            <Icon name="location" class="w-5 h-5 text-orange-600" />
+            <Icon name="location" class="w-5 h-5 text-primary-600" />
             Localisation
           </h2>
 

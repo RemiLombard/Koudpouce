@@ -34,14 +34,14 @@ const { user } = useAuth();
       <!-- décorations de fond -->
       <div class="absolute inset-0 pointer-events-none overflow-hidden">
         <div
-          class="absolute top-20 -left-20 w-80 h-80 bg-orange-300/20 rounded-full blur-3xl animate-pulse-soft"
+          class="absolute top-20 -left-20 w-80 h-80 bg-primary-300/20 rounded-full blur-3xl animate-pulse-soft"
         />
         <div
-          class="absolute -bottom-20 -right-20 w-96 h-96 bg-amber-300/20 rounded-full blur-3xl animate-pulse-soft"
+          class="absolute -bottom-20 -right-20 w-96 h-96 bg-secondary-300/20 rounded-full blur-3xl animate-pulse-soft"
           style="animation-delay: 1.5s"
         />
         <div
-          class="absolute top-1/2 left-1/4 w-40 h-40 bg-orange-200/30 rounded-full blur-2xl animate-float"
+          class="absolute top-1/2 left-1/4 w-40 h-40 bg-primary-200/30 rounded-full blur-2xl animate-float"
         />
       </div>
 
@@ -51,9 +51,9 @@ const { user } = useAuth();
           class="inline-flex items-center gap-2 glass px-5 py-2.5 rounded-full shadow-lg mb-8 animate-bounce-small"
         >
           <span
-            class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center"
+            class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center"
           >
-            <Icon name="hand-raised" class="w-4 h-4 text-orange-600" />
+            <Icon name="hand-raised" class="w-4 h-4 text-primary-600" />
           </span>
           <span class="text-sm font-semibold text-stone-700"
             >Entraide locale</span
@@ -75,7 +75,7 @@ const { user } = useAuth();
         >
           Koudpouce met en relation des voisins pour s'entraider, simplement.
           <br class="hidden sm:block" />
-          <span class="text-orange-600 font-medium"
+          <span class="text-primary-600 font-medium"
             >Publier une annonce est gratuit et rapide !</span
           >
         </p>
@@ -108,22 +108,22 @@ const { user } = useAuth();
         <!-- points forts -->
         <div class="grid grid-cols-3 gap-4 max-w-lg mx-auto">
           <div class="glass rounded-2xl p-4 text-center">
-            <div class="text-2xl font-bold text-orange-600 mb-1">100%</div>
+            <div class="text-2xl font-bold text-primary-600 mb-1">100%</div>
             <div class="text-xs text-stone-600 font-medium">Gratuit</div>
           </div>
           <div class="glass rounded-2xl p-4 text-center">
             <div
-              class="w-8 h-8 mx-auto mb-1 bg-orange-100 rounded-full flex items-center justify-center"
+              class="w-8 h-8 mx-auto mb-1 bg-primary-100 rounded-full flex items-center justify-center"
             >
-              <Icon name="check" class="w-5 h-5 text-orange-600" />
+              <Icon name="check" class="w-5 h-5 text-primary-600" />
             </div>
             <div class="text-xs text-stone-600 font-medium">Sécurisé</div>
           </div>
           <div class="glass rounded-2xl p-4 text-center">
             <div
-              class="w-8 h-8 mx-auto mb-1 bg-orange-100 rounded-full flex items-center justify-center"
+              class="w-8 h-8 mx-auto mb-1 bg-primary-100 rounded-full flex items-center justify-center"
             >
-              <Icon name="location" class="w-5 h-5 text-orange-600" />
+              <Icon name="location" class="w-5 h-5 text-primary-600" />
             </div>
             <div class="text-xs text-stone-600 font-medium">Local</div>
           </div>
