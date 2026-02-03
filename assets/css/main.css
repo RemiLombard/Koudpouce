@@ -349,3 +349,9 @@ h6 {
     margin-bottom: var(--spacing-2);
   }
 }
+
+/* Bloquer le scroll global quand un overlay/menu est ouvert */
+.no-scroll {
+  overflow: hidden !important;
+  height: 100% !important;
+}

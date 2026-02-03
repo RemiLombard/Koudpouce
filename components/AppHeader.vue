@@ -238,6 +238,31 @@ const menuOpen = ref(false);
 // Temps réel : mettre à jour le compteur quand un nouveau message arrive
 const userId = computed(() => user.value?.id);
 
+// Scroll lock state
+const _menuScrollY = ref(0);
+
+function lockBodyScroll() {
+  if (!import.meta.client) return;
+  _menuScrollY.value = window.scrollY || document.documentElement.scrollTop || 0;
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${_menuScrollY.value}px`;
+  document.body.style.left = '0';
+  document.body.style.right = '0';
+  document.body.classList.add('no-scroll');
+}
+
+function unlockBodyScroll() {
+  if (!import.meta.client) return;
+  document.body.classList.remove('no-scroll');
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.left = '';
+  document.body.style.right = '';
+  const scrollTo = _menuScrollY.value || 0;
+  window.scrollTo(0, scrollTo);
+  _menuScrollY.value = 0;
+}
+
 onMounted(async () => {
   fetchUnreadCount();
 
@@ -261,6 +286,18 @@ watch(userId, (newId) => {
   if (newId) {
     fetchUnreadCount();
   }
+});
+
+// Watch menu open state to lock/unlock body scroll
+watch(menuOpen, (val) => {
+  if (!import.meta.client) return;
+  if (val) lockBodyScroll();
+  else unlockBodyScroll();
+});
+
+onUnmounted(() => {
+  // Ensure body scroll is unlocked when component unmounts
+  if (import.meta.client) unlockBodyScroll();
 });
 
 const route = useRoute();
