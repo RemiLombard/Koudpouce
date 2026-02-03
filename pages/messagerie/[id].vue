@@ -329,7 +329,8 @@ const sending = ref(false);
 const messagesContainer = ref<HTMLElement | null>(null);
 
 // Temps réel : s'abonner aux nouveaux messages
-const { useRealtimeMessages } = await import("~/composables/useRealtime");
+
+import { useRealtimeMessages } from '~/composables/useRealtime';
 
 function handleRealtimeMessage(realtimeMsg: RealtimeMessage) {
   // Ne pas ajouter si c'est notre propre message (déjà ajouté localement)
@@ -362,7 +363,11 @@ function handleRealtimeMessage(realtimeMsg: RealtimeMessage) {
   markAsRead(conversationId.value);
 }
 
-useRealtimeMessages(conversationId, handleRealtimeMessage);
+onMounted(() => {
+  loadConversation().then(() => {
+    useRealtimeMessages(conversationId, handleRealtimeMessage);
+  });
+});
 
 const showReportModal = ref(false);
 const reportReason = ref("");
