@@ -1,5 +1,6 @@
 <!-- Page d'inscription -->
 <script setup lang="ts">
+// SEO
 useHead({
   title: "Créer un compte - Koudpouce",
   meta: [
@@ -10,6 +11,26 @@ useHead({
     },
   ],
 });
+
+// Composable auth et navigation
+const { register, loading, error } = useAuth();
+const router = useRouter();
+
+// Inscription puis redirection vers l'accueil
+async function handleRegister(data: {
+  email: string;
+  password: string;
+  displayName?: string;
+}) {
+  const success = await register(
+    data.email,
+    data.password,
+    data.displayName ?? "",
+  );
+  if (success) {
+    router.push("/");
+  }
+}
 </script>
 
 <template>
@@ -72,25 +93,3 @@ useHead({
     </main>
   </div>
 </template>
-
-<script setup lang="ts">
-// Composable auth et navigation
-const { register, loading, error } = useAuth();
-const router = useRouter();
-
-// Inscription puis redirection vers l'accueil
-async function handleRegister(data: {
-  email: string;
-  password: string;
-  displayName?: string;
-}) {
-  const success = await register(
-    data.email,
-    data.password,
-    data.displayName ?? "",
-  );
-  if (success) {
-    router.push("/");
-  }
-}
-</script>
