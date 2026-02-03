@@ -329,11 +329,9 @@ const sending = ref(false);
 const messagesContainer = ref<HTMLElement | null>(null);
 
 // Temps réel : s'abonner aux nouveaux messages
-
-import { useRealtimeMessages } from "~/composables/useRealtime";
+const { useRealtimeMessages } = await import("~/composables/useRealtime");
 
 function handleRealtimeMessage(realtimeMsg: RealtimeMessage) {
-  console.debug("[conversation] realtime message received", realtimeMsg);
   // Ne pas ajouter si c'est notre propre message (déjà ajouté localement)
   if (realtimeMsg.sender_id === user.value?.id) return;
 
@@ -364,29 +362,7 @@ function handleRealtimeMessage(realtimeMsg: RealtimeMessage) {
   markAsRead(conversationId.value);
 }
 
-// Initialiser le realtime hook
-const realtimeHook = useRealtimeMessages(conversationId, handleRealtimeMessage);
-
-onMounted(() => {
-  loadConversation().then(() => {
-    // S'abonner explicitement après le chargement de la conversation
-    try {
-      realtimeHook.subscribe();
-      console.debug("[conversation] realtime subscribe called");
-    } catch (e) {
-      console.error("[conversation] realtime subscribe error", e);
-    }
-  });
-});
-
-onUnmounted(() => {
-  try {
-    realtimeHook.unsubscribe();
-    console.debug("[conversation] realtime unsubscribe called");
-  } catch (e) {
-    console.error("[conversation] realtime unsubscribe error", e);
-  }
-});
+useRealtimeMessages(conversationId, handleRealtimeMessage);
 
 const showReportModal = ref(false);
 const reportReason = ref("");
@@ -540,27 +516,7 @@ function formatMessageDate(dateStr: string): string {
 }
 
 // Charger au montage
-
-import { useRealtimeMessages } from "~/composables/useRealtime";
-
 onMounted(() => {
   loadConversation();
-
-  // Abonnement temps réel aux nouveaux messages
-  useRealtimeMessages(conversationId, (msg) => {
-    // Vérifier que le message n'est pas déjà dans la liste
-    if (!messages.value.find((m) => m.id === msg.id)) {
-      messages.value.push({
-        id: msg.id,
-        conversationId: msg.conversation_id,
-        senderId: msg.sender_id,
-        senderName: msg.sender_id === user?.id ? user?.name : otherPartyName,
-        content: msg.content,
-        createdAt: msg.created_at,
-        isRead: false,
-      });
-      nextTick().then(scrollToBottom);
-    }
-  });
 });
 </script>
