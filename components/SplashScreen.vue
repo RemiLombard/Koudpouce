@@ -67,16 +67,12 @@ onMounted(() => {
             class="absolute inset-0 bg-white/30 rounded-full blur-2xl scale-150 animate-pulse"
           />
 
-          <!-- Logo -->
-          <div
-            class="relative w-28 h-28 sm:w-36 sm:h-36 bg-white rounded-3xl shadow-2xl flex items-center justify-center"
-          >
-            <img
-              src="/logo_koudpouce.svg"
-              alt="Koudpouce"
-              class="w-20 h-20 sm:w-28 sm:h-28"
-            />
-          </div>
+          <!-- Logo blanc sans fond -->
+          <img
+            src="/logo_koudpouce_white.svg"
+            alt="Koudpouce"
+            class="relative w-32 h-32 sm:w-44 sm:h-44 drop-shadow-2xl"
+          />
         </div>
 
         <!-- Texte -->
