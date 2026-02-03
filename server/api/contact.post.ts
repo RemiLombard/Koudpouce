@@ -28,7 +28,8 @@ export default defineEventHandler(async (event) => {
     console.error("RESEND_API_KEY manquante");
     throw createError({
       statusCode: 500,
-      message: "Configuration email manquante. Veuillez contacter l'administrateur.",
+      message:
+        "Configuration email manquante. Veuillez contacter l'administrateur.",
     });
   }
 
@@ -100,10 +101,11 @@ ${message}
     };
   } catch (err: any) {
     console.error("Erreur lors de l'envoi de l'email:", err);
-    
+
     // Si l'erreur vient de Resend, on peut avoir plus de détails
-    const errorMessage = err?.data?.message || err?.message || "Erreur lors de l'envoi";
-    
+    const errorMessage =
+      err?.data?.message || err?.message || "Erreur lors de l'envoi";
+
     throw createError({
       statusCode: 500,
       message: `Impossible d'envoyer le message: ${errorMessage}`,

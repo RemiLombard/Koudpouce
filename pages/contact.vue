@@ -25,7 +25,9 @@
           class="p-4 bg-green-50 border border-green-200 rounded-xl text-green-700 text-center"
         >
           <p class="font-medium">Message envoyé avec succès !</p>
-          <p class="text-sm mt-1">Nous vous répondrons dans les plus brefs délais.</p>
+          <p class="text-sm mt-1">
+            Nous vous répondrons dans les plus brefs délais.
+          </p>
         </div>
 
         <!-- Message d'erreur -->
@@ -39,7 +41,10 @@
         <template v-if="!success">
           <!-- Nom -->
           <div>
-            <label for="name" class="block text-sm font-medium text-stone-700 mb-2">
+            <label
+              for="name"
+              class="block text-sm font-medium text-stone-700 mb-2"
+            >
               Votre nom
             </label>
             <input
@@ -54,7 +59,10 @@
 
           <!-- Email -->
           <div>
-            <label for="email" class="block text-sm font-medium text-stone-700 mb-2">
+            <label
+              for="email"
+              class="block text-sm font-medium text-stone-700 mb-2"
+            >
               Votre email
             </label>
             <input
@@ -69,7 +77,10 @@
 
           <!-- Sujet -->
           <div>
-            <label for="subject" class="block text-sm font-medium text-stone-700 mb-2">
+            <label
+              for="subject"
+              class="block text-sm font-medium text-stone-700 mb-2"
+            >
               Sujet
             </label>
             <select
@@ -89,7 +100,10 @@
 
           <!-- Message -->
           <div>
-            <label for="message" class="block text-sm font-medium text-stone-700 mb-2">
+            <label
+              for="message"
+              class="block text-sm font-medium text-stone-700 mb-2"
+            >
               Votre message
             </label>
             <textarea
@@ -128,7 +142,9 @@
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
               />
             </svg>
-            <span>{{ loading ? "Envoi en cours..." : "Envoyer le message" }}</span>
+            <span>{{
+              loading ? "Envoi en cours..." : "Envoyer le message"
+            }}</span>
           </button>
         </template>
 
@@ -199,7 +215,9 @@ async function sendMessage() {
     });
     success.value = true;
   } catch (err: any) {
-    error.value = err?.data?.message || "Une erreur est survenue lors de l'envoi du message.";
+    error.value =
+      err?.data?.message ||
+      "Une erreur est survenue lors de l'envoi du message.";
   } finally {
     loading.value = false;
   }
