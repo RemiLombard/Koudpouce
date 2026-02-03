@@ -40,7 +40,7 @@ let searchTimeout: ReturnType<typeof setTimeout> | null = null;
 
 async function performSearch() {
   const query = searchQuery.value.trim();
-  
+
   if (query.length < 3) {
     addressResults.value = [];
     showDropdown.value = false;
