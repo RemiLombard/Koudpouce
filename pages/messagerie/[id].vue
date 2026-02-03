@@ -5,7 +5,7 @@
     <AppHeader />
 
     <!-- Barre de navigation conversation -->
-    <div class="bg-white border-b border-gray-200 shadow-sm">
+    <div class="bg-white border-b border-gray-200 shadow-sm sticky top-16 z-30">
       <div class="max-w-4xl mx-auto px-4 py-3">
         <div class="flex items-center gap-4">
           <NuxtLink
@@ -78,7 +78,7 @@
     <template v-else>
       <!-- Liste des messages -->
       <div ref="messagesContainer" class="flex-1 overflow-y-auto">
-        <div class="max-w-4xl mx-auto px-4 py-6 space-y-4">
+        <div class="max-w-4xl mx-auto px-4 py-6 space-y-4 pb-28">
           <!-- Message vide -->
           <div
             v-if="messages.length === 0"
@@ -133,7 +133,7 @@
       </div>
 
       <!-- Zone de saisie -->
-      <div class="bg-white border-t border-gray-200 shadow-lg">
+      <div class="bg-white border-t border-gray-200 shadow-lg sticky bottom-0 z-40">
         <div class="max-w-4xl mx-auto px-4 py-4">
           <!-- Annonce clôturée -->
           <div
