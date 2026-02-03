@@ -333,6 +333,7 @@ const messagesContainer = ref<HTMLElement | null>(null);
 import { useRealtimeMessages } from "~/composables/useRealtime";
 
 function handleRealtimeMessage(realtimeMsg: RealtimeMessage) {
+  console.debug('[conversation] realtime message received', realtimeMsg);
   // Ne pas ajouter si c'est notre propre message (déjà ajouté localement)
   if (realtimeMsg.sender_id === user.value?.id) return;
 
@@ -363,10 +364,28 @@ function handleRealtimeMessage(realtimeMsg: RealtimeMessage) {
   markAsRead(conversationId.value);
 }
 
+// Initialiser le realtime hook
+const realtimeHook = useRealtimeMessages(conversationId, handleRealtimeMessage);
+
 onMounted(() => {
   loadConversation().then(() => {
-    useRealtimeMessages(conversationId, handleRealtimeMessage);
+    // S'abonner explicitement après le chargement de la conversation
+    try {
+      realtimeHook.subscribe();
+      console.debug('[conversation] realtime subscribe called');
+    } catch (e) {
+      console.error('[conversation] realtime subscribe error', e);
+    }
   });
+});
+
+onUnmounted(() => {
+  try {
+    realtimeHook.unsubscribe();
+    console.debug('[conversation] realtime unsubscribe called');
+  } catch (e) {
+    console.error('[conversation] realtime unsubscribe error', e);
+  }
 });
 
 const showReportModal = ref(false);
