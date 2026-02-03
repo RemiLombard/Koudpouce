@@ -5,8 +5,6 @@ import { supabase } from "../../utils/supabase";
 export default defineEventHandler(async (event) => {
   const cookies = parseCookies(event);
   const token = cookies["koudpouce.token"];
-  const cookies = parseCookies(event);
-  const token = cookies["koudpouce.token"];
 
   if (!token) {
     // Pas connecté -> renvoyer zéros plutôt qu'une erreur 401
