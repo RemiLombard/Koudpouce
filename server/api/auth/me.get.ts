@@ -12,7 +12,10 @@ export default defineEventHandler(async (event) => {
   }
 
   // Vérifier le token
-  const { data: { user }, error } = await supabase.auth.getUser(token);
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser(token);
 
   if (error || !user) {
     // Token invalide : supprimer le cookie mais renvoyer user=null

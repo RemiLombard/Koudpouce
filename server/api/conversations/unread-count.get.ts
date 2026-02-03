@@ -13,7 +13,10 @@ export default defineEventHandler(async (event) => {
     return { total: 0, unreadCount: 0, receivedUnread: 0, sentUnread: 0 };
   }
 
-  const { data: { user }, error } = await supabase.auth.getUser(token);
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser(token);
 
   if (error || !user) {
     // Session invalide -> supprimer cookie et renvoyer zéros
@@ -26,12 +29,14 @@ export default defineEventHandler(async (event) => {
   // Récupérer toutes les conversations de l'utilisateur
   const { data: conversations } = await supabase
     .from("conversations")
-    .select(`
+    .select(
+      `
       id,
       participant_ids,
       listing:listings!inner(author_id),
       messages(id, sender_id, read_by)
-    `)
+    `,
+    )
     .contains("participant_ids", [userId]);
 
   let total = 0;
@@ -39,14 +44,16 @@ export default defineEventHandler(async (event) => {
   let sentUnread = 0;
 
   for (const conv of conversations || []) {
-    const unreadMessages = (conv.messages || []).filter((m: any) =>
-      m.sender_id !== userId && !(m.read_by || []).includes(userId)
+    const unreadMessages = (conv.messages || []).filter(
+      (m: any) => m.sender_id !== userId && !(m.read_by || []).includes(userId),
     );
 
     const count = unreadMessages.length;
     total += count;
 
-    const listing = Array.isArray(conv.listing) ? conv.listing[0] : conv.listing;
+    const listing = Array.isArray(conv.listing)
+      ? conv.listing[0]
+      : conv.listing;
     const isMyListing = listing?.author_id === userId;
 
     if (isMyListing) {
