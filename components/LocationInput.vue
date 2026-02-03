@@ -121,7 +121,7 @@ async function handleUseGeolocation() {
 
     try {
       const response = await $fetch<{ features: AddressResult[] }>(
-        "https://api-adresse.data.gouv.fr/reverse/",
+        "/api/geocode-reverse",
         {
           query: {
             lat: position.lat,
