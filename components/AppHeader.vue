@@ -243,21 +243,22 @@ const _menuScrollY = ref(0);
 
 function lockBodyScroll() {
   if (!import.meta.client) return;
-  _menuScrollY.value = window.scrollY || document.documentElement.scrollTop || 0;
-  document.body.style.position = 'fixed';
+  _menuScrollY.value =
+    window.scrollY || document.documentElement.scrollTop || 0;
+  document.body.style.position = "fixed";
   document.body.style.top = `-${_menuScrollY.value}px`;
-  document.body.style.left = '0';
-  document.body.style.right = '0';
-  document.body.classList.add('no-scroll');
+  document.body.style.left = "0";
+  document.body.style.right = "0";
+  document.body.classList.add("no-scroll");
 }
 
 function unlockBodyScroll() {
   if (!import.meta.client) return;
-  document.body.classList.remove('no-scroll');
-  document.body.style.position = '';
-  document.body.style.top = '';
-  document.body.style.left = '';
-  document.body.style.right = '';
+  document.body.classList.remove("no-scroll");
+  document.body.style.position = "";
+  document.body.style.top = "";
+  document.body.style.left = "";
+  document.body.style.right = "";
   const scrollTo = _menuScrollY.value || 0;
   window.scrollTo(0, scrollTo);
   _menuScrollY.value = 0;
