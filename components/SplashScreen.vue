@@ -61,15 +61,12 @@ onMounted(() => {
         :class="{ 'splash-content-enter': isAnimating }"
       >
         <!-- Logo avec animation -->
-        <div
-          class="relative mb-6"
-          :class="{ 'logo-bounce': isAnimating }"
-        >
+        <div class="relative mb-6" :class="{ 'logo-bounce': isAnimating }">
           <!-- Glow effect derrière le logo -->
           <div
             class="absolute inset-0 bg-white/30 rounded-full blur-2xl scale-150 animate-pulse"
           />
-          
+
           <!-- Logo -->
           <div
             class="relative w-28 h-28 sm:w-36 sm:h-36 bg-white rounded-3xl shadow-2xl flex items-center justify-center"
@@ -89,7 +86,7 @@ onMounted(() => {
         >
           Koudpouce
         </h1>
-        
+
         <p
           class="text-white/80 text-lg sm:text-xl font-medium"
           :class="{ 'text-fade-in-delay': isAnimating }"
@@ -98,10 +95,7 @@ onMounted(() => {
         </p>
 
         <!-- Indicateur de chargement -->
-        <div
-          class="mt-8 flex gap-1.5"
-          :class="{ 'dots-fade-in': isAnimating }"
-        >
+        <div class="mt-8 flex gap-1.5" :class="{ 'dots-fade-in': isAnimating }">
           <span
             class="w-2.5 h-2.5 bg-white/60 rounded-full animate-bounce"
             style="animation-delay: 0s"
