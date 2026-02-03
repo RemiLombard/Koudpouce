@@ -517,7 +517,7 @@ function formatMessageDate(dateStr: string): string {
 
 // Charger au montage
 
-import { useRealtimeMessages } from '~/composables/useRealtime';
+import { useRealtimeMessages } from "~/composables/useRealtime";
 
 onMounted(() => {
   loadConversation();
@@ -525,7 +525,7 @@ onMounted(() => {
   // Abonnement temps réel aux nouveaux messages
   useRealtimeMessages(conversationId, (msg) => {
     // Vérifier que le message n'est pas déjà dans la liste
-    if (!messages.value.find(m => m.id === msg.id)) {
+    if (!messages.value.find((m) => m.id === msg.id)) {
       messages.value.push({
         id: msg.id,
         conversationId: msg.conversation_id,
