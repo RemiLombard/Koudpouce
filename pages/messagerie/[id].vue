@@ -330,7 +330,7 @@ const messagesContainer = ref<HTMLElement | null>(null);
 
 // Temps réel : s'abonner aux nouveaux messages
 
-import { useRealtimeMessages } from '~/composables/useRealtime';
+import { useRealtimeMessages } from "~/composables/useRealtime";
 
 function handleRealtimeMessage(realtimeMsg: RealtimeMessage) {
   // Ne pas ajouter si c'est notre propre message (déjà ajouté localement)
