@@ -7,21 +7,24 @@ export default defineEventHandler(async (event) => {
   const token = cookies["koudpouce.token"];
 
   if (!token) {
-    throw createError({ statusCode: 401, message: "Non connecté." });
+    // Pas d'utilisateur côté client : renvoyer user=null au lieu d'une erreur 401
+    return { user: null };
   }
 
   // Vérifier le token
   const { data: { user }, error } = await supabase.auth.getUser(token);
 
   if (error || !user) {
+    // Token invalide : supprimer le cookie mais renvoyer user=null
     deleteCookie(event, "koudpouce.token", { path: "/" });
-    throw createError({ statusCode: 401, message: "Session invalide ou expirée." });
+    return { user: null };
   }
 
   const userPublic = await getUserById(user.id);
 
   if (!userPublic) {
-    throw createError({ statusCode: 404, message: "Profil introuvable." });
+    // Profil manquant -> renvoyer user=null
+    return { user: null };
   }
 
   return { user: userPublic };

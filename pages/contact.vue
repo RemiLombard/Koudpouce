@@ -167,7 +167,7 @@
             href="mailto:remi.lombard70@gmail.com"
             class="text-orange-600 hover:underline font-medium"
           >
-            remi.lombard70@gmail.com
+            remi.lombard@edu.univ-fcomte.fr
           </a>
         </p>
       </div>

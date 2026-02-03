@@ -5,15 +5,20 @@ import { supabase } from "../../utils/supabase";
 export default defineEventHandler(async (event) => {
   const cookies = parseCookies(event);
   const token = cookies["koudpouce.token"];
+  const cookies = parseCookies(event);
+  const token = cookies["koudpouce.token"];
 
   if (!token) {
-    throw createError({ statusCode: 401, message: "Non connecté." });
+    // Pas connecté -> renvoyer zéros plutôt qu'une erreur 401
+    return { total: 0, unreadCount: 0, receivedUnread: 0, sentUnread: 0 };
   }
 
   const { data: { user }, error } = await supabase.auth.getUser(token);
 
   if (error || !user) {
-    throw createError({ statusCode: 401, message: "Session invalide." });
+    // Session invalide -> supprimer cookie et renvoyer zéros
+    deleteCookie(event, "koudpouce.token", { path: "/" });
+    return { total: 0, unreadCount: 0, receivedUnread: 0, sentUnread: 0 };
   }
 
   const userId = user.id;
