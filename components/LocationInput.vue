@@ -33,10 +33,15 @@ const isSearching = ref(false);
 const showDropdown = ref(false);
 const useGeoloc = ref(false);
 
+// Flag pour éviter les recherches lors de la sélection d'une adresse
+const skipNextSearch = ref(false);
+
 let searchTimeout: ReturnType<typeof setTimeout> | null = null;
 
-async function debouncedSearch() {
-  if (searchQuery.value.length < 3) {
+async function performSearch() {
+  const query = searchQuery.value.trim();
+  
+  if (query.length < 3) {
     addressResults.value = [];
     showDropdown.value = false;
     return;
@@ -45,30 +50,51 @@ async function debouncedSearch() {
   isSearching.value = true;
   try {
     const response = await $fetch<{ features: AddressResult[] }>(
-      `https://api-adresse.data.gouv.fr/search/`,
+      "https://api-adresse.data.gouv.fr/search/",
       {
         query: {
-          q: searchQuery.value,
+          q: query,
           limit: 10,
         },
       },
     );
-    addressResults.value = response.features;
-    showDropdown.value = true;
+    addressResults.value = response.features || [];
+    showDropdown.value = addressResults.value.length > 0;
   } catch (error) {
     console.error("Erreur recherche adresse:", error);
     addressResults.value = [];
+    showDropdown.value = false;
   } finally {
     isSearching.value = false;
   }
 }
 
-watch(searchQuery, () => {
-  if (searchTimeout) clearTimeout(searchTimeout);
-  searchTimeout = setTimeout(debouncedSearch, 300);
-});
+function debouncedSearch() {
+  if (searchTimeout) {
+    clearTimeout(searchTimeout);
+    searchTimeout = null;
+  }
+  searchTimeout = setTimeout(performSearch, 300);
+}
+
+// Watch uniquement côté client pour éviter les problèmes SSR
+if (import.meta.client) {
+  watch(searchQuery, () => {
+    // Ignorer la recherche si on vient de sélectionner une adresse
+    if (skipNextSearch.value) {
+      skipNextSearch.value = false;
+      return;
+    }
+    // Ne pas rechercher si une adresse est déjà sélectionnée
+    if (selectedAddress.value) {
+      return;
+    }
+    debouncedSearch();
+  });
+}
 
 function selectAddress(address: AddressResult) {
+  skipNextSearch.value = true;
   selectedAddress.value = address;
   searchQuery.value = address.properties.label;
   showDropdown.value = false;
@@ -89,12 +115,13 @@ async function handleUseGeolocation() {
 
   if (position) {
     useGeoloc.value = true;
+    skipNextSearch.value = true;
     selectedAddress.value = null;
     searchQuery.value = "";
 
     try {
       const response = await $fetch<{ features: AddressResult[] }>(
-        `https://api-adresse.data.gouv.fr/reverse/`,
+        "https://api-adresse.data.gouv.fr/reverse/",
         {
           query: {
             lat: position.lat,
@@ -104,8 +131,9 @@ async function handleUseGeolocation() {
         },
       );
 
-      if (response.features.length > 0) {
+      if (response.features && response.features.length > 0) {
         const address = response.features[0];
+        skipNextSearch.value = true;
         selectedAddress.value = address;
         searchQuery.value = address.properties.label;
 
@@ -125,6 +153,7 @@ async function handleUseGeolocation() {
 }
 
 function reset() {
+  skipNextSearch.value = true;
   searchQuery.value = "";
   selectedAddress.value = null;
   addressResults.value = [];
