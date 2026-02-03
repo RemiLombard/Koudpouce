@@ -61,7 +61,10 @@ export default defineNuxtConfig({
         // Open Graph
         { property: "og:type", content: "website" },
         { property: "og:site_name", content: "Koudpouce" },
-        { property: "og:title", content: "Koudpouce - Entraide locale entre voisins" },
+        {
+          property: "og:title",
+          content: "Koudpouce - Entraide locale entre voisins",
+        },
         {
           property: "og:description",
           content:
@@ -71,7 +74,10 @@ export default defineNuxtConfig({
         { property: "og:locale", content: "fr_FR" },
         // Twitter Card
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: "Koudpouce - Entraide locale entre voisins" },
+        {
+          name: "twitter:title",
+          content: "Koudpouce - Entraide locale entre voisins",
+        },
         {
           name: "twitter:description",
           content:

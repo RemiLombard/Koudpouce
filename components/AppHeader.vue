@@ -240,11 +240,12 @@ const userId = computed(() => user.value?.id);
 
 onMounted(async () => {
   fetchUnreadCount();
-  
+
   // S'abonner aux notifications en temps réel si connecté
   if (userId.value) {
     try {
-      const { useRealtimeNotifications } = await import("~/composables/useRealtime");
+      const { useRealtimeNotifications } =
+        await import("~/composables/useRealtime");
       useRealtimeNotifications(userId, () => {
         // Rafraîchir le compteur quand un nouveau message arrive
         fetchUnreadCount();

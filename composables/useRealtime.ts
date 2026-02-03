@@ -1,7 +1,11 @@
 // Composable pour gérer la connexion Supabase Realtime côté client
 // Permet de s'abonner aux nouveaux messages en temps réel
 
-import { createClient, SupabaseClient, RealtimeChannel } from "@supabase/supabase-js";
+import {
+  createClient,
+  SupabaseClient,
+  RealtimeChannel,
+} from "@supabase/supabase-js";
 
 let _realtimeClient: SupabaseClient | null = null;
 
@@ -22,7 +26,7 @@ export function useRealtimeClient() {
               eventsPerSecond: 10,
             },
           },
-        }
+        },
       );
     }
     return _realtimeClient;
@@ -45,7 +49,7 @@ export interface RealtimeMessage {
 // Hook pour s'abonner aux messages d'une conversation
 export function useRealtimeMessages(
   conversationId: Ref<string>,
-  onNewMessage: (message: RealtimeMessage) => void
+  onNewMessage: (message: RealtimeMessage) => void,
 ) {
   const config = useRuntimeConfig();
   let channel: RealtimeChannel | null = null;
@@ -60,7 +64,7 @@ export function useRealtimeMessages(
     if (!client) {
       client = createClient(
         config.public.supabaseUrl as string,
-        config.public.supabaseAnonKey as string
+        config.public.supabaseAnonKey as string,
       );
     }
 
@@ -82,7 +86,7 @@ export function useRealtimeMessages(
         },
         (payload) => {
           onNewMessage(payload.new as RealtimeMessage);
-        }
+        },
       )
       .subscribe();
   }
@@ -120,7 +124,7 @@ export function useRealtimeMessages(
 // Hook pour s'abonner aux notifications globales (nouveaux messages dans toutes les conversations)
 export function useRealtimeNotifications(
   userId: Ref<string | undefined>,
-  onNewMessage: (message: RealtimeMessage) => void
+  onNewMessage: (message: RealtimeMessage) => void,
 ) {
   const config = useRuntimeConfig();
   let channel: RealtimeChannel | null = null;
@@ -134,7 +138,7 @@ export function useRealtimeNotifications(
     if (!client) {
       client = createClient(
         config.public.supabaseUrl as string,
-        config.public.supabaseAnonKey as string
+        config.public.supabaseAnonKey as string,
       );
     }
 
@@ -159,7 +163,7 @@ export function useRealtimeNotifications(
           if (msg.sender_id !== userId.value) {
             onNewMessage(msg);
           }
-        }
+        },
       )
       .subscribe();
   }

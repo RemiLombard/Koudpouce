@@ -334,14 +334,15 @@ const { useRealtimeMessages } = await import("~/composables/useRealtime");
 function handleRealtimeMessage(realtimeMsg: RealtimeMessage) {
   // Ne pas ajouter si c'est notre propre message (déjà ajouté localement)
   if (realtimeMsg.sender_id === user.value?.id) return;
-  
+
   // Vérifier si le message n'existe pas déjà
   if (messages.value.some((m) => m.id === realtimeMsg.id)) return;
 
   // Récupérer le nom de l'expéditeur
-  const senderName = realtimeMsg.sender_id === conversation.value?.contacterId
-    ? conversation.value?.contacterName
-    : conversation.value?.listingAuthorName;
+  const senderName =
+    realtimeMsg.sender_id === conversation.value?.contacterId
+      ? conversation.value?.contacterName
+      : conversation.value?.listingAuthorName;
 
   // Ajouter le message
   messages.value.push({
@@ -356,7 +357,7 @@ function handleRealtimeMessage(realtimeMsg: RealtimeMessage) {
 
   // Scroll en bas
   nextTick(() => scrollToBottom());
-  
+
   // Marquer comme lu si on est sur la page
   markAsRead(conversationId.value);
 }
