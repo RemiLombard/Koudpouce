@@ -58,7 +58,6 @@ export default defineEventHandler(async (event) => {
     .update({
       status: "closed",
       closed_at: new Date().toISOString(),
-      closed_by_user_id: user.id,
     })
     .eq("id", id)
     .select()
